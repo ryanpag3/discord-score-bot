@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+    postgres:
+        image: postgres
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_USER: score-bot
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: score_bot_db
+    pgadmin:
+        image: dpage/pgadmin4
+        ports: 
+            - 80:80
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "user@user.com"
+            PGADMIN_DEFAULT_PASSWORD: "pass"

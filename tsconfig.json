@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+      "module": "commonjs",
+      "target": "es2016",
+      "lib": ["es5", "es6", "dom"],
+      "noImplicitAny": false,
+      "sourceMap": true,
+      "outDir": "dist",
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "disableSizeLimit": true
+  },
+  "exclude": [
+      "node_modules",
+      "**/*.spec.ts"
+  ],
+  "include": [
+      "**/*.ts"
+  ]
+}
