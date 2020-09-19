@@ -7,6 +7,7 @@ import plus from '../commands/plus';
 import minus from '../commands/minus';
 import { handleCommandError } from '../util/error';
 import { User } from '../models';
+import set from '../commands/set';
 
 const onMessageReceived = async (message: Message) => {
     try {
@@ -51,6 +52,8 @@ const routeShorthandMessage = async (user: User, command: string, message: Messa
         return await plus(user, command, message);
     } else if (isNaN(Number.parseInt(command.split(`-`)[1])) === false) {
         return await minus(user, command, message);
+    } else if (isNaN(Number.parseInt(command.split(`=`)[1])) === false) {
+        return await set(user, command, message)
     }
     throw new Error(`Invalid command provided.`);
 }
@@ -58,8 +61,9 @@ const routeShorthandMessage = async (user: User, command: string, message: Messa
 export const isShorthandMessage = (command: string) => {
     return command.endsWith(`++`) ||
         command.endsWith(`--`) ||
-        Number.parseInt(command.split(`+`)[1]) !== NaN ||
-        Number.parseInt(command.split(`-`)[1]) !== NaN
+        isNaN(Number.parseInt(command.split(`+`)[1])) === false ||
+        isNaN(Number.parseInt(command.split(`-`)[1])) === false ||
+        isNaN(Number.parseInt(command.split(`=`)[1])) === false;
 }
 
 export default onMessageReceived;
