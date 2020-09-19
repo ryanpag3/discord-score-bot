@@ -3,8 +3,9 @@ import logger from '../util/logger';
 import { Score } from '../models';
 import { handleCommandError } from '../util/error';
 import { getMessageEmbed } from '../util/command';
+import { User } from '../models';
 
-const handleMessage = async (command: string, message: Message) => {
+const handleMessage = async (user: User, command: string, message: Message) => {
     const splitMessage = message.content.split(' ');
     const splitComment = command.split('-');
     const scoreName = splitComment[0];

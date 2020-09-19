@@ -9,10 +9,11 @@ export const createUserIfNotExists = async (discordId: string) => {
     const user = await User.findByPk(discordId);
     if (user) {
         logger.debug(`user already exists. bailing out!`);
-        return;
+        return user;
     }
-    await User.create({
+    const created = await User.create({
         id: discordId
     });
     logger.info(`created user ${discordId}`);
+    return created;
 }
