@@ -21,7 +21,7 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 
 You will need a Discord developer token.
 
-1. Go here https://discord.com/developers
+1. Go here [https://discord.com/developers](https://discord.com/developers)
 
 1. Create a new application and click into it
 

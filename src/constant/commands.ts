@@ -18,6 +18,8 @@ export default {
         filename: `add.ts`,
         examples: `
         \`.sb add MyScore\`
+
+        \`.sb add -c MyScore\`
         `
     },
     SCORES: {
