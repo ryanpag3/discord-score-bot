@@ -34,7 +34,7 @@ const info = async (user: User, command: string, message: Message) => {
     });
 
     if (!score) {
-        throw new Error(`Could not find score with name **${scoreName}**.`);
+        throw new Error(`Could not find ${type === ScoreType.CHANNEL ? 'channel' : 'server'} score with name **${scoreName}**.`);
     }
 
     const createdBy = message.guild.member(score.createdBy);
