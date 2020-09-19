@@ -10,7 +10,8 @@ module.exports = (sequelize, Sequelize) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Score.belongsTo(models.User, { foreignKey: 'createdBy' });
+      models.User.hasMany(Score, { foreignKey: 'createdBy' });
     }
   };
   Score.init({
@@ -38,6 +39,14 @@ module.exports = (sequelize, Sequelize) => {
     value: {
       type: Sequelize.INTEGER,
       defaultValue: 0
+    },
+    createdBy: {
+      allowNull: false,
+      type: Sequelize.STRING,
+      references: {
+        model: 'Users',
+        key: 'id'
+      }
     },
     createdAt: {
       allowNull: false,

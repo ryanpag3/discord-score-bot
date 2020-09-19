@@ -2,8 +2,10 @@ import { Message, MessageEmbed } from "discord.js";
 import { createScore } from '../service/score';
 import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
+import { User } from '../models';
 
-const handleMessage = async (command: string, message: Message) => {
+const handleMessage = async (user: User, command: string, message: Message) => {
+    logger.info(user);
     try {
         let isChannelScore = false;
         const splitContent = message.content.split(' ');
@@ -20,10 +22,9 @@ const handleMessage = async (command: string, message: Message) => {
             serverId: message.guild.id,
             channelId: message.channel.id,
             type: isChannelScore ? 'CHANNEL' : 'SERVER',
-            name: splitContent[2]
+            name: splitContent[2],
+            createdBy: user.id
         });
-
-        logger.info(message.author.avatarURL());
 
         const embed = new MessageEmbed()
             .setAuthor(message.author.tag, message.author.avatarURL())
@@ -35,6 +36,7 @@ const handleMessage = async (command: string, message: Message) => {
         logger.info(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitContent[2]}]`);
         message.channel.send(embed);
     } catch (e) {
+        logger.error(e);
         let showExamples = true;
         if (e.toString().includes(`SequelizeUniqueConstraintError`)) {
             e = `A score with the specified name already exists.`;

@@ -30,6 +30,14 @@ module.exports = {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
+      createdBy: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

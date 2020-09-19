@@ -1,7 +1,8 @@
 import { Message, MessageEmbed } from "discord.js";
 import { COMMAND_MAP } from '../util/command';
+import { User } from '../models';
 
-const handleMessage = (command: string, message: Message) => {
+const handleMessage = (user: User, command: string, message: Message) => {
     const optionalCommand = message.content.split(' ')[2];
     if (optionalCommand) {
         return handleCommandHelpMessage(optionalCommand, message);

@@ -5,13 +5,15 @@ export const createScore = async ({
     serverId,
     channelId,
     type,
-    name
+    name,
+    createdBy
 }) => {
     const score = await Score.create({
         serverId,
         channelId,
         type,
-        name
+        name,
+        createdBy
     });
     logger.info(`New score created. serverId [${serverId}] channelId: [${channelId}] name: [${name}]`);
     return score;

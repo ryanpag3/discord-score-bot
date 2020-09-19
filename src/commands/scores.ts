@@ -5,9 +5,9 @@ import logger from '../util/logger';
 import ScoreType from '../constant/score-type';
 import { renderSmallChart } from '../util/canvas';
 import { getMessageEmbed } from '../util/command';
-import { isWhiteSpaceLike } from 'typescript';
+import { User } from '../models';
 
-const scores = async (command: string, message: Message) => {
+const scores = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
     const type = split[2] === '-c' ? ScoreType.CHANNEL : ScoreType.SERVER;
     if (split[2] && type != ScoreType.CHANNEL) 
