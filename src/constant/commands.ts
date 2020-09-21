@@ -39,5 +39,23 @@ export default {
         examples: `
         \`.sb info [score_name]\`
         `
+    },
+    RM: {
+        command: 'rm',
+        description: `Delete a score.`,
+        filename: 'rm.ts',
+        examples: `
+        Delete a server score with confirmation.
+        \`.sb rm [score_name]\`
+
+        Delete a server score and skip confirmation.
+        \`.sb rm -f [score_name]\`
+        
+        Delete a channel score.
+        \`.sb rm -c [channel_score_name]\`
+        
+        Delete a channel score and skip confirmation.
+        \`.sb rm -cf [channel_score_name]\`
+        `
     }
 }

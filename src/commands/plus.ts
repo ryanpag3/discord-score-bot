@@ -29,7 +29,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
     });
 
     if (!score) {
-        return handleCommandError(command, `**Unable to decrease score count!**
+        return handleCommandError(command, `**Unable to increase score count!**
         Reason: Cannot find matching ${type === 'CHANNEL' ? 'channel' : 'server'} score with the name **${scoreName}**`, message);
     }
     const previous = score.value;
