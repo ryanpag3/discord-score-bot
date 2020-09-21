@@ -6,7 +6,6 @@ import logger from '../util/logger';
 
 
 const rm = async (user: User, command: string, message: Message) => {
-    logger.info('hi');
     const splitMsg = message.content.split(' ');
     let args;
     if (splitMsg[2].startsWith('-')) {
