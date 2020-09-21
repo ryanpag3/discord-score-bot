@@ -54,6 +54,16 @@ _note: you will need to manually create a database with `test_` prepended to it 
 
 `yarn test`
 
+### Configure your environment
+
+The bot is configured using a `.env` file located at the root of the project.
+
+Copy the provided `.env.template` file and edit as necessary
+
+``` bash
+cp .env.template .env
+```
+
 ### Start the bot
 
 `yarn start` - starts the bot
