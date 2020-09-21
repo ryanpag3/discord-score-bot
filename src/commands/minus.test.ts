@@ -1,11 +1,15 @@
 import { createScore } from '../service/score';
 import logger from '../util/logger';
-import { getTestMessage, resetDb } from '../util/test-util'
+import { createTestUser, getTestMessage, resetDb } from '../util/test-util'
 import minus from './minus';
 import { delay } from 'bluebird';
 
+let TEST_USER;
+
+
 beforeEach(async () => {
     await resetDb();
+    TEST_USER = await createTestUser();
 });
 
 it('should decrease a score by one', async () => {
@@ -16,9 +20,10 @@ it('should decrease a score by one', async () => {
         serverId: message.guild.id,
         channelId: message.channel.id,
         type: `SERVER`,
-        name: scoreName
+        name: scoreName,
+        createdBy: TEST_USER
     });
-    const res = await minus(command, message);
+    const res = await minus(TEST_USER, command, message);
     expect(res.value).toBe(score.value - 1);
 });
 
@@ -30,9 +35,10 @@ it('should decrease a score by 10', async () => {
         serverId: message.guild.id,
         channelId: message.channel.id,
         type: `SERVER`,
-        name: scoreName
+        name: scoreName,
+        createdBy: TEST_USER.id
     });
-    const res = await minus(command, message);
+    const res = await minus(TEST_USER, command, message);
     expect(res.value).toBe(score.value - 10);
 });
 
@@ -40,6 +46,6 @@ it('should respond with an error if the score does not exist', async () => {
     const scoreName = 'test'
     const command = `${scoreName}-10`
     const message = getTestMessage(`.sb ${command}`);
-    await minus(command, message);
+    await minus(TEST_USER, command, message);
     expect(message.channel.send.mock.calls[0][0].description).toContain(`Cannot find matching`);
 });
