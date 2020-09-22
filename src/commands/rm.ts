@@ -1,4 +1,4 @@
-import { Channel, Message, MessageCollector, MessageEmbed } from 'discord.js';
+import { Message, MessageCollector, MessageEmbed } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { User, Score } from '../models';
 import { getMessageEmbed } from '../util/command';
