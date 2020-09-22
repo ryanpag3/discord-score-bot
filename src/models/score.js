@@ -29,6 +29,13 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       type: Sequelize.STRING(64)
     },
+    ScoreboardId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Scoreboards',
+        key: 'id'
+      }
+    },
     type: {
       allowNull: false,
       type: Sequelize.ENUM(`SERVER`, `CHANNEL`, `SCOREBOARD`)

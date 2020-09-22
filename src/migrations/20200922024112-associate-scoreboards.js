@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn(
-      'Users',
+      'Scores',
       'ScoreboardId',
       {
         type: Sequelize.INTEGER,
@@ -18,7 +18,7 @@ module.exports = {
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeColumn(
-      `Users`,
+      `Scores`,
       'ScoreboardId'
     );
   }
