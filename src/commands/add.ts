@@ -7,9 +7,7 @@ import ScoreType from '../constant/score-type';
 import { getScoreTypeLowercase } from '../util/command';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
-    logger.info(user);
     try {
-        let isChannelScore = false;
         const splitMsg = message.content.split(' ');
         let type = ScoreType.SERVER;
         let args = [];
