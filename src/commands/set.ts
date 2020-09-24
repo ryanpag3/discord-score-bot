@@ -1,15 +1,25 @@
 import { Message } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { User, Score } from '../models';
-import { getMessageEmbed, getScoreType, getScoreTypeLowercase } from '../util/command';
+import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import logger from '../util/logger';
 
 const set = async (user: User, command: string, message: Message) => {
-    const splitMsg = message.content.split(' ');
-    const type = splitMsg[2] === '-c' ? ScoreType.CHANNEL : ScoreType.SERVER;
+    const args = parseArgs(message);
+    let type = ScoreType.SERVER;
     const split = command.split('=');
     const amount = Number.parseInt(split[1]);
     const scoreName = split[0];
+
+    if (args.length > 1)
+        throw new Error(`Only one argument is allowed for this command.`);
+
+    if (args.includes('c'))
+        type = ScoreType.CHANNEL;
+    
+    if (args.includes('s'))
+        type = ScoreType.SCOREBOARD;
+
     const where = {
         serverId: message.guild.id,
         channelId: message.channel.id,
