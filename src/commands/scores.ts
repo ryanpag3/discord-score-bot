@@ -1,23 +1,46 @@
 import { Message, MessageAttachment } from 'discord.js';
 import Chart from 'chart.js';
-import { Score } from '../models';
+import { Score, Scoreboard } from '../models';
 import logger from '../util/logger';
 import ScoreType from '../constant/score-type';
 import { renderSmallChart } from '../util/canvas';
-import { getMessageEmbed } from '../util/command';
+import { getMessageEmbed, parseArgs } from '../util/command';
 import { User } from '../models';
 
 const scores = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
-    const type = split[2] === '-c' ? ScoreType.CHANNEL : ScoreType.SERVER;
-    if (split[2] && type != ScoreType.CHANNEL) 
-        throw new Error(`Invalid argument provided.`);
+    let type = ScoreType.SERVER;
+    const args = parseArgs(message);
+
+    if (args.length > 1)
+        throw new Error(`Only one argument is allowed for this command.`);
+
+    if (args.includes('c'))
+        type = ScoreType.CHANNEL;
+
+    const scoreboardName = split[3];
+    if (args.includes('s')) {
+        type = ScoreType.SCOREBOARD;
+        const scoreboard = await Scoreboard.findOne({
+            where: {
+                serverId: message.guild.id,
+                name: scoreboardName
+            }
+        });
+        
+        if (!scoreboard) 
+            throw new Error(`Cannot find scoreboard with name ${scoreboardName} to display scores.`);
+        
+        
+    }
+
     const where = {
         serverId: message.guild.id,
         channelId: message.channel.id,
         type
     }
-    if (type === ScoreType.SERVER) {
+
+    if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD) {
         delete where.channelId;
     }
 
@@ -44,9 +67,9 @@ const buildChart = (type: ScoreType, scores: Score[]) => {
             datasets: [
                 {
                     data: scores.map(s => s.value),
-                    backgroundColor: "lightgrey" 
+                    backgroundColor: "lightgrey"
                 }
-            ], 
+            ],
         },
         options: {
             title: {
