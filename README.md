@@ -29,6 +29,16 @@ You will need a Discord developer token.
 
 1. Copy the bot token and put it in your `.env` file under `DISCORD_TOKEN=<token>`
 
+### Invite your bot to your development server
+
+1. Go here [https://discordapi.com/permissions.html](https://discordapi.com/permissions.html)
+
+1. Input the **Client ID** in the form. You can find your Client ID in the same developer dashboard listed in the section above.
+
+1. Assign the appropriate permissions. For development purposes, you can just use `Administrator`
+
+1. Click the link it generates and invite your own personal instance of Score Bot to your server.
+
 ### Start up services
 
 Score Bot uses postgres for its database. There is a `docker-compose.yml` file at the root of the project which makes starting up the database ease-peasy lemon squeezy.
