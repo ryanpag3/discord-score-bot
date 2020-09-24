@@ -55,8 +55,6 @@ const rm = async (user: User, command: string, message: Message) => {
             where
         });
 
-        logger.info(res);
-
         const msg = res === 0 ?
             `**${splitMsg[2]}** was not deleted. It does not exist.` :
             `**${splitMsg[2]}** has been deleted.`;
@@ -64,6 +62,8 @@ const rm = async (user: User, command: string, message: Message) => {
         const embed = getMessageEmbed(message.author)
             .setDescription(msg);
         message.channel.send(embed);
+
+        logger.debug(`${splitMsg[2]} has been deleted.`);
 
         return res;
     }

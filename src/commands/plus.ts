@@ -2,16 +2,28 @@ import { Message } from "discord.js";
 import logger from "../util/logger";
 import { Score } from '../models';
 import { handleCommandError } from '../util/error';
-import { getMessageEmbed } from '../util/command';
+import { getMessageEmbed, parseArgs } from '../util/command';
 import { User } from '../models';
+import ScoreType from '../constant/score-type';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
     const splitMessage = message.content.split(' ');
     const splitComment = command.split('+');
     const scoreName = splitComment[0];
     const amount = Number.parseInt(splitComment[1]) || 1;
-    const type = splitMessage[2] === '-c' ? 'CHANNEL' : 'SERVER';
+    const args = parseArgs(message);
+    let type = ScoreType.SERVER;
     logger.info(`increasing score ${scoreName} by ${amount}`);
+
+    if (args.length > 1)
+        throw new Error(`Only one argument is allowed for this command.`);
+
+    if (args.includes('c'))
+        type = ScoreType.CHANNEL;
+    
+    if (args.includes('s'))
+        type = ScoreType.SCOREBOARD;
+
     const where = {
         name: scoreName,
         serverId: message.guild.id,

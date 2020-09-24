@@ -3,18 +3,25 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, Sequelize) => {
-  class Score extends Model {
+  class Scoreboard extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Score.belongsTo(models.User, { foreignKey: 'createdBy' });
-      models.User.hasMany(Score, { foreignKey: 'createdBy' });
+
+      // score 1-m
+      Scoreboard.hasMany(models.Score);
+      models.Score.belongsTo(Scoreboard);
+
+      // user 1-1
+      Scoreboard.belongsTo(models.User, { foreignKey: 'createdBy' });
+      models.User.hasMany(Scoreboard, { foreignKey: 'createdBy' });
+
     }
   };
-  Score.init({
+  Scoreboard.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -25,27 +32,11 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: false,
       type: Sequelize.STRING(64)
     },
-    channelId: {
-      allowNull: false,
-      type: Sequelize.STRING(64)
-    },
-    ScoreboardId: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'Scoreboards',
-        key: 'id'
-      }
-    },
-    type: {
-      allowNull: false,
-      type: Sequelize.ENUM(`SERVER`, `CHANNEL`, `SCOREBOARD`)
-    },
     name: {
-      type: Sequelize.STRING(32)
+      type: Sequelize.STRING
     },
-    value: {
-      type: Sequelize.INTEGER,
-      defaultValue: 0
+    description: {
+      type: Sequelize.STRING(255)
     },
     createdBy: {
       allowNull: false,
@@ -65,7 +56,7 @@ module.exports = (sequelize, Sequelize) => {
     }
   }, {
     sequelize,
-    modelName: 'Score',
+    modelName: 'Scoreboard',
   });
-  return Score;
+  return Scoreboard;
 };
