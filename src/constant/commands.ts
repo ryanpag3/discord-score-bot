@@ -57,5 +57,15 @@ export default {
         Delete a channel score and skip confirmation.
         \`.sb rm -cf [channel_score_name]\`
         `
+    },
+    SCOREBOARD: {
+        command: 'scoreboard',
+        description: 'Create a scoreboard.',
+        filename: 'scoreboard.ts',
+        examples: `
+        \`.sb scoreboard test\`
+
+        \`.sb scoreboard test "My descriptiont!"\`
+        `
     }
 }

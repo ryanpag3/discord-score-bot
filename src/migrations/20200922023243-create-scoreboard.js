@@ -8,8 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      serverId: {
+        allowNull: false,
+        type: Sequelize.STRING(64)
+      },
       name: {
         type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING(255)
       },
       createdBy: {
         allowNull: false,
@@ -28,6 +35,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.addIndex('Scoreboards', {
+      unique: true,
+      fields: ['serverId', 'name',]
+    })
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Scoreboards');

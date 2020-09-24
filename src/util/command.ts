@@ -1,6 +1,7 @@
-import { MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import COMMANDS from '../constant/commands';
 import ScoreType from '../constant/score-type';
+import logger from './logger';
 
 const buildCommandMap = () => {
     const map = {};
@@ -35,4 +36,25 @@ export const getScoreType = (type: ScoreType) => {
         return 'Server';
     if (type === ScoreType.SCOREBOARD)
         return 'Scoreboard';
+}
+
+export const parseArgs = (message: Message): string[] => {
+    try {
+        const split = message.content.split(' ');
+        if (!split[2].startsWith('-')) return;
+        return split[2].split('-')[1].split('');
+    } catch (e) {
+        logger.error(e);
+        throw new Error(`An error occured while parsing arguments.`);
+    }
+}
+
+export const getDoubleQuoteText = (message: Message) => {
+    if (!message.content.includes(`"`)) 
+        return undefined;
+    try {
+        return message.content.match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, "");
+    } catch (e) {
+        return undefined;
+    }
 }

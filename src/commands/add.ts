@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { createScore } from '../service/score';
 import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
-import { User } from '../models';
+import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
 import { getScoreTypeLowercase } from '../util/command';
 
@@ -25,8 +25,20 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             type = ScoreType.CHANNEL;
         };
 
+        let ScoreboardId;
+        let scoreboard;
         if (args.includes('s')) {
             type = ScoreType.SCOREBOARD;
+            const scoreboardName = splitMsg.splice(2, 1);
+            scoreboard = await Scoreboard.findOne({
+                where: {
+                    name: scoreboardName,
+                    serverId: message.guild.id
+                }
+            });
+            if (!scoreboard)
+                throw new Error(`Cannot create a scoreboard score without a valid scoreboard. Have you created one with \`scoreboard\`?`)
+            ScoreboardId = scoreboard.id;
         }
 
         if (!splitMsg[2]) {
@@ -38,7 +50,8 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             channelId: message.channel.id,
             type,
             name: splitMsg[2],
-            createdBy: user.id
+            createdBy: user.id,
+            ScoreboardId
         });
 
         const embed = new MessageEmbed()
@@ -47,6 +60,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             .setDescription(`\n\n
             name: **${splitMsg[2]}**
             type: **${getScoreTypeLowercase(type)}**
+            ${type === ScoreType.SCOREBOARD && `scoreboard: **${scoreboard.name}**`}
             `);
         logger.info(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
         message.channel.send(embed);
