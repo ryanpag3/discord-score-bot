@@ -6,6 +6,7 @@ import ScoreType from '../constant/score-type';
 import { renderSmallChart } from '../util/canvas';
 import { getMessageEmbed, parseArgs } from '../util/command';
 import { User } from '../models';
+import scoreboard from './scoreboard';
 
 const scores = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
@@ -19,9 +20,10 @@ const scores = async (user: User, command: string, message: Message) => {
         type = ScoreType.CHANNEL;
 
     const scoreboardName = split[3];
+    let scoreboard;
     if (args.includes('s')) {
         type = ScoreType.SCOREBOARD;
-        const scoreboard = await Scoreboard.findOne({
+        scoreboard = await Scoreboard.findOne({
             where: {
                 serverId: message.guild.id,
                 name: scoreboardName
@@ -30,15 +32,17 @@ const scores = async (user: User, command: string, message: Message) => {
         
         if (!scoreboard) 
             throw new Error(`Cannot find scoreboard with name ${scoreboardName} to display scores.`);
-        
-        
     }
 
     const where = {
         serverId: message.guild.id,
         channelId: message.channel.id,
-        type
+        type,
+        ScoreboardId: scoreboard.id
     }
+
+    if (type !== ScoreType.SCOREBOARD)
+        delete where.ScoreboardId;
 
     if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD) {
         delete where.channelId;
