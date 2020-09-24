@@ -41,7 +41,8 @@ export const getScoreType = (type: ScoreType) => {
 export const parseArgs = (message: Message): string[] => {
     try {
         const split = message.content.split(' ');
-        if (!split[2].startsWith('-')) return;
+        if (!split[2]) return [];
+        if (!split[2].startsWith('-')) return [];
         return split[2].split('-')[1].split('');
     } catch (e) {
         logger.error(e);
