@@ -8,6 +8,7 @@ import minus from '../commands/minus';
 import { handleCommandError } from '../util/error';
 import { User } from '../models';
 import set from '../commands/set';
+import { ValidationError } from 'sequelize';
 
 const onMessageReceived = async (message: Message) => {
     try {
@@ -39,6 +40,9 @@ const routeMessage = async (user: User, message: Message) => {
         }
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
+        if (e instanceof ValidationError) {
+            e = new Error(`Already exists.`);
+        }
         handleCommandError(command, e.message, message);
     }
 }

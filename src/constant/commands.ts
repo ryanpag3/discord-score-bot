@@ -83,5 +83,21 @@ export default {
         examples: `
             \`.sb sb-info [scoreboard_name]\`
         `
+    },
+    KEYWORD: {
+        command: 'keyword',
+        description: `Associate one or more keywords to a score.`,
+        filename: 'keyword.ts',
+        examples: `
+            \`.sb keyword [score_name] [keywords]\`
+
+            \`.sb keyword -c [score_name] [keywords]\`
+
+            \`.sb keyword -s [score_name] [keywords]\`
+
+            \`.sb keyword MyScore MyKeyword\`
+
+            \`.sb keyword MyScore MyFirstKeyword,MySecondKeyword,MyThirdKeyword\`
+        `
     }
 }

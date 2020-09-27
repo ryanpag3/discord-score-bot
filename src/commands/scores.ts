@@ -9,57 +9,61 @@ import { User } from '../models';
 import scoreboard from './scoreboard';
 
 const scores = async (user: User, command: string, message: Message) => {
-    const split = message.content.split(' ');
-    let type = ScoreType.SERVER;
-    const args = parseArgs(message);
+    try {
+        const split = message.content.split(' ');
+        let type = ScoreType.SERVER;
+        const args = parseArgs(message);
 
-    if (args.length > 1)
-        throw new Error(`Only one argument is allowed for this command.`);
+        if (args.length > 1)
+            throw new Error(`Only one argument is allowed for this command.`);
 
-    if (args.includes('c'))
-        type = ScoreType.CHANNEL;
+        if (args.includes('c'))
+            type = ScoreType.CHANNEL;
 
-    const scoreboardName = split[3];
-    let scoreboard;
-    if (args.includes('s')) {
-        type = ScoreType.SCOREBOARD;
-        scoreboard = await Scoreboard.findOne({
-            where: {
-                serverId: message.guild.id,
-                name: scoreboardName
-            }
+        const scoreboardName = split[3];
+        let scoreboard;
+        if (args.includes('s')) {
+            type = ScoreType.SCOREBOARD;
+            scoreboard = await Scoreboard.findOne({
+                where: {
+                    serverId: message.guild.id,
+                    name: scoreboardName
+                }
+            });
+
+            if (!scoreboard)
+                throw new Error(`Cannot find scoreboard with name ${scoreboardName} to display scores.`);
+        }
+
+        const where = {
+            serverId: message.guild.id,
+            channelId: message.channel.id,
+            type
+        };
+
+        if (type === ScoreType.SCOREBOARD)
+            where['ScoreboardId'] = scoreboard.id;
+
+        if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD) {
+            delete where.channelId;
+        }
+
+        const scores = await Score.findAll({
+            where,
+            order: [['value', 'DESC']],
+            limit: 20
         });
-        
-        if (!scoreboard) 
-            throw new Error(`Cannot find scoreboard with name ${scoreboardName} to display scores.`);
-    }
 
-    const where = {
-        serverId: message.guild.id,
-        channelId: message.channel.id,
-        type,
-        ScoreboardId: scoreboard.id
-    }
-
-    if (type !== ScoreType.SCOREBOARD)
-        delete where.ScoreboardId;
-
-    if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD) {
-        delete where.channelId;
-    }
-
-    const scores = await Score.findAll({
-        where,
-        order: [['value', 'DESC']],
-        limit: 20
-    });
-
-    const embed = getMessageEmbed(message.author)
-        .setDescription(`You can get more information on a specific score by running:\n\n\`.sb info ${split[2] || ''} [score_name]\`
+        const embed = getMessageEmbed(message.author)
+            .setDescription(`You can get more information on a specific score by running:\n\n\`.sb info ${split[2] || ''} [score_name]\`
         `);
-    const attachment = new MessageAttachment(buildChart(type, scores));
-    embed.attachFiles([attachment]);
-    message.channel.send(embed);
+        const attachment = new MessageAttachment(buildChart(type, scores));
+        embed.attachFiles([attachment]);
+        message.channel.send(embed);
+    } catch (e) {
+        logger.error(e);
+        throw e;
+    }
 }
 
 const buildChart = (type: ScoreType, scores: Score[]) => {
