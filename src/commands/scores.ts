@@ -55,8 +55,7 @@ const scores = async (user: User, command: string, message: Message) => {
     });
 
     const embed = getMessageEmbed(message.author)
-        .setDescription(`You can get more information on a specific score by running:\n\n\`.sb info ${split[2] || ''} [score_name]\`\n
-        View pages by running \`.sb scores [page_number]\`
+        .setDescription(`You can get more information on a specific score by running:\n\n\`.sb info ${split[2] || ''} [score_name]\`
         `);
     const attachment = new MessageAttachment(buildChart(type, scores));
     embed.attachFiles([attachment]);

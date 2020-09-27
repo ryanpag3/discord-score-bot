@@ -67,5 +67,21 @@ export default {
 
         \`.sb scoreboard test "My descriptiont!"\`
         `
+    },
+    SCOREBOARDS: {
+        command: 'scoreboards',
+        description: 'List the current scoreboards for a server.',
+        filename: 'scoreboards.ts',
+        examples: `
+            \`.sb scoreboards\`
+        `
+    },
+    'SB-INFO': {
+        command: 'sb-info',
+        description: `Get the information of a scoreboard.`,
+        filename: `sb-info.ts`,
+        examples: `
+            \`.sb sb-info [scoreboard_name]\`
+        `
     }
 }
