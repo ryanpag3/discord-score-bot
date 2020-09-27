@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message, MessageEmbed, User } from 'discord.js';
 import COMMANDS from '../constant/commands';
 import ScoreType from '../constant/score-type';
 import logger from './logger';
@@ -15,7 +15,7 @@ const buildCommandMap = () => {
 
 export const COMMAND_MAP = buildCommandMap();
 
-export const getMessageEmbed = (author: any) => {
+export const getMessageEmbed = (author: User) => {
     return new MessageEmbed()
         .setAuthor(author.tag, author.avatarURL());
 }
