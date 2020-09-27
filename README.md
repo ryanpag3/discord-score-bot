@@ -5,6 +5,8 @@ Score Bot is the spiritual successor to [Tally Bot](https://github.com/ryanpag3/
 
 Track scores across your entire server, a channel, or create custom scoreboards.
 
+This project is a WIP. No ETA on release currently.
+
 ## RIP Tally Bot
 
 Tally Bot has seen considerable growth since I first wrote it over a weekend. I have been supporting it off and on for awhile now and have decided to cut the cord and build something lighter, faster and more focused on what users want.
