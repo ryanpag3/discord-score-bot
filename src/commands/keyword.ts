@@ -63,7 +63,6 @@ const keyword = async (user: User, command: string, message: Message) => {
 }
 
 const getKeywordInfo = async (user: User, command: string, message: Message) => {
-    logger.info('we here doh');
     const split = message.content.split(' ');
     const keyword = split[3];
     if (!keyword)
