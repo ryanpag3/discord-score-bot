@@ -43,9 +43,6 @@ const routeMessage = async (user: User, message: Message) => {
         } 
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
-        if (e instanceof ValidationError) {
-            e = new Error(`Already exists.`);
-        }
         handleCommandError(command, e.message, message);
     }
 }

@@ -5,9 +5,8 @@ import BotType from '../constant/bot-type';
 import ScoreType from '../constant/score-type';
 import { User, Score, Scoreboard } from '../models';
 import { getMessageEmbed, getScoreType, parseArgs } from '../util/command';
-import scoreboard from './scoreboard';
 
-const exportCmd = async (user: User, command: string, message: Message) => {
+const exportCmd = async (_user: User, _command: string, message: Message) => {
     const args = parseArgs(message);
 
     if (args.length > 1) {

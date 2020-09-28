@@ -134,5 +134,14 @@ export default {
         Export your server data.
         \`.sb export\`
         `
+    },
+    IMPORT: {
+        command: 'import',
+        description: 'Import your score data.',
+        filename: 'import.ts',
+        examples: `
+        Import your score data.
+        \`.sb import\`
+        `
     }
 }
