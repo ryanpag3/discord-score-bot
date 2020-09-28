@@ -8,13 +8,17 @@ import minus from '../commands/minus';
 import { handleCommandError } from '../util/error';
 import { User } from '../models';
 import set from '../commands/set';
+import { ValidationError } from 'sequelize';
+import { handleKeywordMessage, includesKeyword } from '../util/keyword';
 
 const onMessageReceived = async (message: Message) => {
     try {
         const prefix = process.env.BOT_PREFIX || `.sb`;
-        if (message.content.split(' ')[0] !== prefix) {
-            logger.trace(`message ignored.`);
+        if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
+            logger.debug(`message ignored.`);
             return;
+        } else if (message.content.split(' ')[0] !== prefix && includesKeyword(message)) {
+            return handleKeywordMessage(message);
         }
 
         const user = await createUserIfNotExists(message.author.id);
@@ -36,9 +40,12 @@ const routeMessage = async (user: User, message: Message) => {
             return await routeShorthandMessage(user, command, message);
         } else if (!cmdInfo) {
             throw new Error(`Invalid command provided.`);
-        }
+        } 
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
+        if (e instanceof ValidationError) {
+            e = new Error(`Already exists.`);
+        }
         handleCommandError(command, e.message, message);
     }
 }
