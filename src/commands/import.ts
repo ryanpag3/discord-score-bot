@@ -3,8 +3,9 @@ import axios from 'axios';
 import { User, Score, Scoreboard } from '../models';
 import logger from '../util/logger';
 import BotType from '../constant/bot-type';
-import { getMessageEmbed, parseArgs } from '../util/command';
+import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import ScoreType from '../constant/score-type';
+import { UniqueConstraintError } from 'sequelize';
 
 const importCmd = async (user: User, command: string, message: Message) => {
     const maxFileSizeBytes = 5000000;
@@ -20,21 +21,25 @@ const importCmd = async (user: User, command: string, message: Message) => {
 
     const { data } = await axios.get(jsonFile.url);
 
-    logger.info(data);
     switch (data.botType) {
         case BotType.SCORE_BOT:
-            return importScoreBotData(data, message);
+            return await importScoreBotData(data, message);
         case BotType.TALLY_BOT:
-            return importTallyBotData(data, message);
+            return await importTallyBotData(data, message);
     }
 }
 
 const importScoreBotData = async (json: {
     botType: BotType,
-    data: Score[]
+    data: {
+        scores: Score[] 
+    }
 }, message: Message) => {
     try {
-        for (const scoreData of json.data) {
+        message.channel.startTyping();
+        let errorMsgs = [];
+
+        for (const scoreData of json.data.scores) {
             scoreData.serverId = message.guild.id;
             scoreData.channelId = message.channel.id;
 
@@ -45,6 +50,7 @@ const importScoreBotData = async (json: {
                         serverId: message.guild.id
                     }
                 });
+
                 if (!board) {
                     board = await Scoreboard.create({
                         serverId: message.guild.id,
@@ -60,13 +66,23 @@ const importScoreBotData = async (json: {
             try {
                 await Score.create(scoreData);
             } catch (e) {
-                logger.error(e);
+                if (e instanceof UniqueConstraintError) {
+                    e = new Error(`Score with that name and type already exists.`);
+                } else {
+                    logger.error(`Error while importing score.`, e);
+                }
+                errorMsgs.push(`[${getScoreTypeLowercase(scoreData.type)}] **${scoreData.name}** failed to insert. Reason: _${e.message}_`);
             }
         }
 
         const embed = getMessageEmbed(message.author)
-            .setDescription(`Import completed.`);
+            .setDescription(`
+            successfully imported: **${json.data.scores.length - errorMsgs.length}**\n
+            ${errorMsgs.length > 0 && `__Errors__\n` + errorMsgs.join('\n')}
+            `);
         message.channel.send(embed);
+        message.channel.stopTyping();
+
     } catch (e) {
         logger.error(e);
     }

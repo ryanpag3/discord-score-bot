@@ -31,7 +31,7 @@ const exportCmd = async (_user: User, _command: string, message: Message) => {
 
     message.channel.startTyping();
 
-    let data = await Score.findAll({
+    let scoreData = await Score.findAll({
         where,
         include: {
             model: Scoreboard,
@@ -55,7 +55,9 @@ const exportCmd = async (_user: User, _command: string, message: Message) => {
 
     const d = {
         botType: BotType.SCORE_BOT,
-        data
+        data: {
+            scores: scoreData
+        }
     }
 
     const filepath = `/tmp/scorebot-${message.author.id}-${new Date().getTime()}.json`;
@@ -63,7 +65,7 @@ const exportCmd = async (_user: User, _command: string, message: Message) => {
     const embed = getMessageEmbed(message.author)
         .setTitle(`${getScoreType(type)} Export Completed`)
         .setDescription(`
-        ${data.length} scores exported.
+        ${scoreData.length} scores exported.
         `);
     embed.files = [filepath];
     await message.channel.send(embed);
