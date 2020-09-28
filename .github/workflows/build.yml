@@ -1,0 +1,31 @@
+name: Build
+
+on: [push]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: test_score_bot_db
+          POSTGRES_PASSWORD: adminadmin
+    env:
+      DB_USERNAME: postgres
+      DB_PASSWORD: adminadmin
+      DB_HOSTNAME: 127.0.0.1
+      DB_PORT: 5432
+      LOG_LEVEL: 'INFO'
+    steps:
+      - uses: actions/checkout@v2
+      - name: User node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: install dependencies and run tests
+        run: |
+          yarn install
+          yarn test
