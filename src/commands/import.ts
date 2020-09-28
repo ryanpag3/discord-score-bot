@@ -25,6 +25,7 @@ const importCmd = async (user: User, command: string, message: Message) => {
         case BotType.SCORE_BOT:
             return await importScoreBotData(data, message);
         case BotType.TALLY_BOT:
+        default: // tally bot doesnt specify the type explicity like score bot does
             return await importTallyBotData(data, message);
     }
 }
@@ -32,7 +33,7 @@ const importCmd = async (user: User, command: string, message: Message) => {
 const importScoreBotData = async (json: {
     botType: BotType,
     data: {
-        scores: Score[] 
+        scores: Score[]
     }
 }, message: Message) => {
     try {
@@ -89,7 +90,36 @@ const importScoreBotData = async (json: {
 }
 
 const importTallyBotData = async (data: any, message: Message) => {
+    const scoreData = data.tallies;
+    const errorMsgs = [];
+    for (const score of scoreData) {
+        try {
+            await Score.create({
+                serverId: message.guild.id,
+                channelId: message.channel.id,
+                type: ScoreType.SERVER,
+                name: score.name,
+                description: score.description.toLowerCase().includes('no description') ? null : scoreData.description,
+                value: score.count,
+                createdBy: message.author.id
+            });
+        } catch (e) {
+            if (e instanceof UniqueConstraintError) {
+                e = new Error(`Score with that name and type already exists.`);
+            } else {
+                logger.error(`Error while importing score.`, e);
+            }
+            errorMsgs.push(`[server] **${score.name}** failed to insert. Reason: _${e.message}_`);
+        }
+    }
 
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`
+            successfully imported: **${scoreData.length - errorMsgs.length}**\n
+            ${errorMsgs.length > 0 && `__Errors__\n` + errorMsgs.join('\n')}
+        `);
+    message.channel.send(embed);
+    message.channel.stopTyping();
 }
 
 export default importCmd;
