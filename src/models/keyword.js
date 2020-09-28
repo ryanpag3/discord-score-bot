@@ -24,13 +24,18 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(64),
       allowNull: false
     },
+    serverId: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
     ScoreId: {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
         model: 'Scores',
         key: 'id'
-      }
+      },
+      onDelete: 'CASCADE'
     },
     createdAt: {
       allowNull: false,

@@ -12,13 +12,18 @@ module.exports = {
         type: Sequelize.STRING(64),
         allowNull: false
       },
+      serverId: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       ScoreId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Scores',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -31,7 +36,7 @@ module.exports = {
     });
     await queryInterface.addIndex('Keywords', {
       unique: true,
-      fields: ['name', 'ScoreId',]
+      fields: ['serverId', 'name', 'ScoreId',]
     })
   },
   down: async (queryInterface, Sequelize) => {

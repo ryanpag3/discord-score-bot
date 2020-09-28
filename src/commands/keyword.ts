@@ -2,6 +2,8 @@ import { User, Score, Keyword } from '../models';
 import { Message } from 'discord.js';
 import { getMessageEmbed, parseArgs } from '../util/command';
 import ScoreType from '../constant/score-type';
+import { loadKeywords } from '../util/keyword';
+import logger from '../util/logger';
 
 const keyword = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
@@ -15,7 +17,6 @@ const keyword = async (user: User, command: string, message: Message) => {
         type = ScoreType.CHANNEL;
         split.splice(2, 1);
     }
-
 
     if (args.includes('s')) {
         type = ScoreType.SCOREBOARD;
@@ -43,6 +44,7 @@ const keyword = async (user: User, command: string, message: Message) => {
     for (const keyword of keywords) {
         await Keyword.create({
             ScoreId: score.id,
+            serverId: message.guild.id,
             name: keyword
         });
     }
@@ -50,9 +52,15 @@ const keyword = async (user: User, command: string, message: Message) => {
     const embed = getMessageEmbed(message.author)
         .setTitle(`Score Keywords`)
         .setDescription(`
-            ${score.name} has been associated with: **${split[3]}**
+            ${score.name} has been associated with keyword(s): **${split[3]}**
         `);
     message.channel.send(embed);
+
+    loadKeywords();
+}
+
+const getKeywordInfo = async (user: User, command: string, message: Message) => {
+
 }
 
 export default keyword;
