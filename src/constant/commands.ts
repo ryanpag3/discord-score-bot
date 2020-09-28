@@ -116,5 +116,14 @@ export default {
         Create a bug report.
         \`.sb bug "This is my bug report that I want to submit."\`
         `
+    },
+    FEATURE: {
+        command: 'feature',
+        description: 'Submit a feature request.',
+        filename: 'feature.ts',
+        examples: `
+        Create a feature request.
+        \`.sb feature "This is my feature request. I would like to submit this feature!"\`
+        `
     }
 }
