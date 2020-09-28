@@ -31,7 +31,6 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 
 1. Command syntax is poor and documentation is not easy to access.
 
-
 ## Development
 
 ### Setup Discord Developer Token
