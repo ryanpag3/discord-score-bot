@@ -60,7 +60,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             .setDescription(`\n\n
             name: **${splitMsg[2]}**
             type: **${getScoreTypeLowercase(type)}**
-            ${type === ScoreType.SCOREBOARD && `scoreboard: **${scoreboard.name}**`}
+            ${type === ScoreType.SCOREBOARD ? `scoreboard: **${scoreboard.name}**` : ``}
             `);
         logger.info(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
         message.channel.send(embed);

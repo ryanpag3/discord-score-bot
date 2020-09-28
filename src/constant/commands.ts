@@ -125,5 +125,23 @@ export default {
         Create a feature request.
         \`.sb feature "This is my feature request. I would like to submit this feature!"\`
         `
+    },
+    EXPORT: {
+        command: 'export',
+        description: 'Export your score data.',
+        filename: 'export.ts',
+        examples: `
+        Export your server data.
+        \`.sb export\`
+        `
+    },
+    IMPORT: {
+        command: 'import',
+        description: 'Import your score data.',
+        filename: 'import.ts',
+        examples: `
+        Import your score data.
+        \`.sb import\`
+        `
     }
 }
