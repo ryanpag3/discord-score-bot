@@ -1379,6 +1379,11 @@ dateformat@~1.0.4-1.2.3:
     get-stdin "^4.0.1"
     meow "^3.3.0"
 
+dayjs@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.9.0.tgz#ec6197d974143f5563913d08af71b3f21e008d5d"
+  integrity sha512-Ym40L4ZN+LUMCbsYXWDh/RxEntfaWChc/M+iD5/tat8jylbwE1sa+7eoHxsZ+NB8al6D8VYBmP6eV6GsZ8i01A==
+
 debug@^2.2.0, debug@^2.3.3:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"

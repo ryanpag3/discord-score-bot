@@ -107,5 +107,14 @@ export default {
             Delete a keyword for a scoreboard score.
             \`.sb keyword -rms [score_name] [keyword]\`
         `
+    },
+    BUG: {
+        command: 'bug',
+        description: 'Report a bug.',
+        filename: 'bug.ts',
+        examples: `
+        Create a bug report.
+        \`.sb bug "This is my bug report that I want to submit."\`
+        `
     }
 }
