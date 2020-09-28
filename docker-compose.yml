@@ -16,3 +16,6 @@ services:
         environment:
             PGADMIN_DEFAULT_EMAIL: "user@user.com"
             PGADMIN_DEFAULT_PASSWORD: "pass"
+    bot:
+        build: .
+        env_file: ./.env
