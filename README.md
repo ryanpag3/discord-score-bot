@@ -17,6 +17,19 @@ _**When is Tally Bot going to die?**_ I'm not sure. Current plan is sometime in 
 
 _**What happens to my Tally Bot data?**_ You will have the opportunity to migrate your Tally Bot data to this new bot.
 
+## Objectives
+
+Score Bot (working title) aims to fix a lot of the issues I have now with maintaining Tally Bot.
+
+1. Deployment is not straightforward. It's not easy for users to deploy their own instance of the bot.
+
+1. The bot tries to do too much. This is a lightweight feature-rich scoring bot. 
+
+1. Tech debt impedes scaling possibilities while also requiring larger-than-necessary resources to do so.
+
+1. Syntax is poor and documentation is not easy to access.
+
+
 ## Development
 
 ### Setup Discord Developer Token
