@@ -19,7 +19,7 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 
 ## Objectives
 
-Score Bot (working title) aims to fix a lot of the issues I have now with maintaining Tally Bot.
+**Score Bot** (working title) aims to fix a lot of the issues I have now with maintaining Tally Bot.
 
 1. Deployment is not straightforward. It's not easy for users to deploy their own instance of the bot.
 
