@@ -89,15 +89,23 @@ export default {
         description: `Associate one or more keywords to a score.`,
         filename: 'keyword.ts',
         examples: `
+            Create one or more keywords for a server score.
             \`.sb keyword [score_name] [keywords]\`
 
+            Create one or more keywords for a channel score.
             \`.sb keyword -c [score_name] [keywords]\`
 
+            Create one or more keywords for a scoreboard score.
             \`.sb keyword -s [score_name] [keywords]\`
 
-            \`.sb keyword MyScore MyKeyword\`
+            Delete a keyword for a server score.
+            \`.sb keyword -rm [score_name] [keyword]\`
 
-            \`.sb keyword MyScore MyFirstKeyword,MySecondKeyword,MyThirdKeyword\`
+            Delete a keyword for a channel score.
+            \`.sb keyword -rmc [score_name] [keyword]\`
+
+            Delete a keyword for a scoreboard score.
+            \`.sb keyword -rms [score_name] [keyword]\`
         `
     }
 }

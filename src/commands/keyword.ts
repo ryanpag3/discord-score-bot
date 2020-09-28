@@ -8,8 +8,13 @@ import logger from '../util/logger';
 const keyword = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
     const args = parseArgs(message);
-    if (args.length > 1) {
+    
+    if (args.length > 1 && args.includes('r') === false) {
         throw new Error(`Only one argument can be provided.`);
+    }
+
+    if (args.includes('r') && args.includes('m')) {
+        return deleteKeyword(user, command, message);
     }
 
     if (args.includes('i'))
@@ -86,6 +91,61 @@ const getKeywordInfo = async (user: User, command: string, message: Message) => 
                 return `**${k.Score.name}** | **${k.Score.value}** | **${getScoreTypeLowercase(k.Score.type)}** `
             }).join('\n')}
         `);
+    message.channel.send(embed);
+}
+
+const deleteKeyword = async(user: User, command: string, message: Message) => {
+    const split = message.content.split(' ');
+    const args = parseArgs(message);
+
+    let type = ScoreType.SERVER;
+    if (args.includes('s')) {
+        type = ScoreType.SCOREBOARD;
+        split.splice(2, 1);
+    }
+
+    if (args.includes('c')) {
+        type = ScoreType.CHANNEL;
+        split.splice(2, 1);
+    }
+
+    const scoreName = split[2];
+    if (!scoreName)
+        throw new Error(`Score name is required to delete keyword.`);
+    
+    const keyword = split[3];
+    if (!keyword)
+        throw new Error(`Keyword name is required to delete keyword.`);
+    
+    const where = {
+        serverId: message.guild.id,
+        channelId: message.channel.id,
+        type,
+        name: scoreName
+    };
+
+    if (type !== ScoreType.CHANNEL)
+        delete where.channelId;
+
+    const score = await Score.findOne({
+        where
+    });
+
+    if (!score)
+        throw new Error(`Could not find score by name **${scoreName}**. If you deleted a score, all associated keywords are also deleted.`);
+
+    const res = await Keyword.destroy({
+        where: {
+            ScoreId: score.id,
+            serverId: message.guild.id
+        }
+    });
+
+    if (res === 0)
+        throw new Error(`Could not find keyword with the specified parameters.`);
+
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`keyword **${keyword}** has been deleted for score **${scoreName}**`);
     message.channel.send(embed);
 }
 
