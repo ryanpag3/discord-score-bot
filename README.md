@@ -1,6 +1,8 @@
 
 # Score Bot
 
+![Build](https://github.com/ryanpag3/discord-score-bot/workflows/Build/badge.svg?branch=master&event=push)
+
 Score Bot is the spiritual successor to [Tally Bot](https://github.com/ryanpag3/discord-tally-bot).
 
 Track scores across your entire server, a channel, or create custom scoreboards.
