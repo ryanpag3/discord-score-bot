@@ -35,5 +35,6 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
           docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-          docker build . -t ryanpage/discord-score-bot:${{ github.run_number }}
+          docker build . -t ryanpage/discord-score-bot:${{ github.run_number }} -t ryanpage/discord-score-bot:latest
           docker push ryanpage/discord-score-bot:${{ github.run_number }}
+          docker push ryanpage/discord-score-bot:latest
