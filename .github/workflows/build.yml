@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 jobs:
-  run-tests:
+  run-build:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -35,5 +35,5 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
           docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
-          docker build . -t ryanpage/discord-score-bot:${{ github.run_id }}
-          docker push ryanpage/discord-score-bot:${{ github.run_id }}
+          docker build . -t ryanpage/discord-score-bot:${{ github.run_number }}
+          docker push ryanpage/discord-score-bot:${{ github.run_number }}
