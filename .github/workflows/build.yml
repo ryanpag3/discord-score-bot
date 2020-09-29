@@ -29,10 +29,8 @@ jobs:
         run: |
           yarn install
           yarn test
-  publish-container:
-    runs-on: ubuntu-latest
-    steps:
-      - name: build docker container
+            - name: build docker container
+      - name: build and publish docker container
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
