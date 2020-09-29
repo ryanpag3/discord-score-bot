@@ -25,7 +25,7 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 
 1. Deployment is not straightforward. It's not easy for users to deploy their own instance of the bot.
 
-1. The bot tries to do too much. This is a lightweight feature-rich scoring bot. 
+1. The bot tries to do too much. This is a lightweight feature-rich scoring bot.
 
 1. Tech debt impedes scaling possibilities while also requiring larger-than-necessary resources to do so.
 
