@@ -29,3 +29,14 @@ jobs:
         run: |
           yarn install
           yarn test
+  publish-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build docker container
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |
+          docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+          docker build . -t ryanpage/discord-score-bot:${{ github.run_id }}
+          docker push ryanpage/discord-score-bot:${{ github.run_id }}
