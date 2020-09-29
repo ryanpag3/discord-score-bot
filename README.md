@@ -109,7 +109,7 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 1. Download the Score Bot image
 
 ``` bash
-ryanpage@Ryans-MBP ~/g/discord-score-bot (master)> docker pull ryanpage/discord-score-bot
+user@computer ~/g/discord-score-bot (master)> docker pull ryanpage/discord-score-bot
 Using default tag: latest
 latest: Pulling from ryanpage/discord-score-bot
 4f250268ed6a: Already exists 
