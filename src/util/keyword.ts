@@ -9,8 +9,8 @@ export const loadKeywords = async () => {
     logger.debug(`loading keywords`);
     const savedKeywords = await Keyword.findAll();
     keywords = savedKeywords.map(k => k.name);
-    logger.trace(keywords);
     logger.info(`loaded ${savedKeywords.length} keywords.`);
+    return keywords;
 }
 
 export const keywordsInitialized = () => {

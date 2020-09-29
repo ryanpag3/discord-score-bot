@@ -14,7 +14,7 @@ const keyword = async (user: User, command: string, message: Message) => {
     }
 
     if (args.includes('r') && args.includes('m')) {
-        return deleteKeyword(user, command, message);
+        return await deleteKeyword(user, command, message);
     }
 
     if (args.includes('i'))
@@ -81,8 +81,6 @@ const getKeywordInfo = async (user: User, command: string, message: Message) => 
         include: Score
     });
 
-    logger.info(keywords);
-
     const embed = getMessageEmbed(message.author)
         .setTitle(`Keyword _"${keywords[0].name}"_ Info`)
         .setDescription(`
@@ -92,6 +90,8 @@ const getKeywordInfo = async (user: User, command: string, message: Message) => 
             }).join('\n')}
         `);
     message.channel.send(embed);
+
+    return keywords;
 }
 
 const deleteKeyword = async(user: User, command: string, message: Message) => {
@@ -147,6 +147,8 @@ const deleteKeyword = async(user: User, command: string, message: Message) => {
     const embed = getMessageEmbed(message.author)
         .setDescription(`keyword **${keyword}** has been deleted for score **${scoreName}**`);
     message.channel.send(embed);
+
+    return res;
 }
 
 export default keyword;
