@@ -42,10 +42,10 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         }
 
         if (!splitMsg[2]) {
-            return handleCommandError(command, `A name must be provided!`, message);
+            throw new Error(`A name must be provided!`);
         }
 
-        await createScore({
+        const score = await createScore({
             serverId: message.guild.id,
             channelId: message.channel.id,
             type,
@@ -64,14 +64,12 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             `);
         logger.info(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
         message.channel.send(embed);
+        return score;
     } catch (e) {
-        logger.error(e);
-        let showExamples = true;
         if (e.toString().includes(`SequelizeUniqueConstraintError`)) {
             e = `A score with the specified name already exists.`;
-            showExamples = false;
         }
-        handleCommandError(command, e.toString(), message, showExamples);
+        throw e;
     }
 }
 
