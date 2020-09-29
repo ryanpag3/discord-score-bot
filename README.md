@@ -95,3 +95,38 @@ cp .env.template .env
 `yarn start` - starts the bot
 
 `yarn watch` - starts the bot and will restart when changes occur
+
+## Deployment
+
+It's easy to deploy your own instance of Score Bot if you would like to use it on your server and control your own data. In fact, I encourage you to try it!
+
+### Docker
+
+1. Install Docker for your operating system [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+
+1. Deploy your database using the provided `docker-compose.yml` file
+
+1. Download the Score Bot image
+
+``` bash
+ryanpage@Ryans-MBP ~/g/discord-score-bot (master)> docker pull ryanpage/discord-score-bot
+Using default tag: latest
+latest: Pulling from ryanpage/discord-score-bot
+4f250268ed6a: Already exists 
+1b49aa113642: Already exists 
+c159512f4cc2: Already exists 
+8439168fd8dc: Already exists 
+55abbc6cc158: Already exists 
+e5c5821cd889: Already exists 
+b895fb797ecc: Already exists 
+5b37d50231fd: Already exists 
+6e4c550f68c7: Already exists 
+86fbca3d8521: Pull complete 
+0b0a2f406ade: Pull complete 
+6ceb05111eab: Pull complete 
+Digest: sha256:8bdfa2be395213588d6d68178bd459acf4420c73f344c4a476b0cd920fe3b658
+Status: Downloaded newer image for ryanpage/discord-score-bot:latest
+docker.io/ryanpage/discord-score-bot:latest
+```
+
+1. Configure and deploy image. Configuration is done via environment variables, see `.env.template` for more details.
