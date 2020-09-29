@@ -29,7 +29,6 @@ jobs:
         run: |
           yarn install
           yarn test
-            - name: build docker container
       - name: build and publish docker container
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
