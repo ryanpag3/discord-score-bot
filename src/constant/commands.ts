@@ -1,3 +1,5 @@
+import BotDefaultRoles from './bot-default-roles';
+
 /**
  * Command events will not fire unless they are defined in this manifest.
  * 
@@ -10,7 +12,8 @@ export default {
         filename: `help.ts`,
         examples: `
         \`.sb help\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     ADD: {
         command: `add`,
@@ -20,7 +23,8 @@ export default {
         \`.sb add MyScore\`
 
         \`.sb add -c MyScore\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     SCORES: {
         command: 'scores',
@@ -30,7 +34,8 @@ export default {
         \`.sb scores\`
 
         \`.sb scores -c\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     INFO: {
         command: 'info',
@@ -38,7 +43,8 @@ export default {
         filename: 'info.ts',
         examples: `
         \`.sb info [score_name]\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     RM: {
         command: 'rm',
@@ -56,7 +62,8 @@ export default {
         
         Delete a channel score and skip confirmation.
         \`.sb rm -cf [channel_score_name]\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
     },
     SCOREBOARD: {
         command: 'scoreboard',
@@ -66,7 +73,8 @@ export default {
         \`.sb scoreboard test\`
 
         \`.sb scoreboard test "My descriptiont!"\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     SCOREBOARDS: {
         command: 'scoreboards',
@@ -74,7 +82,8 @@ export default {
         filename: 'scoreboards.ts',
         examples: `
             \`.sb scoreboards\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     'SB-INFO': {
         command: 'sb-info',
@@ -82,7 +91,8 @@ export default {
         filename: `sb-info.ts`,
         examples: `
             \`.sb sb-info [scoreboard_name]\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     KEYWORD: {
         command: 'keyword',
@@ -106,7 +116,8 @@ export default {
 
             Delete a keyword for a scoreboard score.
             \`.sb keyword -rms [score_name] [keyword]\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.USER
     },
     BUG: {
         command: 'bug',
@@ -115,7 +126,8 @@ export default {
         examples: `
         Create a bug report.
         \`.sb bug "This is my bug report that I want to submit."\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
     },
     FEATURE: {
         command: 'feature',
@@ -124,7 +136,8 @@ export default {
         examples: `
         Create a feature request.
         \`.sb feature "This is my feature request. I would like to submit this feature!"\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
     },
     EXPORT: {
         command: 'export',
@@ -133,7 +146,8 @@ export default {
         examples: `
         Export your server data.
         \`.sb export\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
     },
     IMPORT: {
         command: 'import',
@@ -142,6 +156,38 @@ export default {
         examples: `
         Import your score data.
         \`.sb import\`
-        `
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
+    },
+    PERMISSION: {
+        command: 'permission',
+        description: 'Setup and manage permissions',
+        filename: 'permission.ts',
+        examples: ``,
+        defaultRole: BotDefaultRoles.ADMIN
+    },
+    PLUS: {
+        command: 'plus',
+        description: 'Add to a score.',
+        filename: 'plus.ts',
+        examples: ``,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
+    },
+    MINUS: {
+        command: 'minus',
+        description: 'Remove from a score.',
+        filename: 'minus.ts',
+        examples: ``,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
+    },
+    SET: {
+        command: 'set',
+        description: 'Set a score value.',
+        filename: 'set.ts',
+        examples: ``,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
     }
 }

@@ -67,7 +67,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         return score;
     } catch (e) {
         if (e.toString().includes(`SequelizeUniqueConstraintError`)) {
-            e = `A score with the specified name already exists.`;
+            e = new Error(`A score with the specified name already exists.`);
         }
         throw e;
     }

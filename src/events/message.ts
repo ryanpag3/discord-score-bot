@@ -2,14 +2,15 @@ import { Message } from "discord.js";
 import { createUserIfNotExists } from "../service/user";
 import logger from "../util/logger";
 import commands from '../commands';
+import commandsManifest from '../constant/commands';
 import { COMMAND_MAP } from "../util/command";
 import plus from '../commands/plus';
 import minus from '../commands/minus';
 import { handleCommandError } from '../util/error';
 import { User } from '../models';
 import set from '../commands/set';
-import { ValidationError } from 'sequelize';
 import { handleKeywordMessage, includesKeyword } from '../util/keyword';
+import { hasPermission } from '../util/permission';
 
 const onMessageReceived = async (message: Message) => {
     try {
@@ -37,10 +38,19 @@ const routeMessage = async (user: User, message: Message) => {
     try {
         const cmdInfo = COMMAND_MAP[command];
         if (!cmdInfo && isShorthandMessage(command)) {
+            const type = getShorthandMessageType(command);
+            if (!await hasPermission(type, message))
+                return message.author.send(`Invalid permissions.`)
             return await routeShorthandMessage(user, command, message);
         } else if (!cmdInfo) {
             throw new Error(`Invalid command provided.`);
-        } 
+        }
+
+        const commandKey = getCommandKey(cmdInfo.filename);
+
+        if (!await hasPermission(commandKey, message))
+            return message.author.send(`Invalid permissions.`);
+
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
         handleCommandError(command, e.message, message);
@@ -48,26 +58,54 @@ const routeMessage = async (user: User, message: Message) => {
 }
 
 const routeShorthandMessage = async (user: User, command: string, message: Message) => {
-    if (command.endsWith(`++`)) {
+    if (isPlusCommand(command)) {
         return await plus(user, command, message);
-    } else if (command.endsWith(`--`)) {
+    } else if (isMinusCommand(command)) {
         return await minus(user, command, message);
-    } else if (isNaN(Number.parseInt(command.split(`+`)[1])) === false) {
-        return await plus(user, command, message);
-    } else if (isNaN(Number.parseInt(command.split(`-`)[1])) === false) {
-        return await minus(user, command, message);
-    } else if (isNaN(Number.parseInt(command.split(`=`)[1])) === false) {
+    } else if (isSetCommand(command)) {
         return await set(user, command, message)
     }
     throw new Error(`Invalid command provided.`);
 }
 
+const getShorthandMessageType = (command: string) => {
+    if (isPlusCommand(command)) {
+        return `PLUS`;
+    } else if (isMinusCommand(command)) {
+        return `MINUS`;
+    } else if (isSetCommand(command)) {
+        return `SET`;
+    }
+}
+
+const isPlusCommand = (command: string) => {
+    return command.endsWith('++') ||
+        isNaN(Number.parseInt(command.split(`+`)[1])) === false;
+}
+
+const isMinusCommand = (command: string) => {
+    return command.endsWith(`--`) ||
+        isNaN(Number.parseInt(command.split(`-`)[1])) === false;
+}
+
+const isSetCommand = (command: string) => {
+    return isNaN(Number.parseInt(command.split(`=`)[1])) === false;
+}
+
 export const isShorthandMessage = (command: string) => {
-    return command.endsWith(`++`) ||
-        command.endsWith(`--`) ||
-        isNaN(Number.parseInt(command.split(`+`)[1])) === false ||
-        isNaN(Number.parseInt(command.split(`-`)[1])) === false ||
-        isNaN(Number.parseInt(command.split(`=`)[1])) === false;
+    return isPlusCommand(command) || isSetCommand(command) || isMinusCommand(command);
+}
+
+const getCommandKey = (filename: string) => {
+    let commandKey;
+    const keys = Object.keys(commandsManifest);
+    for (const key of keys) {
+        if (commandsManifest[key].filename === filename) {
+            commandKey = key;
+            break;
+        }
+    }
+    return commandKey;
 }
 
 export default onMessageReceived;
