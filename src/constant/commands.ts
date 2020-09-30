@@ -163,7 +163,19 @@ export default {
         command: 'permission',
         description: 'Setup and manage permissions',
         filename: 'permission.ts',
-        examples: ``,
+        examples: `
+        Initialize default roles permissions for your server.
+        \`.sb permission --init\`
+
+        Set a command to require a particular role.
+        \`.sb permission [command] "[role]"\`
+
+        Set a command to be allowed by anyone
+        \`.sb permission [command] everyone\`
+
+        Set all commands to require a particular role.
+        \`.sb permission "[role]"\`
+        `,
         defaultRole: BotDefaultRoles.ADMIN
     },
     PLUS: {

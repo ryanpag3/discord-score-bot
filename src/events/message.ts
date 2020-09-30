@@ -53,6 +53,7 @@ const routeMessage = async (user: User, message: Message) => {
 
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
+        logger.error(e);
         handleCommandError(command, e.message, message);
     }
 }
@@ -96,7 +97,7 @@ export const isShorthandMessage = (command: string) => {
     return isPlusCommand(command) || isSetCommand(command) || isMinusCommand(command);
 }
 
-const getCommandKey = (filename: string) => {
+export const getCommandKey = (filename: string) => {
     let commandKey;
     const keys = Object.keys(commandsManifest);
     for (const key of keys) {

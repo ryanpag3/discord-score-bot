@@ -4,11 +4,14 @@ import { Permission } from '../models';
 import BotDefaultRoles from '../constant/bot-default-roles';
 import Commands from '../constant/commands';
 import logger from './logger';
+import { getMessageEmbed } from './command';
 
 export const initPermissions = async (message: Message) => {
     await createDefaultRoles(message);
     await assignCommandsToDefaultRoles(message);
-
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`Permissions have been initialized for server. Assign roles ${BotDefaultRoles.ADMIN} or ${BotDefaultRoles.USER} to users.`);
+    message.channel.send(embed);
 }
 
 const createDefaultRoles = async (message: Message) => {
@@ -61,6 +64,6 @@ export const hasPermission = async (command: string, message: Message) => {
 
     const role = permission.role;
     return message.member.roles.cache.some(r => r.name === role) 
-        || (!env.isProd() && message.member.hasPermission(`ADMINISTRATOR`));
+        || message.member.hasPermission(`ADMINISTRATOR`);
 }
 
