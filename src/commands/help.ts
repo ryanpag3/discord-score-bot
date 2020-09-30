@@ -31,7 +31,7 @@ const listCommands = (message: Message) => {
     const commands = Object.keys(COMMAND_MAP);
     const embed = new MessageEmbed()
         .setTitle(`Commands`)
-        .setDescription(`${commands.join(`\n`)}`);
+        .setDescription(`${commands.sort().join(`\n`)}`);
     message.channel.send(embed);
 }
 
