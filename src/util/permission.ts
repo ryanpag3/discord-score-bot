@@ -46,7 +46,7 @@ const assignCommandsToDefaultRoles = async (message: Message) => {
             });
             logger.debug(`assigned ${k} to role ${command.defaultRole} in server ${message.guild.id}`);
         } catch (e) {
-            logger.error(e);
+            // ignore any that already exist
         }
     }
 };
