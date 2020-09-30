@@ -2,6 +2,7 @@ import { Message } from 'discord.js';
 import { getCommandKey } from '../events/message';
 import { User, Permission } from '../models';
 import { COMMAND_MAP, getDoubleQuoteText, getMessageEmbed } from '../util/command';
+import commands from '../constant/commands';
 import logger from '../util/logger';
 import { initPermissions } from '../util/permission';
 
@@ -10,6 +11,9 @@ const permission = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
     if (split[2] === '--init')
         return await initPermissions(message);
+
+    if (split[2] === '-l')
+        return await listPermissions(message);
     
     logger.info(message.content);
 
@@ -42,6 +46,20 @@ const permission = async (user: User, command: string, message: Message) => {
 
     const embed = getMessageEmbed(message.author)
         .setDescription(`command **${targetCommand}** now requires the role **${targetRole}**`);
+    message.channel.send(embed);
+}
+
+const listPermissions = async (message: Message) => {
+    const permissions = await Permission.findAll({
+        where: {
+            serverId: message.guild.id
+        }
+    });
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`
+        __Current Permissions__
+        ${permissions.map(p => `**${commands[p.command].command}** | ${p.role}`).join('\n')}
+        `);
     message.channel.send(embed);
 }
 
