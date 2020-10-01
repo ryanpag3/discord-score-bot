@@ -130,3 +130,35 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
     ```
 
 1. Configure and deploy image. Configuration is done via environment variables, see `.env.template` for more details.
+
+## Permissions
+
+By default all users can run all commands for score bot. You must setup your permissions in order to limit this.
+
+_note: Server administrators can __always__ run every command._
+
+### `.sb permission --init`
+
+This will create two roles in your server (`ScoreBotAdmin` and `ScoreBotUser`) and assign all of the available commands to those two users. You can then assign users to each role.
+
+### `.sb permission [command] [role]`
+
+This will set a command to require a specific role.
+
+``` txt
+.sb permission help Member
+
+.sb permission add Admin
+```
+
+### `.sb permission -l`
+
+List off all of the current set permissions. If a command is not included in this list then everyone can use it.
+
+### `.sb permission -a [role]`
+
+Set all permissions to require a specific role.
+
+``` txt
+.sb permission -a Member
+```
