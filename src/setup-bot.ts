@@ -5,7 +5,7 @@ import runMigration from './util/umzug';
 import { loadKeywords } from './util/keyword';
 
 const setupApp =  async (client: Client) => {
-    if (!env.isProd()) await runMigration();
+    await runMigration();
     
     await loadKeywords();
     
