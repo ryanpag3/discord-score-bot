@@ -10,7 +10,7 @@ const handleMessage = (user: User, command: string, message: Message) => {
 
     const embed = new MessageEmbed()
         .setTitle(`Help`)
-        .setDescription(`You can view the documentation [here](https://github.com/ryanpag3/score-bot/blob/master/README.md)`);
+        .setDescription(`You can view the documentation [here](https://github.com/ryanpag3/score-bot/blob/master/README.md)\n\nUse \`.sb help [command]\` to get specific command information.`);
     message.channel.send(embed);
 }
 
