@@ -11,7 +11,7 @@ export default {
         description: `Provides a link to the documentation.`,
         filename: `help.ts`,
         examples: `
-        \`.sb help\`
+\`.sb help\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -20,9 +20,9 @@ export default {
         description: `Add a new score to the server.`,
         filename: `add.ts`,
         examples: `
-        \`.sb add MyScore\`
+\`.sb add MyScore\`
 
-        \`.sb add -c MyScore\`
+\`.sb add -c MyScore\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -31,9 +31,9 @@ export default {
         description: 'Show the current score values.',
         filename: 'scores.ts',
         examples: `
-        \`.sb scores\`
+\`.sb scores\`
 
-        \`.sb scores -c\`
+\`.sb scores -c\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -42,7 +42,7 @@ export default {
         description: `Get info about a score.`,
         filename: 'info.ts',
         examples: `
-        \`.sb info [score_name]\`
+\`.sb info [score_name]\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -51,17 +51,17 @@ export default {
         description: `Delete a score.`,
         filename: 'rm.ts',
         examples: `
-        Delete a server score with confirmation.
-        \`.sb rm [score_name]\`
+Delete a server score with confirmation.
+\`.sb rm [score_name]\`
 
-        Delete a server score and skip confirmation.
-        \`.sb rm -f [score_name]\`
-        
-        Delete a channel score.
-        \`.sb rm -c [channel_score_name]\`
-        
-        Delete a channel score and skip confirmation.
-        \`.sb rm -cf [channel_score_name]\`
+Delete a server score and skip confirmation.
+\`.sb rm -f [score_name]\`
+
+Delete a channel score.
+\`.sb rm -c [channel_score_name]\`
+
+Delete a channel score and skip confirmation.
+\`.sb rm -cf [channel_score_name]\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -70,9 +70,9 @@ export default {
         description: 'Create a scoreboard.',
         filename: 'scoreboard.ts',
         examples: `
-        \`.sb scoreboard test\`
+\`.sb scoreboard test\`
 
-        \`.sb scoreboard test "My descriptiont!"\`
+\`.sb scoreboard test "My descriptiont!"\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -81,7 +81,7 @@ export default {
         description: 'List the current scoreboards for a server.',
         filename: 'scoreboards.ts',
         examples: `
-            \`.sb scoreboards\`
+\`.sb scoreboards\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -90,7 +90,7 @@ export default {
         description: `Get the information of a scoreboard.`,
         filename: `sb-info.ts`,
         examples: `
-            \`.sb sb-info [scoreboard_name]\`
+\`.sb sb-info [scoreboard_name]\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -99,23 +99,23 @@ export default {
         description: `Associate one or more keywords to a score.`,
         filename: 'keyword.ts',
         examples: `
-            Create one or more keywords for a server score.
-            \`.sb keyword [score_name] [keywords]\`
+Create one or more keywords for a server score.
+\`.sb keyword [score_name] [keywords]\`
 
-            Create one or more keywords for a channel score.
-            \`.sb keyword -c [score_name] [keywords]\`
+Create one or more keywords for a channel score.
+\`.sb keyword -c [score_name] [keywords]\`
 
-            Create one or more keywords for a scoreboard score.
-            \`.sb keyword -s [score_name] [keywords]\`
+Create one or more keywords for a scoreboard score.
+\`.sb keyword -s [score_name] [keywords]\`
 
-            Delete a keyword for a server score.
-            \`.sb keyword -rm [score_name] [keyword]\`
+Delete a keyword for a server score.
+\`.sb keyword -rm [score_name] [keyword]\`
 
-            Delete a keyword for a channel score.
-            \`.sb keyword -rmc [score_name] [keyword]\`
+Delete a keyword for a channel score.
+\`.sb keyword -rmc [score_name] [keyword]\`
 
-            Delete a keyword for a scoreboard score.
-            \`.sb keyword -rms [score_name] [keyword]\`
+Delete a keyword for a scoreboard score.
+\`.sb keyword -rms [score_name] [keyword]\`
         `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -124,8 +124,8 @@ export default {
         description: 'Report a bug.',
         filename: 'bug.ts',
         examples: `
-        Create a bug report.
-        \`.sb bug "This is my bug report that I want to submit."\`
+Create a bug report.
+\`.sb bug "This is my bug report that I want to submit."\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -134,8 +134,8 @@ export default {
         description: 'Submit a feature request.',
         filename: 'feature.ts',
         examples: `
-        Create a feature request.
-        \`.sb feature "This is my feature request. I would like to submit this feature!"\`
+Create a feature request.
+\`.sb feature "This is my feature request. I would like to submit this feature!"\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -144,8 +144,8 @@ export default {
         description: 'Export your score data.',
         filename: 'export.ts',
         examples: `
-        Export your server data.
-        \`.sb export\`
+Export your server data.
+\`.sb export\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -154,8 +154,8 @@ export default {
         description: 'Import your score data.',
         filename: 'import.ts',
         examples: `
-        Import your score data.
-        \`.sb import\`
+Import your score data.
+\`.sb import\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -164,17 +164,17 @@ export default {
         description: 'Setup and manage permissions',
         filename: 'permission.ts',
         examples: `
-        Initialize default roles permissions for your server.
-        \`.sb permission --init\`
+Initialize default roles permissions for your server.
+\`.sb permission --init\`
 
-        Set a command to require a particular role.
-        \`.sb permission [command] "[role]"\`
+Set a command to require a particular role.
+\`.sb permission [command] "[role]"\`
 
-        Set a command to be allowed by anyone
-        \`.sb permission [command] everyone\`
+Set a command to be allowed by anyone
+\`.sb permission [command] everyone\`
 
-        Set all commands to require a particular role.
-        \`.sb permission "[role]"\`
+Set all commands to require a particular role.
+\`.sb permission "[role]"\`
         `,
         defaultRole: BotDefaultRoles.ADMIN
     },
@@ -207,7 +207,7 @@ export default {
         description: 'Change the bot prefix for the server.',
         filename: 'prefix.ts',
         examples: `
-        .sb prefix [new_prefix]
+.sb prefix [new_prefix]
         `,
         defaultRole: BotDefaultRoles.ADMIN
     }

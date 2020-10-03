@@ -165,4 +165,278 @@ Set all permissions to require a specific role.
 
 [//]: <> (BEGIN_GENERATED_COMMANDS)
 
+# `help`
+
+_Provides a link to the documentation._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb help
+        
+```
+
+
+# `add`
+
+_Add a new score to the server._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb add MyScore
+
+.sb add -c MyScore
+        
+```
+
+
+# `scores`
+
+_Show the current score values._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb scores
+
+.sb scores -c
+        
+```
+
+
+# `info`
+
+_Get info about a score._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb info [score_name]
+        
+```
+
+
+# `rm`
+
+_Delete a score._
+
+default role: **ScoreBotAdmin**
+
+```
+
+Delete a server score with confirmation.
+.sb rm [score_name]
+
+Delete a server score and skip confirmation.
+.sb rm -f [score_name]
+
+Delete a channel score.
+.sb rm -c [channel_score_name]
+
+Delete a channel score and skip confirmation.
+.sb rm -cf [channel_score_name]
+        
+```
+
+
+# `scoreboard`
+
+_Create a scoreboard._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb scoreboard test
+
+.sb scoreboard test "My descriptiont!"
+        
+```
+
+
+# `scoreboards`
+
+_List the current scoreboards for a server._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb scoreboards
+        
+```
+
+
+# `sb-info`
+
+_Get the information of a scoreboard._
+
+default role: **ScoreBotUser**
+
+```
+
+.sb sb-info [scoreboard_name]
+        
+```
+
+
+# `keyword`
+
+_Associate one or more keywords to a score._
+
+default role: **ScoreBotUser**
+
+```
+
+Create one or more keywords for a server score.
+.sb keyword [score_name] [keywords]
+
+Create one or more keywords for a channel score.
+.sb keyword -c [score_name] [keywords]
+
+Create one or more keywords for a scoreboard score.
+.sb keyword -s [score_name] [keywords]
+
+Delete a keyword for a server score.
+.sb keyword -rm [score_name] [keyword]
+
+Delete a keyword for a channel score.
+.sb keyword -rmc [score_name] [keyword]
+
+Delete a keyword for a scoreboard score.
+.sb keyword -rms [score_name] [keyword]
+        
+```
+
+
+# `bug`
+
+_Report a bug._
+
+default role: **ScoreBotAdmin**
+
+```
+
+Create a bug report.
+.sb bug "This is my bug report that I want to submit."
+        
+```
+
+
+# `feature`
+
+_Submit a feature request._
+
+default role: **ScoreBotAdmin**
+
+```
+
+Create a feature request.
+.sb feature "This is my feature request. I would like to submit this feature!"
+        
+```
+
+
+# `export`
+
+_Export your score data._
+
+default role: **ScoreBotAdmin**
+
+```
+
+Export your server data.
+.sb export
+        
+```
+
+
+# `import`
+
+_Import your score data._
+
+default role: **ScoreBotAdmin**
+
+```
+
+Import your score data.
+.sb import
+        
+```
+
+
+# `permission`
+
+_Setup and manage permissions_
+
+default role: **ScoreBotAdmin**
+
+```
+
+Initialize default roles permissions for your server.
+.sb permission --init
+
+Set a command to require a particular role.
+.sb permission [command] "[role]"
+
+Set a command to be allowed by anyone
+.sb permission [command] everyone
+
+Set all commands to require a particular role.
+.sb permission "[role]"
+        
+```
+
+
+# `plus`
+
+_Add to a score._
+
+default role: **ScoreBotUser**
+
+```
+
+```
+
+
+# `minus`
+
+_Remove from a score._
+
+default role: **ScoreBotUser**
+
+```
+
+```
+
+
+# `set`
+
+_Set a score value._
+
+default role: **ScoreBotUser**
+
+```
+
+```
+
+
+# `prefix`
+
+_Change the bot prefix for the server._
+
+default role: **ScoreBotAdmin**
+
+```
+
+.sb prefix [new_prefix]
+        
+```
+
+
 [//]: <> (END_GENERATED_COMMANDS)

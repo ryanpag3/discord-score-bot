@@ -21,30 +21,34 @@ const generate = async () => {
 
     const document = [split[0], secondHalfSplit[1]];
 
-    let commandsDoc = `${BEGIN_COMMENT}`;
+    let commandsDoc = `${BEGIN_COMMENT}\n`;
 
     const keys = Object.keys(commands);
     for (const k of keys) {
         const c = commands[k];
         commandsDoc += `
-        # \`${c.command}\`
-        
-        ${c.description}
+# \`${c.command}\`
 
-        default role: ${c.defaultRole}
+_${c.description}_
 
-        \`\`\`
-        ${c.examples}
-        \`\`\`
-        `;
+default role: **${c.defaultRole}**
+
+\`\`\`
+${c.examples.replace(/`/g, '')}
+\`\`\`
+
+`;
     }
-    commandsDoc += END_COMMENT;
+    commandsDoc += `\n` + END_COMMENT;
 
     document.splice(1, 0, commandsDoc);
 
     console.log(document);
 
-    const str = document.join('\n');
+    const str = document.join('');
+
+    console.log(str);
+
     await promises.writeFile(README_PATH, str);
 }
 
