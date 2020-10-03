@@ -14,11 +14,9 @@ import { hasPermission } from '../util/permission';
 
 const onMessageReceived = async (message: Message) => {
     try {
-        const server = await Server.upsert({
-            id: message.guild.id
-        });
-
+        const server = await getServer(message.guild.id);
         const prefix = server.prefix || process.env.BOT_PREFIX || `.sb`;
+        
         if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
             logger.debug(`message ignored.`);
             return;
@@ -27,7 +25,6 @@ const onMessageReceived = async (message: Message) => {
         }
 
         const user = await createUserIfNotExists(message.author.id);
-
         routeMessage(user, message)
             .then(() => logger.debug(`bot action completed.`))
             .catch((e) => logger.error(e));
@@ -111,6 +108,14 @@ export const getCommandKey = (filename: string) => {
         }
     }
     return commandKey;
+}
+
+const getServer = async (serverId: string) => {
+    const servers = await Server.upsert({
+        id: serverId
+    });
+    return servers[0];
+
 }
 
 export default onMessageReceived;

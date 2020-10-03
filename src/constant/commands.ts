@@ -201,5 +201,14 @@ export default {
         examples: ``,
         defaultRole: BotDefaultRoles.USER,
         isShorthand: true
+    },
+    PREFIX: {
+        command: 'prefix',
+        description: 'Change the bot prefix for the server.',
+        filename: 'prefix.ts',
+        examples: `
+        .sb prefix [new_prefix]
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
     }
 }
