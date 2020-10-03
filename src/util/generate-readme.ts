@@ -43,10 +43,9 @@ const generate = async () => {
     document.splice(1, 0, commandsDoc);
 
     console.log(document);
-    // const fileHandle = await promises.appendFile(README_PATH, 'test');
 
-    
-
+    const str = document.join('\n');
+    await promises.writeFile(README_PATH, str);
 }
 
 generate();
