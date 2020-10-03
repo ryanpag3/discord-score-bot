@@ -7,14 +7,16 @@ import { COMMAND_MAP } from "../util/command";
 import plus from '../commands/plus';
 import minus from '../commands/minus';
 import { handleCommandError } from '../util/error';
-import { User } from '../models';
+import { User, Server } from '../models';
 import set from '../commands/set';
 import { handleKeywordMessage, includesKeyword } from '../util/keyword';
 import { hasPermission } from '../util/permission';
 
 const onMessageReceived = async (message: Message) => {
     try {
-        const prefix = process.env.BOT_PREFIX || `.sb`;
+        const server = await getServer(message.guild.id);
+        const prefix = server.prefix || process.env.BOT_PREFIX || `.sb`;
+        
         if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
             logger.debug(`message ignored.`);
             return;
@@ -23,7 +25,6 @@ const onMessageReceived = async (message: Message) => {
         }
 
         const user = await createUserIfNotExists(message.author.id);
-
         routeMessage(user, message)
             .then(() => logger.debug(`bot action completed.`))
             .catch((e) => logger.error(e));
@@ -107,6 +108,14 @@ export const getCommandKey = (filename: string) => {
         }
     }
     return commandKey;
+}
+
+const getServer = async (serverId: string) => {
+    const servers = await Server.upsert({
+        id: serverId
+    });
+    return servers[0];
+
 }
 
 export default onMessageReceived;
