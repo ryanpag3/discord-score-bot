@@ -21,14 +21,14 @@ const generate = async () => {
 
     const document = [split[0], secondHalfSplit[1]];
 
-    let commandsDoc = `${BEGIN_COMMENT}\n`;
+    let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n`;
 
     const keys = Object.keys(commands);
     for (const k of keys) {
         const c = commands[k];
-        commandsDoc += `# \`${c.command}\`
+        commandsDoc += `## \`${c.command}\`
 
-_${c.description}_
+${c.description}
 
 default role: **${c.defaultRole}**
 
@@ -38,7 +38,7 @@ ${c.examples.replace(/`/g, '')}
 
 `;
     }
-    commandsDoc += `\n` + END_COMMENT;
+    commandsDoc += END_COMMENT;
 
     document.splice(1, 0, commandsDoc);
 

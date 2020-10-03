@@ -164,9 +164,12 @@ Set all permissions to require a specific role.
 ```
 
 [//]: <> (BEGIN_GENERATED_COMMANDS)
-# `help`
 
-_Provides a link to the documentation._
+# Commands
+
+## `help`
+
+Provides a link to the documentation.
 
 default role: **ScoreBotUser**
 
@@ -176,9 +179,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `add`
+## `add`
 
-_Add a new score to the server._
+Add a new score to the server.
 
 default role: **ScoreBotUser**
 
@@ -190,9 +193,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `scores`
+## `scores`
 
-_Show the current score values._
+Show the current score values.
 
 default role: **ScoreBotUser**
 
@@ -204,9 +207,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `info`
+## `info`
 
-_Get info about a score._
+Get info about a score.
 
 default role: **ScoreBotUser**
 
@@ -216,9 +219,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `rm`
+## `rm`
 
-_Delete a score._
+Delete a score.
 
 default role: **ScoreBotAdmin**
 
@@ -238,9 +241,9 @@ Delete a channel score and skip confirmation.
 
 ```
 
-# `scoreboard`
+## `scoreboard`
 
-_Create a scoreboard._
+Create a scoreboard.
 
 default role: **ScoreBotUser**
 
@@ -252,9 +255,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `scoreboards`
+## `scoreboards`
 
-_List the current scoreboards for a server._
+List the current scoreboards for a server.
 
 default role: **ScoreBotUser**
 
@@ -264,9 +267,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `sb-info`
+## `sb-info`
 
-_Get the information of a scoreboard._
+Get the information of a scoreboard.
 
 default role: **ScoreBotUser**
 
@@ -276,9 +279,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `keyword`
+## `keyword`
 
-_Associate one or more keywords to a score._
+Associate one or more keywords to a score.
 
 default role: **ScoreBotUser**
 
@@ -304,9 +307,9 @@ Delete a keyword for a scoreboard score.
 
 ```
 
-# `bug`
+## `bug`
 
-_Report a bug._
+Report a bug.
 
 default role: **ScoreBotAdmin**
 
@@ -317,9 +320,9 @@ Create a bug report.
 
 ```
 
-# `feature`
+## `feature`
 
-_Submit a feature request._
+Submit a feature request.
 
 default role: **ScoreBotAdmin**
 
@@ -330,9 +333,9 @@ Create a feature request.
 
 ```
 
-# `export`
+## `export`
 
-_Export your score data._
+Export your score data.
 
 default role: **ScoreBotAdmin**
 
@@ -343,9 +346,9 @@ Export your server data.
 
 ```
 
-# `import`
+## `import`
 
-_Import your score data._
+Import your score data.
 
 default role: **ScoreBotAdmin**
 
@@ -356,9 +359,9 @@ Import your score data.
 
 ```
 
-# `permission`
+## `permission`
 
-_Setup and manage permissions_
+Setup and manage permissions
 
 default role: **ScoreBotAdmin**
 
@@ -378,19 +381,9 @@ Set all commands to require a particular role.
 
 ```
 
-# `plus`
+## `plus`
 
-_Add to a score._
-
-default role: **ScoreBotUser**
-
-``` txt
-
-```
-
-# `minus`
-
-_Remove from a score._
+Add to a score.
 
 default role: **ScoreBotUser**
 
@@ -398,9 +391,9 @@ default role: **ScoreBotUser**
 
 ```
 
-# `set`
+## `minus`
 
-_Set a score value._
+Remove from a score.
 
 default role: **ScoreBotUser**
 
@@ -408,9 +401,19 @@ default role: **ScoreBotUser**
 
 ```
 
-# `prefix`
+## `set`
 
-_Change the bot prefix for the server._
+Set a score value.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+```
+
+## `prefix`
+
+Change the bot prefix for the server.
 
 default role: **ScoreBotAdmin**
 
@@ -419,6 +422,5 @@ default role: **ScoreBotAdmin**
 .sb prefix [new_prefix]
 
 ```
-
 
 [//]: <> (END_GENERATED_COMMANDS)
