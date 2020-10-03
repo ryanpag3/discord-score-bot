@@ -162,3 +162,7 @@ Set all permissions to require a specific role.
 ``` txt
 .sb permission -a Member
 ```
+
+[//]: <> (BEGIN_GENERATED_COMMANDS)
+
+[//]: <> (END_GENERATED_COMMANDS)
