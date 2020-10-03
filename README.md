@@ -169,13 +169,20 @@ Set all permissions to require a specific role.
 
 ## `help`
 
-Provides a link to the documentation.
+Get help using Score Bot.
 
 default role: **ScoreBotUser**
 
 ``` txt
 
+Get a link to the documentation.
 .sb help
+
+Get help for a specific command.
+.sb help [command]
+
+Get a list of all available commands.
+.sb help commands
 
 ```
 
@@ -187,9 +194,14 @@ default role: **ScoreBotUser**
 
 ``` txt
 
-.sb add MyScore
+Add a server score.
+.sb add [name] [optional_description]
 
-.sb add -c MyScore
+Add a channel score.
+.sb add -c [name] [optional_description]
+
+Add a scoreboard score
+.sb add -s [scoreboard_name] [score_name] [optional_score_description]
 
 ```
 
@@ -201,9 +213,14 @@ default role: **ScoreBotUser**
 
 ``` txt
 
+Get server scores.
 .sb scores
 
+Get channel scores.
 .sb scores -c
+
+Get scoreboard scores.
+.sb scores -s [scoreboard_name]
 
 ```
 
@@ -215,7 +232,14 @@ default role: **ScoreBotUser**
 
 ``` txt
 
+Get server score info.
 .sb info [score_name]
+
+Get channel score info.
+.sb info -c [score_name]
+
+Get server score info.
+.sb info -s [scoreboard_name] [score_name]
 
 ```
 
@@ -354,7 +378,7 @@ default role: **ScoreBotAdmin**
 
 ``` txt
 
-Import your score data.
+Import your server data. This command works with bot score bot data files and tally bot data files.
 .sb import
 
 ```
@@ -389,6 +413,18 @@ default role: **ScoreBotUser**
 
 ``` txt
 
+Increase a server score by one.
+.sb [name]++
+
+Increase a channel score by one.
+.sb [name]++ -c
+
+Increase a scoreboard score by one.
+.sb [name]++ -s
+
+You can also increase by an amount
+.sb [name]+[amount]
+
 ```
 
 ## `minus`
@@ -399,6 +435,18 @@ default role: **ScoreBotUser**
 
 ``` txt
 
+Decrease a server score by one.
+.sb [name]--
+
+Descrease a channel score by one.
+.sb [name]-- -c
+
+Decrease a scoreboard score by one.
+.sb [name]-- -s
+
+You can also decrease by an amount
+.sb [name]-[amount]
+
 ```
 
 ## `set`
@@ -408,6 +456,15 @@ Set a score value.
 default role: **ScoreBotUser**
 
 ``` txt
+
+Set a server score value.
+.sb [name]=[amount]   
+
+Set a channel score value.
+.sb [name]=[amount] -c
+
+Set a scoreboard score value.
+.sb [name]=[amount] -s 
 
 ```
 
