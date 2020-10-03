@@ -26,14 +26,13 @@ const generate = async () => {
     const keys = Object.keys(commands);
     for (const k of keys) {
         const c = commands[k];
-        commandsDoc += `
-# \`${c.command}\`
+        commandsDoc += `# \`${c.command}\`
 
 _${c.description}_
 
 default role: **${c.defaultRole}**
 
-\`\`\`
+\`\`\` txt
 ${c.examples.replace(/`/g, '')}
 \`\`\`
 

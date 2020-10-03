@@ -12,7 +12,7 @@ export default {
         filename: `help.ts`,
         examples: `
 \`.sb help\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     ADD: {
@@ -23,7 +23,7 @@ export default {
 \`.sb add MyScore\`
 
 \`.sb add -c MyScore\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     SCORES: {
@@ -34,7 +34,7 @@ export default {
 \`.sb scores\`
 
 \`.sb scores -c\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     INFO: {
@@ -43,7 +43,7 @@ export default {
         filename: 'info.ts',
         examples: `
 \`.sb info [score_name]\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     RM: {
@@ -62,7 +62,7 @@ Delete a channel score.
 
 Delete a channel score and skip confirmation.
 \`.sb rm -cf [channel_score_name]\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     SCOREBOARD: {
@@ -73,7 +73,7 @@ Delete a channel score and skip confirmation.
 \`.sb scoreboard test\`
 
 \`.sb scoreboard test "My descriptiont!"\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     SCOREBOARDS: {
@@ -82,7 +82,7 @@ Delete a channel score and skip confirmation.
         filename: 'scoreboards.ts',
         examples: `
 \`.sb scoreboards\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     'SB-INFO': {
@@ -91,7 +91,7 @@ Delete a channel score and skip confirmation.
         filename: `sb-info.ts`,
         examples: `
 \`.sb sb-info [scoreboard_name]\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     KEYWORD: {
@@ -116,7 +116,7 @@ Delete a keyword for a channel score.
 
 Delete a keyword for a scoreboard score.
 \`.sb keyword -rms [score_name] [keyword]\`
-        `,
+`,
         defaultRole: BotDefaultRoles.USER
     },
     BUG: {
@@ -126,7 +126,7 @@ Delete a keyword for a scoreboard score.
         examples: `
 Create a bug report.
 \`.sb bug "This is my bug report that I want to submit."\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     FEATURE: {
@@ -136,7 +136,7 @@ Create a bug report.
         examples: `
 Create a feature request.
 \`.sb feature "This is my feature request. I would like to submit this feature!"\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     EXPORT: {
@@ -146,7 +146,7 @@ Create a feature request.
         examples: `
 Export your server data.
 \`.sb export\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     IMPORT: {
@@ -156,7 +156,7 @@ Export your server data.
         examples: `
 Import your score data.
 \`.sb import\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     PERMISSION: {
@@ -175,7 +175,7 @@ Set a command to be allowed by anyone
 
 Set all commands to require a particular role.
 \`.sb permission "[role]"\`
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     },
     PLUS: {
@@ -208,7 +208,7 @@ Set all commands to require a particular role.
         filename: 'prefix.ts',
         examples: `
 .sb prefix [new_prefix]
-        `,
+`,
         defaultRole: BotDefaultRoles.ADMIN
     }
 }
