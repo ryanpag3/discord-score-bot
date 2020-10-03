@@ -33,6 +33,7 @@ jobs:
           yarn install
           yarn test
       - name: generate readme commands and commit
+        continue-on-error: true
         run: |
           yarn generate-readme
           git config --local user.email "action@github.com"
