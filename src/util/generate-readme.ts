@@ -27,7 +27,6 @@ const generate = async () => {
         cmds.push(commands[k]);
     }
 
-    // TODO: generate table of contents
     let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n${cmds.map(c => `- [${c.command}](#${c.command}) - _${c.description}_`).join('\n')}\n\n`;
 
     for (const c of cmds) {
