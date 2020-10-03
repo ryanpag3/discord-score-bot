@@ -8,10 +8,17 @@ import BotDefaultRoles from './bot-default-roles';
 export default {
     HELP: {
         command: `help`,
-        description: `Provides a link to the documentation.`,
+        description: `Get help using Score Bot.`,
         filename: `help.ts`,
         examples: `
+Get a link to the documentation.
 \`.sb help\`
+
+Get help for a specific command.
+\`.sb help [command]\`
+
+Get a list of all available commands.
+\`.sb help commands\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -20,9 +27,14 @@ export default {
         description: `Add a new score to the server.`,
         filename: `add.ts`,
         examples: `
-\`.sb add MyScore\`
+Add a server score.
+\`.sb add [name] [optional_description]\`
 
-\`.sb add -c MyScore\`
+Add a channel score.
+\`.sb add -c [name] [optional_description]\`
+
+Add a scoreboard score
+\`.sb add -s [scoreboard_name] [score_name] [optional_score_description]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -31,9 +43,14 @@ export default {
         description: 'Show the current score values.',
         filename: 'scores.ts',
         examples: `
+Get server scores.
 \`.sb scores\`
 
+Get channel scores.
 \`.sb scores -c\`
+
+Get scoreboard scores.
+\`.sb scores -s [scoreboard_name]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -42,7 +59,14 @@ export default {
         description: `Get info about a score.`,
         filename: 'info.ts',
         examples: `
+Get server score info.
 \`.sb info [score_name]\`
+
+Get channel score info.
+\`.sb info -c [score_name]\`
+
+Get server score info.
+\`.sb info -s [scoreboard_name] [score_name]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -154,7 +178,7 @@ Export your server data.
         description: 'Import your score data.',
         filename: 'import.ts',
         examples: `
-Import your score data.
+Import your server data. This command works with bot score bot data files and tally bot data files.
 \`.sb import\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
@@ -182,7 +206,19 @@ Set all commands to require a particular role.
         command: 'plus',
         description: 'Add to a score.',
         filename: 'plus.ts',
-        examples: ``,
+        examples: `
+Increase a server score by one.
+\`.sb [name]++\`
+
+Increase a channel score by one.
+\`.sb [name]++ -c\`
+
+Increase a scoreboard score by one.
+\`.sb [name]++ -s\`
+
+You can also increase by an amount
+\`.sb [name]+[amount]\`
+`,
         defaultRole: BotDefaultRoles.USER,
         isShorthand: true
     },
@@ -190,7 +226,19 @@ Set all commands to require a particular role.
         command: 'minus',
         description: 'Remove from a score.',
         filename: 'minus.ts',
-        examples: ``,
+        examples: `
+Decrease a server score by one.
+\`.sb [name]--\`
+
+Descrease a channel score by one.
+\`.sb [name]-- -c\`
+
+Decrease a scoreboard score by one.
+\`.sb [name]-- -s\`
+
+You can also decrease by an amount
+\`.sb [name]-[amount]\`
+`,
         defaultRole: BotDefaultRoles.USER,
         isShorthand: true
     },
@@ -198,7 +246,16 @@ Set all commands to require a particular role.
         command: 'set',
         description: 'Set a score value.',
         filename: 'set.ts',
-        examples: ``,
+        examples: `
+Set a server score value.
+\`.sb [name]=[amount]\`   
+
+Set a channel score value.
+\`.sb [name]=[amount] -c\`
+
+Set a scoreboard score value.
+\`.sb [name]=[amount] -s\` 
+`,
         defaultRole: BotDefaultRoles.USER,
         isShorthand: true
     },
