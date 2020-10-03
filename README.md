@@ -131,34 +131,340 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 
 1. Configure and deploy image. Configuration is done via environment variables, see `.env.template` for more details.
 
-## Permissions
+[//]: <> (BEGIN_GENERATED_COMMANDS)
 
-By default all users can run all commands for score bot. You must setup your permissions in order to limit this.
+# Commands
 
-_note: Server administrators can __always__ run every command._
+- [help](#help) - _Get help using Score Bot._
+- [add](#add) - _Add a new score to the server._
+- [scores](#scores) - _Show the current score values._
+- [info](#info) - _Get info about a score._
+- [rm](#rm) - _Delete a score._
+- [scoreboard](#scoreboard) - _Create a scoreboard._
+- [scoreboards](#scoreboards) - _List the current scoreboards for a server._
+- [sb-info](#sb-info) - _Get the information of a scoreboard._
+- [keyword](#keyword) - _Associate one or more keywords to a score._
+- [bug](#bug) - _Report a bug._
+- [feature](#feature) - _Submit a feature request._
+- [export](#export) - _Export your score data._
+- [import](#import) - _Import your score data._
+- [permission](#permission) - _Setup and manage permissions_
+- [plus](#plus) - _Add to a score._
+- [minus](#minus) - _Remove from a score._
+- [set](#set) - _Set a score value._
+- [prefix](#prefix) - _Change the bot prefix for the server._
 
-### `.sb permission --init`
+### `help`
 
-This will create two roles in your server (`ScoreBotAdmin` and `ScoreBotUser`) and assign all of the available commands to those two users. You can then assign users to each role.
+Get help using Score Bot.
 
-### `.sb permission [command] [role]`
-
-This will set a command to require a specific role.
+default role: **ScoreBotUser**
 
 ``` txt
-.sb permission help Member
 
-.sb permission add Admin
+Get a link to the documentation.
+.sb help
+
+Get help for a specific command.
+.sb help [command]
+
+Get a list of all available commands.
+.sb help commands
+
 ```
 
-### `.sb permission -l`
+### `add`
 
-List off all of the current set permissions. If a command is not included in this list then everyone can use it.
+Add a new score to the server.
 
-### `.sb permission -a [role]`
-
-Set all permissions to require a specific role.
+default role: **ScoreBotUser**
 
 ``` txt
-.sb permission -a Member
+
+Add a server score.
+.sb add [name] [optional_description]
+
+Add a channel score.
+.sb add -c [name] [optional_description]
+
+Add a scoreboard score
+.sb add -s [scoreboard_name] [score_name] [optional_score_description]
+
 ```
+
+### `scores`
+
+Show the current score values.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Get server scores.
+.sb scores
+
+Get channel scores.
+.sb scores -c
+
+Get scoreboard scores.
+.sb scores -s [scoreboard_name]
+
+```
+
+### `info`
+
+Get info about a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Get server score info.
+.sb info [score_name]
+
+Get channel score info.
+.sb info -c [score_name]
+
+Get server score info.
+.sb info -s [scoreboard_name] [score_name]
+
+```
+
+### `rm`
+
+Delete a score.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Delete a server score with confirmation.
+.sb rm [score_name]
+
+Delete a server score and skip confirmation.
+.sb rm -f [score_name]
+
+Delete a channel score.
+.sb rm -c [channel_score_name]
+
+Delete a channel score and skip confirmation.
+.sb rm -cf [channel_score_name]
+
+```
+
+### `scoreboard`
+
+Create a scoreboard.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+.sb scoreboard test
+
+.sb scoreboard test "My descriptiont!"
+
+```
+
+### `scoreboards`
+
+List the current scoreboards for a server.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+.sb scoreboards
+
+```
+
+### `sb-info`
+
+Get the information of a scoreboard.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+.sb sb-info [scoreboard_name]
+
+```
+
+### `keyword`
+
+Associate one or more keywords to a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Create one or more keywords for a server score.
+.sb keyword [score_name] [keywords]
+
+Create one or more keywords for a channel score.
+.sb keyword -c [score_name] [keywords]
+
+Create one or more keywords for a scoreboard score.
+.sb keyword -s [score_name] [keywords]
+
+Delete a keyword for a server score.
+.sb keyword -rm [score_name] [keyword]
+
+Delete a keyword for a channel score.
+.sb keyword -rmc [score_name] [keyword]
+
+Delete a keyword for a scoreboard score.
+.sb keyword -rms [score_name] [keyword]
+
+```
+
+### `bug`
+
+Report a bug.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Create a bug report.
+.sb bug "This is my bug report that I want to submit."
+
+```
+
+### `feature`
+
+Submit a feature request.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Create a feature request.
+.sb feature "This is my feature request. I would like to submit this feature!"
+
+```
+
+### `export`
+
+Export your score data.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Export your server data.
+.sb export
+
+```
+
+### `import`
+
+Import your score data.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Import your server data. This command works with bot score bot data files and tally bot data files.
+.sb import
+
+```
+
+### `permission`
+
+Setup and manage permissions
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Initialize default roles permissions for your server.
+.sb permission --init
+
+Set a command to require a particular role.
+.sb permission [command] "[role]"
+
+Set a command to be allowed by anyone
+.sb permission [command] everyone
+
+Set all commands to require a particular role.
+.sb permission "[role]"
+
+```
+
+### `plus`
+
+Add to a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Increase a server score by one.
+.sb [name]++
+
+Increase a channel score by one.
+.sb [name]++ -c
+
+Increase a scoreboard score by one.
+.sb [name]++ -s
+
+You can also increase by an amount
+.sb [name]+[amount]
+
+```
+
+### `minus`
+
+Remove from a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Decrease a server score by one.
+.sb [name]--
+
+Descrease a channel score by one.
+.sb [name]-- -c
+
+Decrease a scoreboard score by one.
+.sb [name]-- -s
+
+You can also decrease by an amount
+.sb [name]-[amount]
+
+```
+
+### `set`
+
+Set a score value.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Set a server score value.
+.sb [name]=[amount]   
+
+Set a channel score value.
+.sb [name]=[amount] -c
+
+Set a scoreboard score value.
+.sb [name]=[amount] -s 
+
+```
+
+### `prefix`
+
+Change the bot prefix for the server.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+.sb prefix [new_prefix]
+
+```
+
+[//]: <> (END_GENERATED_COMMANDS)

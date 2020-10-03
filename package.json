@@ -14,7 +14,8 @@
     "watch-prod": "env NODE_ENV=production yarn watch",
     "create-migration": "cd src && npx npx sequelize-cli migration:generate",
     "create-model": "cd src && npx sequelize-cli model:generate",
-    "undo-all-migrations": "cd src && npx sequelize-cli db:migrate:undo:all"
+    "undo-all-migrations": "cd src && npx sequelize-cli db:migrate:undo:all",
+    "generate-readme": "ts-node src/util/generate-readme.ts"
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
