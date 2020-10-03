@@ -185,7 +185,7 @@ Import your server data. This command works with bot score bot data files and ta
     },
     PERMISSION: {
         command: 'permission',
-        description: 'Setup and manage permissions',
+        description: 'Setup and manage permissions.',
         filename: 'permission.ts',
         examples: `
 Initialize default roles permissions for your server.
