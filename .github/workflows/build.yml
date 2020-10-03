@@ -32,6 +32,16 @@ jobs:
         run: |
           yarn install
           yarn test
+      - name: generate readme commands and commit
+        run: |
+          yarn generate-readme
+          git config --local user.email "action@github.com"
+          git config --local user.name "Github Action"
+          git commit -m "Generate new README based on commands manifest." README.md
+      - name: Push README.md
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: build and publish docker container
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
