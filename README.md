@@ -148,7 +148,7 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 - [feature](#feature) - _Submit a feature request._
 - [export](#export) - _Export your score data._
 - [import](#import) - _Import your score data._
-- [permission](#permission) - _Setup and manage permissions_
+- [permission](#permission) - _Setup and manage permissions._
 - [plus](#plus) - _Add to a score._
 - [minus](#minus) - _Remove from a score._
 - [set](#set) - _Set a score value._
@@ -372,7 +372,7 @@ Import your server data. This command works with bot score bot data files and ta
 
 ### `permission`
 
-Setup and manage permissions
+Setup and manage permissions.
 
 default role: **ScoreBotAdmin**
 
