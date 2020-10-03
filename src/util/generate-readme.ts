@@ -21,12 +21,16 @@ const generate = async () => {
 
     const document = [split[0], secondHalfSplit[1]];
 
-    // TODO: generate table of contents
-    let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n`;
-
+    const cmds = [];
     const keys = Object.keys(commands);
-    for (const k of keys) {
-        const c = commands[k];
+    for (const k of keys) { 
+        cmds.push(commands[k]);
+    }
+
+    // TODO: generate table of contents
+    let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n${cmds.map(c => `- [${c.command}](#${c.command}) - _${c.description}_`).join('\n')}\n\n`;
+
+    for (const c of cmds) {
         commandsDoc += `### \`${c.command}\`
 
 ${c.description}

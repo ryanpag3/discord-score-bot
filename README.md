@@ -167,7 +167,26 @@ Set all permissions to require a specific role.
 
 # Commands
 
-## `help`
+- [help](#help) - _Get help using Score Bot._
+- [add](#add) - _Add a new score to the server._
+- [scores](#scores) - _Show the current score values._
+- [info](#info) - _Get info about a score._
+- [rm](#rm) - _Delete a score._
+- [scoreboard](#scoreboard) - _Create a scoreboard._
+- [scoreboards](#scoreboards) - _List the current scoreboards for a server._
+- [sb-info](#sb-info) - _Get the information of a scoreboard._
+- [keyword](#keyword) - _Associate one or more keywords to a score._
+- [bug](#bug) - _Report a bug._
+- [feature](#feature) - _Submit a feature request._
+- [export](#export) - _Export your score data._
+- [import](#import) - _Import your score data._
+- [permission](#permission) - _Setup and manage permissions_
+- [plus](#plus) - _Add to a score._
+- [minus](#minus) - _Remove from a score._
+- [set](#set) - _Set a score value._
+- [prefix](#prefix) - _Change the bot prefix for the server._
+
+### `help`
 
 Get help using Score Bot.
 
@@ -186,7 +205,7 @@ Get a list of all available commands.
 
 ```
 
-## `add`
+### `add`
 
 Add a new score to the server.
 
@@ -205,7 +224,7 @@ Add a scoreboard score
 
 ```
 
-## `scores`
+### `scores`
 
 Show the current score values.
 
@@ -224,7 +243,7 @@ Get scoreboard scores.
 
 ```
 
-## `info`
+### `info`
 
 Get info about a score.
 
@@ -243,7 +262,7 @@ Get server score info.
 
 ```
 
-## `rm`
+### `rm`
 
 Delete a score.
 
@@ -265,7 +284,7 @@ Delete a channel score and skip confirmation.
 
 ```
 
-## `scoreboard`
+### `scoreboard`
 
 Create a scoreboard.
 
@@ -279,7 +298,7 @@ default role: **ScoreBotUser**
 
 ```
 
-## `scoreboards`
+### `scoreboards`
 
 List the current scoreboards for a server.
 
@@ -291,7 +310,7 @@ default role: **ScoreBotUser**
 
 ```
 
-## `sb-info`
+### `sb-info`
 
 Get the information of a scoreboard.
 
@@ -303,7 +322,7 @@ default role: **ScoreBotUser**
 
 ```
 
-## `keyword`
+### `keyword`
 
 Associate one or more keywords to a score.
 
@@ -331,7 +350,7 @@ Delete a keyword for a scoreboard score.
 
 ```
 
-## `bug`
+### `bug`
 
 Report a bug.
 
@@ -344,7 +363,7 @@ Create a bug report.
 
 ```
 
-## `feature`
+### `feature`
 
 Submit a feature request.
 
@@ -357,7 +376,7 @@ Create a feature request.
 
 ```
 
-## `export`
+### `export`
 
 Export your score data.
 
@@ -370,7 +389,7 @@ Export your server data.
 
 ```
 
-## `import`
+### `import`
 
 Import your score data.
 
@@ -383,7 +402,7 @@ Import your server data. This command works with bot score bot data files and ta
 
 ```
 
-## `permission`
+### `permission`
 
 Setup and manage permissions
 
@@ -405,7 +424,7 @@ Set all commands to require a particular role.
 
 ```
 
-## `plus`
+### `plus`
 
 Add to a score.
 
@@ -427,7 +446,7 @@ You can also increase by an amount
 
 ```
 
-## `minus`
+### `minus`
 
 Remove from a score.
 
@@ -449,7 +468,7 @@ You can also decrease by an amount
 
 ```
 
-## `set`
+### `set`
 
 Set a score value.
 
@@ -468,7 +487,7 @@ Set a scoreboard score value.
 
 ```
 
-## `prefix`
+### `prefix`
 
 Change the bot prefix for the server.
 
