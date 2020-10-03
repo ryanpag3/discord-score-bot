@@ -21,6 +21,7 @@ const generate = async () => {
 
     const document = [split[0], secondHalfSplit[1]];
 
+    // TODO: generate table of contents
     let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n`;
 
     const keys = Object.keys(commands);
@@ -42,13 +43,10 @@ ${c.examples.replace(/`/g, '')}
 
     document.splice(1, 0, commandsDoc);
 
-    console.log(document);
-
     const str = document.join('');
 
-    console.log(str);
-
     await promises.writeFile(README_PATH, str);
+    console.log('readme command generation complete');
 }
 
 generate();
