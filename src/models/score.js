@@ -38,7 +38,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     type: {
       allowNull: false,
-      type: Sequelize.ENUM(`SERVER`, `CHANNEL`, `SCOREBOARD`)
+      type: Sequelize.ENUM(`SERVER`, `CHANNEL`, `SCOREBOARD`, 'USER')
     },
     name: {
       type: Sequelize.STRING(32)

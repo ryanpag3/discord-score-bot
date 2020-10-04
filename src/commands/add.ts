@@ -1,10 +1,11 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed, User as DiscordUser } from "discord.js";
 import { createScore } from '../service/score';
 import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
 import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
 import { getScoreTypeLowercase } from '../util/command';
+import { discordClient } from '../';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
     try {
@@ -45,6 +46,10 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             throw new Error(`A name must be provided!`);
         }
 
+        const mention = getUserFromMention(splitMsg[2]);
+
+        logger.info(mention);
+
         const score = await createScore({
             serverId: message.guild.id,
             channelId: message.channel.id,
@@ -71,6 +76,20 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         }
         throw e;
     }
+}
+
+const getUserFromMention = (mention: string): DiscordUser => {
+    if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return discordClient.users.cache.get(mention);
+	}
 }
 
 export default handleMessage;

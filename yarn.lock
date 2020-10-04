@@ -4154,6 +4154,11 @@ sequelize-pool@^6.0.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-6.1.0.tgz#caaa0c1e324d3c2c3a399fed2c7998970925d668"
   integrity sha512-4YwEw3ZgK/tY/so+GfnSgXkdwIJJ1I32uZJztIEgZeAO6HMgj64OzySbWLgxj+tXhZCJnzRfkY9gINw8Ft8ZMg==
 
+sequelize-replace-enum-postgres@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/sequelize-replace-enum-postgres/-/sequelize-replace-enum-postgres-1.5.0.tgz#76a913b8c073c139074145d25c6117303659d159"
+  integrity sha512-Vn9mtBuNeuswqYWW/BTpyg7rHW5NlbFWSWgev+F+ihi5TFpDUGAB4Tj4/7E2D7kLrW/0ZP30f0VQmIhyMarU/Q==
+
 sequelize@^6.3.5:
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.3.5.tgz#80e3db7ac8b76d98c45ca93334197eb6e2335158"
