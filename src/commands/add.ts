@@ -1,11 +1,9 @@
-import { Message, MessageEmbed, User as DiscordUser } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { createScore } from '../service/score';
-import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
 import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
 import { getScoreTypeLowercase, getUserFromMention } from '../util/command';
-import { discordClient } from '../';
 import { loadUserScoreToCache } from '../util/user-score';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
