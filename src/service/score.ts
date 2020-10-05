@@ -17,6 +17,5 @@ export const createScore = async ({
         createdBy,
         ScoreboardId
     });
-    logger.info(`New score created. serverId [${serverId}] channelId: [${channelId}] name: [${name}]`);
     return score;
 }

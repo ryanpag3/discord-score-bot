@@ -3,6 +3,7 @@ import ScoreType from '../constant/score-type';
 import { User, Score } from '../models';
 import { getMessageEmbed, getUserFromMention } from '../util/command';
 import logger from '../util/logger';
+import { removeUserScoreFromCache } from '../util/user-score';
 
 
 const rm = async (user: User, command: string, message: Message) => {
@@ -55,6 +56,9 @@ const rm = async (user: User, command: string, message: Message) => {
 
     async function deleteScore(message: Message) {
         
+        if (where.type === ScoreType.USER)
+            removeUserScoreFromCache(where.name, where.serverId);
+
         const res = await Score.destroy({
             where
         });
