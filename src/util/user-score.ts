@@ -60,3 +60,22 @@ export const cacheHasUserScore = (userId: string, serverId: string) => {
         return false;
     return userScores[serverId].includes(userId);
 }
+
+export const increaseUserScore = async (userId: string, serverId: string) => {
+    const score = await Score.findOne({
+        where: {
+            type: ScoreType.USER,
+            serverId,
+            name: `<@!${userId}>`
+        }
+    });
+    
+    if (!score) {
+        logger.error(`Could not find score.`);
+        return;
+    }
+
+    score.value += 1;
+    await score.save();
+    logger.debug(`user score ${userId} has been increased by 1`);
+}

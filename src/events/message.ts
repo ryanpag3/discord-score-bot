@@ -11,7 +11,7 @@ import { User, Server } from '../models';
 import set from '../commands/set';
 import { handleKeywordMessage, includesKeyword } from '../util/keyword';
 import { hasPermission } from '../util/permission';
-import { cacheHasUserScore } from '../util/user-score';
+import { cacheHasUserScore, increaseUserScore } from '../util/user-score';
 
 const onMessageReceived = async (message: Message) => {
     try {
@@ -19,7 +19,7 @@ const onMessageReceived = async (message: Message) => {
         const prefix = server.prefix || process.env.BOT_PREFIX || `.sb`;
 
         if (cacheHasUserScore(message.author.id, message.guild.id))
-            logger.info('user score');
+            increaseUserScore(message.author.id, message.guild.id);
         
         if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
             logger.debug(`message ignored.`);
