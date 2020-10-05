@@ -17,6 +17,9 @@ const scores = async (user: User, command: string, message: Message) => {
         if (args.length > 1)
             throw new Error(`Only one argument is allowed for this command.`);
 
+        if (args.includes('u'))
+            type = ScoreType.USER;
+
         if (args.includes('c'))
             type = ScoreType.CHANNEL;
 
