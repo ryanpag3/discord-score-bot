@@ -1,7 +1,7 @@
 import { Message, MessageCollector, MessageEmbed } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { User, Score } from '../models';
-import { getMessageEmbed } from '../util/command';
+import { getMessageEmbed, getUserFromMention } from '../util/command';
 import logger from '../util/logger';
 
 
@@ -16,8 +16,12 @@ const rm = async (user: User, command: string, message: Message) => {
         args = [];
     }
 
-    const type = args.includes('c') ? ScoreType.CHANNEL : ScoreType.SERVER;
+    let type = args.includes('c') ? ScoreType.CHANNEL : ScoreType.SERVER;
     const force = args.includes('f');
+
+    const mention = getUserFromMention(splitMsg[2]);
+    if (mention)
+        type = ScoreType.USER;
 
     const where = {
         serverId: message.guild.id,

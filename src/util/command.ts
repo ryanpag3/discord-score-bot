@@ -2,6 +2,7 @@ import { Message, MessageEmbed, User } from 'discord.js';
 import COMMANDS from '../constant/commands';
 import ScoreType from '../constant/score-type';
 import logger from './logger';
+import { discordClient } from '..';
 
 const buildCommandMap = () => {
     const map = {};
@@ -27,6 +28,9 @@ export const getScoreTypeLowercase = (type: ScoreType) => {
         return 'server';
     if (type === ScoreType.SCOREBOARD)
         return 'scoreboard';
+    if (type === ScoreType.USER)
+        return 'user';
+    return '';
 }
 
 export const getScoreType = (type: ScoreType) => {
@@ -36,6 +40,9 @@ export const getScoreType = (type: ScoreType) => {
         return 'Server';
     if (type === ScoreType.SCOREBOARD)
         return 'Scoreboard';
+    if (type === ScoreType.USER)
+        return 'User';
+    return '';
 }
 
 export const parseArgs = (message: Message): string[] => {
@@ -58,4 +65,18 @@ export const getDoubleQuoteText = (message: Message) => {
     } catch (e) {
         return undefined;
     }
+}
+
+export const getUserFromMention = (mention: string): User => {
+    if (!mention) return;
+
+	if (mention.startsWith('<@') && mention.endsWith('>')) {
+		mention = mention.slice(2, -1);
+
+		if (mention.startsWith('!')) {
+			mention = mention.slice(1);
+		}
+
+		return discordClient.users.cache.get(mention);
+	}
 }

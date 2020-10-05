@@ -4,7 +4,7 @@ import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
 import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
-import { getScoreTypeLowercase } from '../util/command';
+import { getScoreTypeLowercase, getUserFromMention } from '../util/command';
 import { discordClient } from '../';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
@@ -47,8 +47,9 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         }
 
         const mention = getUserFromMention(splitMsg[2]);
-
-        logger.info(mention);
+        if (mention) {
+            type = ScoreType.USER;
+        }
 
         const score = await createScore({
             serverId: message.guild.id,
@@ -78,18 +79,6 @@ const handleMessage = async (user: User, command: string, message: Message) => {
     }
 }
 
-const getUserFromMention = (mention: string): DiscordUser => {
-    if (!mention) return;
 
-	if (mention.startsWith('<@') && mention.endsWith('>')) {
-		mention = mention.slice(2, -1);
-
-		if (mention.startsWith('!')) {
-			mention = mention.slice(1);
-		}
-
-		return discordClient.users.cache.get(mention);
-	}
-}
 
 export default handleMessage;
