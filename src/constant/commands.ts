@@ -51,6 +51,9 @@ Get channel scores.
 
 Get scoreboard scores.
 \`.sb scores -s [scoreboard_name]\`
+
+Get user scores.
+\`.sb scores -u\`
 `,
         defaultRole: BotDefaultRoles.USER
     },

@@ -1,7 +1,11 @@
 import logger from '../util/logger'
-import { keywordsInitialized } from '../util/keyword';
+import { keywordsInitialized, loadKeywords } from '../util/keyword';
+import { loadUserScores } from '../util/user-score';
 
-export default () => {
+export default async () => {
+    await loadKeywords();
+    await loadUserScores();
+
     if (!keywordsInitialized())
         throw new Error(`Keywords must be initialized before bot startup.`);
     

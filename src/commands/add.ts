@@ -1,10 +1,12 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed, User as DiscordUser } from "discord.js";
 import { createScore } from '../service/score';
 import { handleCommandError } from "../util/error";
 import logger from "../util/logger";
 import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
-import { getScoreTypeLowercase } from '../util/command';
+import { getScoreTypeLowercase, getUserFromMention } from '../util/command';
+import { discordClient } from '../';
+import { loadUserScoreToCache } from '../util/user-score';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
     try {
@@ -45,6 +47,12 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             throw new Error(`A name must be provided!`);
         }
 
+        const mention = getUserFromMention(splitMsg[2]);
+        if (mention) {
+            type = ScoreType.USER;
+            loadUserScoreToCache(splitMsg[2], message.guild.id);
+        }
+
         const score = await createScore({
             serverId: message.guild.id,
             channelId: message.channel.id,
@@ -62,7 +70,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             type: **${getScoreTypeLowercase(type)}**
             ${type === ScoreType.SCOREBOARD ? `scoreboard: **${scoreboard.name}**` : ``}
             `);
-        logger.info(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
+        logger.debug(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
         message.channel.send(embed);
         return score;
     } catch (e) {
@@ -72,5 +80,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         throw e;
     }
 }
+
+
 
 export default handleMessage;

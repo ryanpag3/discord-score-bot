@@ -1,7 +1,8 @@
 enum ScoreType {
     SERVER = 'SERVER',
     CHANNEL = 'CHANNEL',
-    SCOREBOARD = 'SCOREBOARD'
+    SCOREBOARD = 'SCOREBOARD',
+    USER = 'USER'
 }
 
 export default ScoreType;
