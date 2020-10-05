@@ -1,8 +1,8 @@
 import { Message, MessageEmbed, User } from 'discord.js';
 import COMMANDS from '../constant/commands';
 import ScoreType from '../constant/score-type';
+import discordClient from './discord-client';
 import logger from './logger';
-import { discordClient } from '..';
 
 const buildCommandMap = () => {
     const map = {};

@@ -27,7 +27,7 @@ function getConfig(p: string): any {
 const migrate = new Umzug(getConfig('../migrations'));
 
 const runMigration = async () => {
-    logger.debug(`running database migration.`)
+    logger.debug(`running database migration.`);
     await migrate.up();
     logger.debug(`completed database migration.`);
 }

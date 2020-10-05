@@ -1,8 +1,6 @@
 require('dotenv').config();
-import Discord from 'discord.js';
 import setupBot from './setup-bot';
-
-export const discordClient = new Discord.Client();
+import discordClient from './util/discord-client';
 
 setupBot(discordClient)
     .then(() => {

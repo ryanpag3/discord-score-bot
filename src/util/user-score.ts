@@ -1,4 +1,3 @@
-import { discordClient } from '..';
 import ScoreType from '../constant/score-type';
 import { Score } from '../models';
 import { getUserFromMention } from './command';
