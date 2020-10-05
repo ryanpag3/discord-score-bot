@@ -2,11 +2,13 @@ import { Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
 import { createTestUser, getTestMessage, resetDb } from '../util/test-util';
 import add from './add';
+import logger from '../util/logger';
 
 let TEST_USER;
 beforeEach(async () => {
     await resetDb();
     TEST_USER = await createTestUser();
+    logger.info('done');
 });
 
 it('should add a server score', async () => {

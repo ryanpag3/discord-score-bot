@@ -1,3 +1,4 @@
+import { delay } from 'bluebird';
 import ScoreType from '../constant/score-type';
 import { createScore } from '../service/score';
 import { createUserIfNotExists } from '../service/user';
