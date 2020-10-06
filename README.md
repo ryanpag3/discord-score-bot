@@ -3,11 +3,11 @@
 
 ![Build](https://github.com/ryanpag3/discord-score-bot/workflows/Build/badge.svg?branch=master&event=push)
 
-Score Bot is the spiritual successor to [Tally Bot](https://github.com/ryanpag3/discord-tally-bot).
+Score Bot is exactly what its name describes. Keep scores in your server, channels, etc. It's highly customizable with permissions, custom prefixes, and more. It's also free.
 
-Track scores across your entire server, a channel, or create custom scoreboards.
+If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
-This project is a WIP. No ETA on release currently.
+**[jump to commands](#commands)**
 
 ## RIP Tally Bot
 
@@ -21,7 +21,7 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 
 ## Objectives
 
-**Score Bot** (working title) aims to fix a lot of the issues I have now with maintaining Tally Bot.
+**Score Bot** aims to fix a lot of the issues I have now with maintaining Tally Bot.
 
 1. Deployment is not straightforward. It's not easy for users to deploy their own instance of the bot.
 
