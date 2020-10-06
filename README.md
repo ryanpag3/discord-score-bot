@@ -19,17 +19,13 @@ _**When is Tally Bot going to die?**_ I'm not sure. Current plan is sometime in 
 
 _**What happens to my Tally Bot data?**_ You will have the opportunity to migrate your Tally Bot data to this new bot.
 
-## Objectives
+## Migrating from Tally Bot
 
-**Score Bot** aims to fix a lot of the issues I have now with maintaining Tally Bot.
+1. [Invite Score Bot to your server.](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)
 
-1. Deployment is not straightforward. It's not easy for users to deploy their own instance of the bot.
+1. Run `!tb data -export` to create a data file containing your Tally Bot data.
 
-1. The bot tries to do too much. This is a lightweight feature-rich scoring bot.
-
-1. Tech debt impedes scaling possibilities while also requiring larger-than-necessary resources to do so.
-
-1. Command syntax is poor and documentation is not easy to access.
+1. Run `.sb import` and attach the Tally Bot data file.
 
 ## Development
 
@@ -472,10 +468,4 @@ default role: **ScoreBotAdmin**
 
 [//]: <> (END_GENERATED_COMMANDS)
 
-## Migrating from Tally Bot
 
-1. [Invite Score Bot to your server.](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)
-
-1. Run `!tb data -export` to create a data file containing your Tally Bot data.
-
-1. Run `.sb import` and attach the Tally Bot data file.
