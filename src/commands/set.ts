@@ -3,6 +3,7 @@ import ScoreType from '../constant/score-type';
 import { User, Score } from '../models';
 import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import logger from '../util/logger';
+import { handleCommandHelpMessage } from './help';
 
 const set = async (user: User, command: string, message: Message) => {
     const args = parseArgs(message);
@@ -13,6 +14,9 @@ const set = async (user: User, command: string, message: Message) => {
 
     if (args.length > 1)
         throw new Error(`Only one argument is allowed for this command.`);
+
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
 
     if (args.includes('c'))
         type = ScoreType.CHANNEL;

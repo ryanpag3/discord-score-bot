@@ -6,8 +6,14 @@ import BotType from '../constant/bot-type';
 import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import ScoreType from '../constant/score-type';
 import { UniqueConstraintError } from 'sequelize';
+import { handleCommandHelpMessage } from './help';
 
 const importCmd = async (user: User, command: string, message: Message) => {
+    const args = parseArgs(message);
+
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
+
     const maxFileSizeBytes = 5000000;
     const jsonFile = message.attachments.first();
     if (!jsonFile)

@@ -4,6 +4,7 @@ import { User, Score } from '../models';
 import { getMessageEmbed, getUserFromMention } from '../util/command';
 import logger from '../util/logger';
 import { removeUserScoreFromCache } from '../util/user-score';
+import { handleCommandHelpMessage } from './help';
 
 
 const rm = async (user: User, command: string, message: Message) => {
@@ -16,6 +17,9 @@ const rm = async (user: User, command: string, message: Message) => {
     } else {
         args = [];
     }
+
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
 
     let type = args.includes('c') ? ScoreType.CHANNEL : ScoreType.SERVER;
     const force = args.includes('f');

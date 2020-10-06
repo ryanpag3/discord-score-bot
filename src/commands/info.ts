@@ -6,9 +6,14 @@ import { getMessageEmbed } from '../util/command';
 import logger from '../util/logger';
 import { createCanvas, loadImage } from 'canvas';
 import { User } from '../models';
+import { handleCommandHelpMessage } from './help';
 
 const info = async (user: User, command: string, message: Message) => {
     let split = message.content.split(' ');
+    
+    if (split[2] === '-h')
+        return await handleCommandHelpMessage(command, message);
+    
     let type = ScoreType.SERVER;
     if (split[2] === '-c') {
         type = ScoreType.CHANNEL;
