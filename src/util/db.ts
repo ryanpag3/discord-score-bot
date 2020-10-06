@@ -1,4 +1,5 @@
 require('dotenv').config();
+import fs from 'fs';
 import { Sequelize } from 'sequelize';
 import logger from './logger';
 
@@ -9,6 +10,13 @@ export const DB_PORT = Number.parseInt(process.env.DB_PORT) || 3306;
 export const DB_USERNAME = process.env.DB_USERNAME;
 export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const DB_POOL_MAX = Number.parseInt(process.env.DB_POOL_MAX) || 25;
+
+let SSL = false;
+let CA_CERT;
+try {
+    CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH);
+    SSL = true;
+} catch(e) {}
 
 const getDbName = () => {
     if (process.env.NODE_ENV === 'test') {
@@ -27,6 +35,10 @@ const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
         acquire: 10000,
         idle: 1000,
         evict: 100
+    },
+    dialectOptions: {
+        ca: CA_CERT,
+        ssl: SSL
     },
     logging: (msg) => logger.trace(msg)
 });
