@@ -7,6 +7,7 @@ import { renderSmallChart } from '../util/canvas';
 import { getMessageEmbed, parseArgs } from '../util/command';
 import { User } from '../models';
 import scoreboard from './scoreboard';
+import { handleCommandHelpMessage } from './help';
 
 const scores = async (user: User, command: string, message: Message) => {
     try {
@@ -16,6 +17,9 @@ const scores = async (user: User, command: string, message: Message) => {
 
         if (args.length > 1)
             throw new Error(`Only one argument is allowed for this command.`);
+
+        if (args.includes('h'))
+            return await handleCommandHelpMessage(command, message);
 
         if (args.includes('u'))
             type = ScoreType.USER;

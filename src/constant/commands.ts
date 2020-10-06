@@ -267,7 +267,7 @@ Set a scoreboard score value.
         description: 'Change the bot prefix for the server.',
         filename: 'prefix.ts',
         examples: `
-.sb prefix [new_prefix]
+\`.sb prefix [new_prefix]\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     }

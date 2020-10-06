@@ -14,12 +14,16 @@ const handleMessage = (user: User, command: string, message: Message) => {
     message.channel.send(embed);
 }
 
-const handleCommandHelpMessage = (command: string, message: Message) => {
+export const handleCommandHelpMessage = (command: string, message: Message) => {
     if (command === 'commands') {
         return listCommands(message);
     }
 
     const cmdInfo = COMMAND_MAP[command];
+
+    if (!cmdInfo)
+        throw new Error(`Could not find command ${command}`);
+
     const embed = new MessageEmbed()
         .setTitle(`Help [${command}]`)
         .setDescription(cmdInfo.description)

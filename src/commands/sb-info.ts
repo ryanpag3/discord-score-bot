@@ -1,9 +1,14 @@
 import { Message } from 'discord.js';
 import { User, Scoreboard } from '../models';
 import { getMessageEmbed } from '../util/command';
+import { handleCommandHelpMessage } from './help';
 
 const sbInfo = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
+    
+    if (split[2] === '-h')
+        return await handleCommandHelpMessage(command, message);
+    
     const name = split[2];
 
     if (!name)

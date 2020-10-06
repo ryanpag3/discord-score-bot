@@ -4,6 +4,7 @@ import { getMessageEmbed, getScoreTypeLowercase, parseArgs } from '../util/comma
 import ScoreType from '../constant/score-type';
 import { loadKeywords } from '../util/keyword';
 import logger from '../util/logger';
+import { handleCommandHelpMessage } from './help';
 
 const keyword = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
@@ -12,6 +13,9 @@ const keyword = async (user: User, command: string, message: Message) => {
     if (args.length > 1 && args.includes('r') === false) {
         throw new Error(`Only one argument can be provided.`);
     }
+
+    if (args.includes('h'))
+        return handleCommandHelpMessage(command, message);
 
     if (args.includes('r') && args.includes('m')) {
         return await deleteKeyword(user, command, message);

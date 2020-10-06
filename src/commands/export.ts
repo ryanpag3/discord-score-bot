@@ -5,13 +5,18 @@ import BotType from '../constant/bot-type';
 import ScoreType from '../constant/score-type';
 import { User, Score, Scoreboard } from '../models';
 import { getMessageEmbed, getScoreType, parseArgs } from '../util/command';
+import { handleCommandHelpMessage } from './help';
 
-const exportCmd = async (_user: User, _command: string, message: Message) => {
+const exportCmd = async (_user: User, command: string, message: Message) => {
     const args = parseArgs(message);
 
     if (args.length > 1) {
         throw new Error(`Only one argument can be provided.`);
     }
+
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
+
     let type = ScoreType.SERVER;
     const where = {
         type: {
