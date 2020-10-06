@@ -23,7 +23,9 @@ try {
     }
     sslEnabled = true;
     logger.info('SSL active.');
-} catch(e) {}
+} catch(e) {
+    logger.error(e);
+}
 
 const getDbName = () => {
     if (process.env.NODE_ENV === 'test') {
