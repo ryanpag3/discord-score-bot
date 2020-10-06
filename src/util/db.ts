@@ -22,6 +22,7 @@ try {
         require: true
     }
     sslEnabled = true;
+    logger.info('SSL active.');
 } catch(e) {}
 
 const getDbName = () => {
