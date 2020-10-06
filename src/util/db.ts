@@ -14,7 +14,7 @@ export const DB_POOL_MAX = Number.parseInt(process.env.DB_POOL_MAX) || 25;
 let SSL = false;
 let CA_CERT;
 try {
-    CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH);
+    CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH).toString();
     SSL = true;
 } catch(e) {}
 
