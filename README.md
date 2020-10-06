@@ -471,3 +471,11 @@ default role: **ScoreBotAdmin**
 ```
 
 [//]: <> (END_GENERATED_COMMANDS)
+
+## Migrating from Tally Bot
+
+1. Invite Score Bot to your server.
+
+1. Run `!tb data -export` to create a data file containing your Tally Bot data.
+
+1. Run `.sb import` and attach the Tally Bot data file.
