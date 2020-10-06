@@ -474,7 +474,7 @@ default role: **ScoreBotAdmin**
 
 ## Migrating from Tally Bot
 
-1. Invite Score Bot to your server.
+1. [Invite Score Bot to your server.](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)
 
 1. Run `!tb data -export` to create a data file containing your Tally Bot data.
 
