@@ -17,7 +17,8 @@ let CA_CERT;
 try {
     CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH).toString();
     ssl = {
-        ca: CA_CERT
+        ca: CA_CERT,
+        require: true
     }
 } catch(e) {}
 
