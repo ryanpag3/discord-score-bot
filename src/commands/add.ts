@@ -5,6 +5,7 @@ import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
 import { getScoreTypeLowercase, getUserFromMention } from '../util/command';
 import { loadUserScoreToCache } from '../util/user-score';
+import { handleCommandHelpMessage } from './help';
 
 const handleMessage = async (user: User, command: string, message: Message) => {
     try {
@@ -20,6 +21,9 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         if (args.length > 1) {
             throw new Error(`Only one argument is allowed for this comment. (i.e \`-c\` or \`-s\`)`);
         }
+
+        if (args.includes('h'))
+            return await handleCommandHelpMessage(command, message);
 
         if (args.includes('c')) {
             type = ScoreType.CHANNEL;

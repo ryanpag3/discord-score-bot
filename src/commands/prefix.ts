@@ -1,9 +1,13 @@
 import { Message, MessageEmbed } from "discord.js";
 import { User, Server } from '../models';
 import { getMessageEmbed } from '../util/command';
+import { handleCommandHelpMessage } from './help';
 
 const handleMessage = async (user: User, command: string, message: Message) => { 
     const split = message.content.split(' ');
+
+    if (split[2] === '-h')
+        return await handleCommandHelpMessage(command, message);
     
     if (!split[2])
         throw new Error(`Cannot set server prefix without valid prefix.`);

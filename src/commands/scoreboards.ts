@@ -1,8 +1,13 @@
 import { Message } from 'discord.js';
 import { User, Scoreboard } from '../models';
-import { getMessageEmbed } from '../util/command';
+import { getMessageEmbed, parseArgs } from '../util/command';
+import { handleCommandHelpMessage } from './help';
 
 const scoreboards = async (user: User, command: string, message: Message) => {
+    const args = parseArgs(message);
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
+    
     const scoreboards = await Scoreboard.findAll({
         where: {
             serverId: message.guild.id

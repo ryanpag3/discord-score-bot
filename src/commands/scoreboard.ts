@@ -3,6 +3,7 @@ import { getDoubleQuoteText, getMessageEmbed } from '../util/command';
 import { Scoreboard } from '../models';
 import logger from '../util/logger';
 import { UniqueConstraintError } from 'sequelize';
+import { handleCommandHelpMessage } from './help';
 
 /**
  * Create a scoreboard.
@@ -16,6 +17,10 @@ import { UniqueConstraintError } from 'sequelize';
 const scoreboard = async (user: User, command: string, message: Message) => {
     try {
         const split = message.content.split(' ');
+        
+        if (split[2] === '-h')
+            return await handleCommandHelpMessage(command, message);
+        
         const name = split[2];
         const description = getDoubleQuoteText(message);
 

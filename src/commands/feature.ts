@@ -2,12 +2,18 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import { Message } from 'discord.js';
 import { User } from '../models';
-import { getDoubleQuoteText, getMessageEmbed } from '../util/command';
+import { getDoubleQuoteText, getMessageEmbed, parseArgs } from '../util/command';
 import logger from '../util/logger';
+import { handleCommandHelpMessage } from './help';
 
 const recentSubmissions = {};
 
 const feature = async (user: User, command: string, message: Message) => { 
+    
+    const args = parseArgs(message);
+
+    if (args.includes('h'))
+        return await handleCommandHelpMessage(command, message);
 
     if (isOnCooldown(message))
         throw new Error(`You are on cooldown until you can submit another feature request. Please wait 5 minutes and try again.`);
