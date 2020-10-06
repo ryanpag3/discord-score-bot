@@ -7,7 +7,7 @@ Score Bot is exactly what its name describes. Keep scores in your server, channe
 
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
-**[jump to commands](#commands)**
+**[jump to commands](#commands)** or **[invite bot](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)**
 
 ## RIP Tally Bot
 
