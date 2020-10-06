@@ -13,6 +13,7 @@ export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const DB_POOL_MAX = Number.parseInt(process.env.DB_POOL_MAX) || 25;
 
 let ssl;
+let sslEnabled = false;
 let CA_CERT;
 try {
     CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH).toString();
@@ -20,6 +21,7 @@ try {
         ca: CA_CERT,
         require: true
     }
+    sslEnabled = true;
 } catch(e) {}
 
 const getDbName = () => {
@@ -34,6 +36,7 @@ const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
     dialect: DB_DIALECT,
     host: DB_HOSTNAME,
     port: DB_PORT,
+    ssl: sslEnabled,
     pool: {
         max: DB_POOL_MAX,
         min: 1,
