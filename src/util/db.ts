@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { CategoryChannel } from 'discord.js';
 import fs from 'fs';
 import { Sequelize } from 'sequelize';
 import logger from './logger';
@@ -11,11 +12,13 @@ export const DB_USERNAME = process.env.DB_USERNAME;
 export const DB_PASSWORD = process.env.DB_PASSWORD;
 export const DB_POOL_MAX = Number.parseInt(process.env.DB_POOL_MAX) || 25;
 
-let SSL = false;
+let ssl;
 let CA_CERT;
 try {
     CA_CERT = fs.readFileSync(process.env.SSL_CERT_PATH).toString();
-    SSL = true;
+    ssl = {
+        ca: CA_CERT
+    }
 } catch(e) {}
 
 const getDbName = () => {
@@ -29,6 +32,7 @@ const getDbName = () => {
 const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
     dialect: DB_DIALECT,
     host: DB_HOSTNAME,
+    port: DB_PORT,
     pool: {
         max: DB_POOL_MAX,
         min: 1,
@@ -37,8 +41,7 @@ const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
         evict: 100
     },
     dialectOptions: {
-        ca: CA_CERT,
-        ssl: SSL
+        ssl
     },
     logging: (msg) => logger.trace(msg)
 });
