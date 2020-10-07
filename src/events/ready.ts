@@ -16,6 +16,5 @@ export default async () => {
         activity: {
             name: '.sb help'
         }
-    })
-
+    });
 }
