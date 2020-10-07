@@ -15,9 +15,9 @@ Tally Bot has seen considerable growth since I first wrote it over a weekend. I 
 
 _**Why not just update Tally Bot?**_ Everything in this bot will be fundamentally different than the previous one. All commands will have different syntax and many of the less-popular features of Tally Bot I plan to gut out. This will be a complete rewrite of the codebase.
 
-_**When is Tally Bot going to die?**_ I'm not sure. Current plan is sometime in 2021.
+_**When is Tally Bot going to die?**_ Jan 1 2021
 
-_**What happens to my Tally Bot data?**_ You will have the opportunity to migrate your Tally Bot data to this new bot.
+_**What happens to my Tally Bot data?**_ You will have the opportunity to migrate your Tally Bot data to this new bot. If you do not migrate before Jan 1 2021 that data will not be recoverable.
 
 ## Migrating from Tally Bot
 
