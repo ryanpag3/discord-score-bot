@@ -136,9 +136,8 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 - [scores](#scores) - _Show the current score values._
 - [info](#info) - _Get info about a score._
 - [rm](#rm) - _Delete a score._
-- [scoreboard](#scoreboard) - _Create a scoreboard._
+- [scoreboard](#scoreboard) - _Manage scoreboard or create a new one._
 - [scoreboards](#scoreboards) - _List the current scoreboards for a server._
-- [sb-info](#sb-info) - _Get the information of a scoreboard._
 - [keyword](#keyword) - _Associate one or more keywords to a score._
 - [bug](#bug) - _Report a bug._
 - [feature](#feature) - _Submit a feature request._
@@ -253,15 +252,23 @@ Delete a channel score and skip confirmation.
 
 ### `scoreboard`
 
-Create a scoreboard.
+Manage scoreboard or create a new one.
 
 default role: **ScoreBotUser**
 
 ``` txt
 
-.sb scoreboard test
+Create a scoreboard.
+.sb scoreboard [name]
 
-.sb scoreboard test "My descriptiont!"
+Create a scoreboard with a description.
+.sb scoreboard [name] "[description]"
+
+Get a scoreboard's information.
+.sb scoreboard -i [name]
+
+Delete a scoreboard
+.sb scoreboard -rm [name]
 
 ```
 
@@ -274,18 +281,6 @@ default role: **ScoreBotUser**
 ``` txt
 
 .sb scoreboards
-
-```
-
-### `sb-info`
-
-Get the information of a scoreboard.
-
-default role: **ScoreBotUser**
-
-``` txt
-
-.sb sb-info [scoreboard_name]
 
 ```
 
