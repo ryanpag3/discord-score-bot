@@ -22,15 +22,16 @@ const onMessageReceived = async (message: Message) => {
             increaseUserScore(message.author.id, message.guild.id);
         
         if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
-            logger.debug(`message ignored.`);
+            logger.trace(`message ignored.`);
             return;
         } else if (message.content.split(' ')[0] !== prefix && includesKeyword(message)) {
+            logger.trace('keyword message found');
             return handleKeywordMessage(message);
         }
 
         const user = await createUserIfNotExists(message.author.id);
         routeMessage(user, message)
-            .then(() => logger.debug(`bot action completed.`))
+            .then(() => logger.trace(`bot action completed.`))
             .catch((e) => logger.error(e));
     } catch (e) {
         logger.error(`Error while inbounding message.`, e);
@@ -43,18 +44,22 @@ const routeMessage = async (user: User, message: Message) => {
     try {
         const cmdInfo = COMMAND_MAP[command];
         if (!cmdInfo && isShorthandMessage(command)) {
+            logger.trace('shorthand message found');
             const type = getShorthandMessageType(command);
-            if (!await hasPermission(type, message))
+            if (!await hasPermission(type, message)) {
+                logger.debug(`${message.author.tag} does not have permission to run ${type}`);
                 return message.author.send(`Invalid permissions.`)
+            }
             return await routeShorthandMessage(user, command, message);
         } else if (!cmdInfo) {
             throw new Error(`Invalid command provided.`);
         }
 
         const commandKey = getCommandKey(cmdInfo.filename);
-
-        if (!await hasPermission(commandKey, message))
+        if (!await hasPermission(commandKey, message)) {
+            logger.debug(`${message.author.tag} does not have permission to run ${command}`);
             return message.author.send(`Invalid permissions.`);
+        }
 
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
