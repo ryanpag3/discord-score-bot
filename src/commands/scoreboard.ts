@@ -1,6 +1,6 @@
 import { Message, User } from 'discord.js';
 import { getDoubleQuoteText, getMessageEmbed } from '../util/command';
-import { Scoreboard } from '../models';
+import { Scoreboard, Score } from '../models';
 import logger from '../util/logger';
 import { UniqueConstraintError } from 'sequelize';
 import { handleCommandHelpMessage } from './help';
@@ -64,15 +64,25 @@ const deleteScoreboard = async (user: User, command: string, message: Message) =
         name,
         serverId: message.guild.id
     };
-    const res = await Scoreboard.destroy({ where });
-    const msg = res === 0 ?
-        `Scoreboard **${name}** was not deleted. It does not exist.` :
-        `Scoreboard **${name}** has been deleted.`;
+    const scoreboard = await Scoreboard.findOne({ where });
+
+    if (!scoreboard)
+        throw new Error('could not find scoreboard to delete');
+    
+    await Score.destroy({
+        where: {
+            serverId: message.guild.id,
+            ScoreboardId: scoreboard.id
+        }
+    });
+
+    await scoreboard.destroy();
+
     const embed = getMessageEmbed(message.author)
-        .setDescription(msg);
+        .setDescription(`**${scoreboard.name}** has been deleted.`);
     message.channel.send(embed);
 
-    logger.debug(msg);
+    logger.debug(`**${scoreboard.name}** has been deleted.`);
 }
 
 const getScoreboardInfo = async (user: User, command: string, message: Message) => {
