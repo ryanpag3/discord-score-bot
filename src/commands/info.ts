@@ -55,6 +55,7 @@ const info = async (user: User, command: string, message: Message) => {
         `);
 
     message.channel.send(embed);
+    logger.info(`${message.author.tag} requested score info for ${score.name}`);
 }
 
 export default info;

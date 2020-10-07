@@ -46,6 +46,8 @@ const bug = async (user: User, command: string, message: Message) => {
         .setDescription(`Your bug report has been submitted. You can view its status [here](${response.data.html_url})`);
     message.channel.send(embed);
 
+    logger.info(`${message.author.tag} submitted a bug report.`);
+
     recentSubmissions[message.author.id] = dayjs();
 }
 

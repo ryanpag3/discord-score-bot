@@ -46,6 +46,8 @@ const feature = async (user: User, command: string, message: Message) => {
         .setDescription(`Your feature request has been submitted. You can view its status [here](${response.data.html_url})`);
     message.channel.send(embed);
 
+    logger.info(`${message.author.tag} submitted a feature request.`);
+
     recentSubmissions[message.author.id] = dayjs();
 }
 

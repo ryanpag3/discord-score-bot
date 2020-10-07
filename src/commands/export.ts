@@ -5,6 +5,7 @@ import BotType from '../constant/bot-type';
 import ScoreType from '../constant/score-type';
 import { User, Score, Scoreboard } from '../models';
 import { getMessageEmbed, getScoreType, parseArgs } from '../util/command';
+import logger from '../util/logger';
 import { handleCommandHelpMessage } from './help';
 
 const exportCmd = async (_user: User, command: string, message: Message) => {
@@ -76,6 +77,7 @@ const exportCmd = async (_user: User, command: string, message: Message) => {
     await message.channel.send(embed);
     message.channel.stopTyping();
     await promises.unlink(filepath);
+    logger.info(`${message.author.tag} exported bot data from ${message.guild.id}`);
 }
 
 export default exportCmd;

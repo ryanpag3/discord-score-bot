@@ -67,6 +67,7 @@ const scores = async (user: User, command: string, message: Message) => {
         const attachment = new MessageAttachment(buildChart(type, scores));
         embed.attachFiles([attachment]);
         message.channel.send(embed);
+        logger.info(`scores displayed for server ${message.guild.id} and user ${message.author.tag}`);
     } catch (e) {
         logger.error(e);
         throw e;

@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import { COMMAND_MAP } from '../util/command';
 import { User } from '../models';
+import logger from '../util/logger';
 
 const handleMessage = (user: User, command: string, message: Message) => {
     const optionalCommand = message.content.split(' ')[2];
@@ -12,6 +13,7 @@ const handleMessage = (user: User, command: string, message: Message) => {
         .setTitle(`Help`)
         .setDescription(`You can view the documentation [here](https://github.com/ryanpag3/discord-score-bot#commands)\n\nUse \`.sb help [command]\` to get specific command information.`);
     message.channel.send(embed);
+    logger.info(`${message.author.tag} requested help.`);
 }
 
 export const handleCommandHelpMessage = (command: string, message: Message) => {
@@ -29,6 +31,8 @@ export const handleCommandHelpMessage = (command: string, message: Message) => {
         .setDescription(cmdInfo.description)
         .addField(`Examples`, cmdInfo.examples);
     message.channel.send(embed);
+
+    logger.info(`${message.author.tag} requested help fpr ${command}.`);
 }
 
 const listCommands = (message: Message) => {
@@ -37,6 +41,7 @@ const listCommands = (message: Message) => {
         .setTitle(`Commands`)
         .setDescription(`${commands.sort().join(`\n`)}`);
     message.channel.send(embed);
+    logger.info(`${message.author.tag} requested command list.`);
 }
 
 export default handleMessage;

@@ -46,6 +46,8 @@ const set = async (user: User, command: string, message: Message) => {
         `);
     message.channel.send(embed);
 
+    logger.info(`score ${score.name} value has been set to ${amount} by user ${message.author.tag}`);
+
     return score;
 }
 

@@ -59,6 +59,8 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         `);
     message.channel.send(embed);
 
+    logger.info(`Score__\n**${scoreName}** was changed from **${previous}** to **${score.value}** by ${message.author.tag}`);
+
     return score;
 }
 

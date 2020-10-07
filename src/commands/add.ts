@@ -72,7 +72,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             type: **${getScoreTypeLowercase(type)}**
             ${type === ScoreType.SCOREBOARD ? `scoreboard: **${scoreboard.name}**` : ``}
             `);
-        logger.debug(`New score created. serverId [${message.guild.id}] channelId: [${message.channel.id}] name: [${splitMsg[2]}]`);
+        logger.info(`new score created | ${message.author.tag} | ${message.guild.id} | ${type} | ${splitMsg[2]}`);
         message.channel.send(embed);
         return score;
     } catch (e) {

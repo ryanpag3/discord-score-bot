@@ -44,6 +44,9 @@ const scoreboard = async (user: User, command: string, message: Message) => {
         description: **${scoreboard.description || 'No description.'}**
         `);
         message.channel.send(embed);
+
+        logger.info(`scoreboard ${scoreboard.name} has been created by ${message.author.tag} for server ${message.guild.id}`);
+
         return scoreboard;
     } catch (e) {
         if (e instanceof UniqueConstraintError)
@@ -82,7 +85,7 @@ const deleteScoreboard = async (user: User, command: string, message: Message) =
         .setDescription(`**${scoreboard.name}** has been deleted.`);
     message.channel.send(embed);
 
-    logger.debug(`**${scoreboard.name}** has been deleted.`);
+    logger.info(`**${scoreboard.name}** has been deleted by ${message.author.tag} in server ${message.guild.id}`);
 }
 
 const getScoreboardInfo = async (user: User, command: string, message: Message) => {
@@ -117,6 +120,7 @@ const getScoreboardInfo = async (user: User, command: string, message: Message) 
             Show scores with \`.sb scores -s ${name}\`
         `);
     message.channel.send(embed);
+    logger.info(`**${scoreboard.name}** info has been requested by ${message.author.tag} in server ${message.guild.id}`)
 }
 
 export default scoreboard;

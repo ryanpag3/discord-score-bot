@@ -1,6 +1,7 @@
 import { Message } from 'discord.js';
 import { User, Scoreboard } from '../models';
 import { getMessageEmbed, parseArgs } from '../util/command';
+import logger from '../util/logger';
 import { handleCommandHelpMessage } from './help';
 
 const scoreboards = async (user: User, command: string, message: Message) => {
@@ -21,6 +22,7 @@ const scoreboards = async (user: User, command: string, message: Message) => {
             use \`.sb sb-info [name]\` to get scoreboard info
         `);
     message.channel.send(embed);
+    logger.info(`scoreboards listed for ${message.author.id} in server ${message.guild.id}`);
 }
 
 export default scoreboards;

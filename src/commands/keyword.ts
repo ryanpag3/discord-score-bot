@@ -67,7 +67,7 @@ const keyword = async (user: User, command: string, message: Message) => {
             ${score.name} has been associated with keyword(s): **${split[3]}**
         `);
     message.channel.send(embed);
-
+    logger.info(`${message.author.tag} associated ${split[3]} with ${score.name}`);
     loadKeywords();
 }
 

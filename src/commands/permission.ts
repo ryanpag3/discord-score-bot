@@ -58,6 +58,7 @@ const permission = async (user: User, command: string, message: Message) => {
     const embed = getMessageEmbed(message.author)
         .setDescription(`command **${targetCommand}** now requires the role **${targetRole}**`);
     message.channel.send(embed);
+    logger.info(`${message.author.tag} set permission ${targetCommand} to role ${targetRole}`);
 }
 
 const listPermissions = async (message: Message) => {

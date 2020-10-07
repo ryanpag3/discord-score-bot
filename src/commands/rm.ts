@@ -75,7 +75,7 @@ const rm = async (user: User, command: string, message: Message) => {
             .setDescription(msg);
         message.channel.send(embed);
 
-        logger.debug(`${splitMsg[2]} has been deleted.`);
+        logger.info(`${splitMsg[2]} has been deleted by ${message.author.tag}`);
 
         return res;
     }

@@ -89,7 +89,7 @@ const importScoreBotData = async (json: {
             `);
         message.channel.send(embed);
         message.channel.stopTyping();
-
+        logger.info(`${message.author.tag} imported score bot data file`);
     } catch (e) {
         logger.error(e);
     }
@@ -126,6 +126,7 @@ const importTallyBotData = async (data: any, message: Message) => {
         `);
     message.channel.send(embed);
     message.channel.stopTyping();
+    logger.info(`${message.author.tag} imported tally bot data file`);
 }
 
 export default importCmd;
