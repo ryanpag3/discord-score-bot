@@ -23,7 +23,7 @@ export const loadUserScores = async () => {
     for (const score of userScores) {
         await loadUserScoreToCache(score.name, score.serverId);
     }
-    logger.info(`loaded ${userScores.length} scores to cache.`);
+    logger.debug(`loaded ${userScores.length} scores to user score cache.`);
     logger.debug(`server count: ${Object.keys(userScores).length}`);
 }
 

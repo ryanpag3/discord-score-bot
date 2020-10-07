@@ -7,6 +7,8 @@ import { promises } from 'fs';
 import path from 'path';
 import commands from '../constant/commands';
 
+console.log('running Score Bot README command generation.')
+
 const README_PATH = path.join(__dirname, '../../README.md');
 
 const BEGIN_COMMENT = `[//]: <> (BEGIN_GENERATED_COMMANDS)`;
@@ -49,7 +51,7 @@ ${c.examples.replace(/`/g, '')}
     const str = document.join('');
 
     await promises.writeFile(README_PATH, str);
-    console.log('readme command generation complete');
+    console.log('readme command generation completed');
 }
 
 generate();

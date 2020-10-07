@@ -1,5 +1,4 @@
 import { Message } from 'discord.js';
-import env from './env';
 import { Permission } from '../models';
 import BotDefaultRoles from '../constant/bot-default-roles';
 import Commands from '../constant/commands';
@@ -9,6 +8,7 @@ import { getMessageEmbed } from './command';
 export const initPermissions = async (message: Message) => {
     await createDefaultRoles(message);
     await assignCommandsToDefaultRoles(message);
+    logger.info(`initialized permissions for server: ${message.guild.id}`);
     const embed = getMessageEmbed(message.author)
         .setDescription(`Permissions have been initialized for server. Assign roles ${BotDefaultRoles.ADMIN} or ${BotDefaultRoles.USER} to users.`);
     message.channel.send(embed);
@@ -16,7 +16,7 @@ export const initPermissions = async (message: Message) => {
 
 const createDefaultRoles = async (message: Message) => {
     if (!message.guild.roles.cache.find(r => r.name === BotDefaultRoles.ADMIN)) {
-        logger.debug(`creating admin role`);
+        logger.debug(`creating default admin role for server ${message.guild.id}`);
         await message.guild.roles.create({
             data: {
                 name: BotDefaultRoles.ADMIN
@@ -25,7 +25,7 @@ const createDefaultRoles = async (message: Message) => {
     }
 
     if (!message.guild.roles.cache.find(r => r.name === BotDefaultRoles.USER)) {
-        logger.debug(`creating user role`);
+        logger.debug(`creating user role for server ${message.guild.id}`);
         await message.guild.roles.create({
             data: {
                 name: BotDefaultRoles.USER

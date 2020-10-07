@@ -22,20 +22,21 @@ try {
         require: true
     }
     sslEnabled = true;
-    logger.info('SSL active.');
+    logger.debug('SSL is active for DB connection.');
 } catch(e) {
-    logger.error(e);
+    logger.trace(e);
 }
 
 const getDbName = () => {
+    let name = DB_NAME;
     if (process.env.NODE_ENV === 'test') {
-        logger.debug(`automation flag enabled, using test database...`);
-        return `test_${DB_NAME}`;
+        name = `test_${DB_NAME}`;
     }
-    return DB_NAME;
+    logger.debug(`using database: ${name}`);
+    return name;
 }
 
-const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
+const seqConfig = {
     dialect: DB_DIALECT,
     host: DB_HOSTNAME,
     port: DB_PORT,
@@ -51,7 +52,10 @@ const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, {
         ssl
     },
     logging: (msg) => logger.trace(msg)
-});
+};
+
+logger.trace(seqConfig);
+const sequelize = new Sequelize(getDbName(), DB_USERNAME, DB_PASSWORD, seqConfig);
 
 const models = require('../models');
 
@@ -62,6 +66,7 @@ const db: any = {
 
 const modelNames = Object.keys(models);
 for (const name of modelNames) {
+    logger.debug(`instantiating model: ${name}`);
     db[name] = models[name];
 }
 

@@ -9,7 +9,7 @@ export const loadKeywords = async () => {
     logger.debug(`loading keywords`);
     const savedKeywords = await Keyword.findAll();
     keywords = savedKeywords.map(k => k.name);
-    logger.info(`loaded ${savedKeywords.length} keywords to cache.`);
+    logger.debug(`loaded ${savedKeywords.length} keywords to keyword cache.`);
     return keywords;
 }
 
@@ -32,6 +32,7 @@ export const getMatchingKeywords = (message: Message) => {
 }
 
 export const handleKeywordMessage = async (message: Message) => {
+    logger.debug(`processing keyword message`);
     const matchingKeywords = getMatchingKeywords(message);
     const keywords = await Keyword.findAll({
         where: {

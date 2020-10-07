@@ -11,12 +11,14 @@ const buildCommandMap = () => {
         const cmdInfo = COMMANDS[key];
         map[cmdInfo.command] = cmdInfo;
     }
+    logger.trace(`built new command map`);
     return map;
 }
 
 export const COMMAND_MAP = buildCommandMap();
 
 export const getMessageEmbed = (author: User) => {
+    logger.trace(`get message embed for ${author.tag}`);
     return new MessageEmbed()
         .setAuthor(author.tag, author.avatarURL());
 }
@@ -58,25 +60,31 @@ export const parseArgs = (message: Message): string[] => {
 }
 
 export const getDoubleQuoteText = (message: Message) => {
-    if (!message.content.includes(`"`)) 
-        return undefined;
+    if (!message.content.includes(`"`)) {
+        logger.trace(`incomplete quotes found...returning undefined`);
+        return;
+    }
+
     try {
         return message.content.match(/(?:"[^"]*"|^[^"]*$)/)[0].replace(/"/g, "");
     } catch (e) {
-        return undefined;
+        logger.trace(e);
+        return;
     }
 }
 
 export const getUserFromMention = (mention: string): User => {
     if (!mention) return;
 
+    logger.trace(`getting user from mention: ${mention}`);
+
 	if (mention.startsWith('<@') && mention.endsWith('>')) {
 		mention = mention.slice(2, -1);
 
 		if (mention.startsWith('!')) {
 			mention = mention.slice(1);
-		}
-
+        }
+        
 		return discordClient.users.cache.get(mention);
 	}
 }

@@ -9,5 +9,5 @@ export default async () => {
     if (!keywordsInitialized())
         throw new Error(`Keywords must be initialized before bot startup.`);
     
-    logger.info(`ScoreBOT has successfully connected to Discord.`);
+    logger.info(`Score Bot has successfully connected to Discord.`);
 }
