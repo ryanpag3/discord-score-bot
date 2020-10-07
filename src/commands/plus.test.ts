@@ -19,6 +19,7 @@ it('should increase a score by one', async () => {
         channelId: message.channel.id,
         type: `SERVER`,
         name: scoreName,
+        description: undefined,
         createdBy: TEST_USER.id,
         ScoreboardId: null
     });
@@ -35,6 +36,7 @@ it('should increase a score by 10', async () => {
         channelId: message.channel.id,
         type: `SERVER`,
         name: scoreName,
+        description: undefined,
         createdBy: TEST_USER.id,
         ScoreboardId: null
     });
