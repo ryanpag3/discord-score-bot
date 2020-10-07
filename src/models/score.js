@@ -43,6 +43,9 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING(32)
     },
+    description: {
+      type: Sequelize.STRING(155)
+    },
     value: {
       type: Sequelize.INTEGER,
       defaultValue: 0

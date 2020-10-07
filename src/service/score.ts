@@ -6,6 +6,7 @@ export const createScore = async ({
     channelId,
     type,
     name,
+    description,
     createdBy,
     ScoreboardId
 }) => {
@@ -14,6 +15,7 @@ export const createScore = async ({
         channelId,
         type,
         name,
+        description,
         createdBy,
         ScoreboardId
     });

@@ -3,7 +3,7 @@ import { createScore } from '../service/score';
 import logger from "../util/logger";
 import { User, Scoreboard } from '../models';
 import ScoreType from '../constant/score-type';
-import { getScoreTypeLowercase, getUserFromMention } from '../util/command';
+import { getDoubleQuoteText, getScoreTypeLowercase, getUserFromMention } from '../util/command';
 import { loadUserScoreToCache } from '../util/user-score';
 import { handleCommandHelpMessage } from './help';
 
@@ -55,11 +55,14 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             loadUserScoreToCache(splitMsg[2], message.guild.id);
         }
 
+        const description = getDoubleQuoteText(message);
+
         const score = await createScore({
             serverId: message.guild.id,
             channelId: message.channel.id,
             type,
             name: splitMsg[2],
+            description,
             createdBy: user.id,
             ScoreboardId
         });
@@ -69,6 +72,7 @@ const handleMessage = async (user: User, command: string, message: Message) => {
             .setTitle(`A new score has been created. :100:`)
             .setDescription(`\n\n
             name: **${splitMsg[2]}**
+            description: **${description || 'none'}**
             type: **${getScoreTypeLowercase(type)}**
             ${type === ScoreType.SCOREBOARD ? `scoreboard: **${scoreboard.name}**` : ``}
             `);
