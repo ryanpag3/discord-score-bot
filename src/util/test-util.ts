@@ -51,6 +51,7 @@ export const createTestScore = async (createdBy: string) => {
         channelId: `channelIdeez`,
         type: ScoreType.SERVER,
         name: `myscorename`,
+        description: undefined,
         createdBy: createdBy,
         ScoreboardId: null
     });
