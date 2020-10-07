@@ -94,12 +94,20 @@ Delete a channel score and skip confirmation.
     },
     SCOREBOARD: {
         command: 'scoreboard',
-        description: 'Create a scoreboard.',
+        description: 'Manage scoreboard or create a new one.',
         filename: 'scoreboard.ts',
         examples: `
-\`.sb scoreboard test\`
+Create a scoreboard.
+\`.sb scoreboard [name]\`
 
-\`.sb scoreboard test "My descriptiont!"\`
+Create a scoreboard with a description.
+\`.sb scoreboard [name] "[description]"\`
+
+Get a scoreboard's information.
+\`.sb scoreboard -i [name]\`
+
+Delete a scoreboard
+\`.sb scoreboard -rm [name]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
@@ -109,15 +117,6 @@ Delete a channel score and skip confirmation.
         filename: 'scoreboards.ts',
         examples: `
 \`.sb scoreboards\`
-`,
-        defaultRole: BotDefaultRoles.USER
-    },
-    'SB-INFO': {
-        command: 'sb-info',
-        description: `Get the information of a scoreboard.`,
-        filename: `sb-info.ts`,
-        examples: `
-\`.sb sb-info [scoreboard_name]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },
