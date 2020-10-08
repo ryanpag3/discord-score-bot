@@ -8,7 +8,6 @@ let TEST_USER;
 beforeEach(async () => {
     await resetDb();
     TEST_USER = await createTestUser();
-    logger.info('done');
 });
 
 it('should add a server score', async () => {
