@@ -24,6 +24,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING(32),
       allowNull: false
     },
+    channelId: {
+      type: Sequelize.STRING(32)
+    },
     name: {
       type: Sequelize.STRING(32),
       allowNull: false

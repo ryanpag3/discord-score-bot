@@ -12,6 +12,9 @@ module.exports = {
         type: Sequelize.STRING(32),
         allowNull: false
       },
+      channelId: {
+        type: Sequelize.STRING(32)
+      },
       name: {
         type: Sequelize.STRING(32),
         allowNull: false
