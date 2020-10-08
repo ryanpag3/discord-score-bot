@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
 import { createScore } from '../service/score';
 import logger from "../util/logger";
-import { User, Scoreboard } from '../models';
+import { User, Scoreboard, Score } from '../models';
 import ScoreType from '../constant/score-type';
 import { getDoubleQuoteText, getScoreTypeLowercase, getUserFromMention } from '../util/command';
 import { loadUserScoreToCache } from '../util/user-score';
@@ -53,6 +53,18 @@ const handleMessage = async (user: User, command: string, message: Message) => {
         if (mention) {
             type = ScoreType.USER;
             loadUserScoreToCache(splitMsg[2], message.guild.id);
+        }
+
+        if (type === ScoreType.SERVER) {
+            const existing = await Score.findOne({
+                where: {
+                    serverId: message.guild.id,
+                    name: splitMsg[2],
+                    type
+                }
+            });
+            if (existing)
+                throw new Error(`A server score already exists with those parameters.`);
         }
 
         const description = getDoubleQuoteText(message);
