@@ -269,5 +269,14 @@ Set a scoreboard score value.
 \`.sb prefix [new_prefix]\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
+    },
+    GROUP: {
+        command: 'group',
+        description: 'Create or remove a score group.',
+        filename: 'group.ts',
+        examples: `
+Create a score group. Score names are comma separated (i.e name1,name2,name3)
+\`.sb group [group_name] [score_names]\`
+`
     }
 }

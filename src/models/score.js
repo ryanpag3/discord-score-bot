@@ -36,6 +36,9 @@ module.exports = (sequelize, Sequelize) => {
         key: 'id'
       }
     },
+    /**
+     * If you make changes to these, please also reflect them in ScoreGroup.js
+     */
     type: {
       allowNull: false,
       type: Sequelize.ENUM(`SERVER`, `CHANNEL`, `SCOREBOARD`, 'USER')
