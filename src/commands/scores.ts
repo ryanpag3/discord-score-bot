@@ -4,7 +4,7 @@ import { Score, Scoreboard } from '../models';
 import logger from '../util/logger';
 import ScoreType from '../constant/score-type';
 import { renderSmallChart } from '../util/canvas';
-import { getMessageEmbed, parseArgs } from '../util/command';
+import { getMessageEmbed, getUserFromMention, parseArgs } from '../util/command';
 import { User } from '../models';
 import scoreboard from './scoreboard';
 import { handleCommandHelpMessage } from './help';
@@ -51,7 +51,7 @@ const scores = async (user: User, command: string, message: Message) => {
         if (type === ScoreType.SCOREBOARD)
             where['ScoreboardId'] = scoreboard.id;
 
-        if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD) {
+        if (type === ScoreType.SERVER || type === ScoreType.SCOREBOARD || type === ScoreType.USER) {
             delete where.channelId;
         }
 
@@ -59,6 +59,13 @@ const scores = async (user: User, command: string, message: Message) => {
             where,
             order: [['value', 'DESC']],
             limit: 20
+        });
+
+        scores.map(s => {
+            const user = getUserFromMention(s.name);
+            if (user)
+                s.name = user.tag;
+            return s;
         });
 
         const embed = getMessageEmbed(message.author)
