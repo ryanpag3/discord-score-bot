@@ -100,10 +100,11 @@ const importTallyBotData = async (data: any, message: Message) => {
     const errorMsgs = [];
     for (const score of scoreData) {
         try {
+            const channelId = message.guild.channels.cache.find(c => c.id === score.originChannelId) ? score.originChannelId : message.channel.id;
             await Score.create({
                 serverId: message.guild.id,
-                channelId: message.channel.id,
-                type: ScoreType.SERVER,
+                channelId: channelId,
+                type: message.guild.channels.cache.find(c => c.id === score.originChannelId) ? ScoreType.CHANNEL : ScoreType.SERVER,
                 name: score.name,
                 description: score.description.toLowerCase().includes('no description') ? null : scoreData.description,
                 value: score.count,
@@ -122,7 +123,7 @@ const importTallyBotData = async (data: any, message: Message) => {
     const embed = getMessageEmbed(message.author)
         .setDescription(`
             successfully imported: **${scoreData.length - errorMsgs.length}**\n
-            ${errorMsgs.length > 0 && `__Errors__\n` + errorMsgs.join('\n')}
+            ${errorMsgs.length > 0 ? `__Errors__\n` + errorMsgs.join('\n') : ``}
         `);
     message.channel.send(embed);
     message.channel.stopTyping();
