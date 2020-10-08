@@ -26,7 +26,10 @@ const group = async (user: User, command: string, message: Message) => {
         scoreType = ScoreType.CHANNEL;
     }
 
-    logger.info(split);
+    if (args.includes('s')) {
+        split.splice(2, 1);
+        scoreType = ScoreType.SCOREBOARD;
+    }
 
     const groupName = split[2];
     const names = split[3];
@@ -34,15 +37,20 @@ const group = async (user: User, command: string, message: Message) => {
         throw new Error(`You must provide names of scores for a group.`);
     const scores = await Score.findAll({
         where: {
+            serverId: message.guild.id,
             name: {
-                [Op.or]: names.split(',')
+                [Op.and]: names.split(',')
             },
             type: scoreType
         }
     });
+
+    logger.debug(scores);
     
-    if (scores.length < names.split(','))
-        throw new Error(`Could not find some scores in group.`);
+    logger.debug(`scores found ${scores.length} and scores expected ${names.split(',').length}`);
+
+    if (scores.length < names.split(',').length)
+        throw new Error(`Please make sure all scores defined exist for type: **${getScoreTypeLowercase(scoreType)}**`);
     
     const group = await ScoreGroup.create({
         serverId: message.guild.id,

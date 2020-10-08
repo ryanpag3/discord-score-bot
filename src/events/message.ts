@@ -12,6 +12,7 @@ import set from '../commands/set';
 import { handleKeywordMessage, includesKeyword } from '../util/keyword';
 import { hasPermission } from '../util/permission';
 import { cacheHasUserScore, increaseUserScore } from '../util/user-score';
+import { UniqueConstraintError } from 'sequelize';
 
 const onMessageReceived = async (message: Message) => {
     try {
@@ -64,6 +65,8 @@ const routeMessage = async (user: User, message: Message) => {
         await commands[cmdInfo.filename](user, command, message);
     } catch (e) {
         logger.error(e);
+        if (e instanceof UniqueConstraintError)
+            e = new Error(`Already exists.`);
         handleCommandError(command, e.message, message);
     }
 }
