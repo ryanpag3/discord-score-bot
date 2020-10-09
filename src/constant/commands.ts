@@ -272,7 +272,7 @@ Set a scoreboard score value.
     },
     GROUP: {
         command: 'group',
-        description: 'Create or remove a score group.',
+        description: 'Manage score groups.',
         filename: 'group.ts',
         examples: `
 Create a score group. Score names are comma separated (i.e name1,name2,name3)
@@ -296,7 +296,7 @@ Get info on score group.
 List all current groups
 \`.sb group -l\`
 
-All score groups use the same syntax as regular scores to update values. (i.e \`.sb [group]+100\`)
+All score groups use the same syntax as regular scores to update values but with \`-g\`. (i.e \`.sb [group]+100 -g\`)
 `
     }
 }
