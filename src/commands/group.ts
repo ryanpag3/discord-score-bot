@@ -5,7 +5,6 @@ import ScoreType from '../constant/score-type';
 import { getMessageEmbed, getScoreTypeLowercase, parseArgs } from '../util/command';
 import { handleCommandHelpMessage } from './help';
 import logger from '../util/logger';
-import { parse } from 'dotenv/types';
 
 const group = async (user: User, command: string, message: Message) => {
     const split = message.content.split(' ');
@@ -16,6 +15,12 @@ const group = async (user: User, command: string, message: Message) => {
 
     if (args.includes('r') && args.includes('m'))
         return await deleteGroup(user, command, message);
+
+    if (args.includes('i'))
+        return await getGroupInfo(user, command, message);
+
+    if (args.includes('l'))
+        return await listGroups(user, command, message);
 
     let scoreType = ScoreType.SERVER;
     let channelId;
@@ -39,7 +44,8 @@ const group = async (user: User, command: string, message: Message) => {
     const names = split[3];
     if (!names)
         throw new Error(`You must provide names of scores for a group.`);
-    const scores = await Score.findAll({
+    
+        const scores = await Score.findAll({
         where: {
             serverId: message.guild.id,
             name: {
@@ -49,14 +55,12 @@ const group = async (user: User, command: string, message: Message) => {
         }
     });
 
-    logger.debug(scores);
-
-    logger.debug(`scores found ${scores.length} and scores expected ${names.split(',').length}`);
+    logger.trace(`scores found ${scores.length} and scores expected ${names.split(',').length}`);
 
     if (scores.length < names.split(',').length)
         throw new Error(`Please make sure all scores defined exist for type: **${getScoreTypeLowercase(scoreType)}**`);
 
-    const group = await ScoreGroup.create({
+    await ScoreGroup.create({
         serverId: message.guild.id,
         channelId,
         scores: names,
@@ -119,6 +123,67 @@ name: ${name}
 type: ${getScoreTypeLowercase(scoreType)}
 \`\`\`
 `);
+    message.channel.send(embed);
+}
+
+const getGroupInfo = async (user: User, command: string, message: Message) => {
+    const split = message.content.split(' ');
+    const name = split[3];
+    const where = {
+        serverId: message.guild.id,
+        name
+    };
+
+    const scoreGroup = await ScoreGroup.findOne({ where });
+
+    if (!scoreGroup)
+        throw new Error(`Could not find score group with name **${name}**`);
+
+    const scoreWhere = {
+        serverId: message.guild.id,
+        type: scoreGroup.type,
+        name: {
+            [Op.or]: scoreGroup.scores.split(',')
+        }
+    };
+    
+    if (scoreGroup.type === ScoreType.CHANNEL)
+        scoreWhere['channelId'] = message.channel.id;
+
+    const scores = await Score.findAll({
+        where: scoreWhere
+    });
+
+    const embed = getMessageEmbed(message.author)
+        .setTitle(`Score Group`)
+        .setDescription(`
+name: **${scoreGroup.name}**
+type: **${getScoreTypeLowercase(scoreGroup.type)}**
+scores:
+\`\`\`
+${scores.map(s => `${s.name}: ${s.value}\n`)}
+\`\`\`
+`)
+    message.channel.send(embed);
+}
+
+const listGroups = async (user: User, command: string, message: Message) => {
+    const groups = await ScoreGroup.findAll({
+        where: {
+            serverId: message.guild.id
+        }
+    });
+    
+    if (groups.length === 0)
+        throw new Error(`No groups found!`);
+
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`
+_Score Groups_
+${groups.map(g => `**${g.name}**`).join('\n')}
+
+use \`.sb group -i [name] to get info on a score group.\`
+`)
     message.channel.send(embed);
 }
 

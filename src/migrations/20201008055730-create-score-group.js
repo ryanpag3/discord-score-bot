@@ -38,7 +38,7 @@ module.exports = {
     });
     await queryInterface.addIndex('ScoreGroups', {
       unique: true,
-      fields: ['serverId', 'name', 'type']
+      fields: ['serverId', 'name']
     })
   },
   down: async (queryInterface, Sequelize) => {

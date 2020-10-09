@@ -277,6 +277,26 @@ Set a scoreboard score value.
         examples: `
 Create a score group. Score names are comma separated (i.e name1,name2,name3)
 \`.sb group [group_name] [score_names]\`
+
+Create a channel score group.
+\`.sb group -c [group_name] [channel_score_names]\`
+
+Create a scoreboard score group.
+\`.sb group -s [group_name] [scoreboard_score_names]\`
+
+Create a user score group.
+\`.sb group -u [group_name] [user_scores]\`
+
+Delete a score group.
+\`.sb group -rm [name]\`
+
+Get info on score group.
+\`.sb group -i [name]\`
+
+List all current groups
+\`.sb group -l\`
+
+All score groups use the same syntax as regular scores to update values. (i.e \`.sb [group]+100\`)
 `
     }
 }
