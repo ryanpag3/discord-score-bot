@@ -148,6 +148,7 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 - [minus](#minus) - _Remove from a score._
 - [set](#set) - _Set a score value._
 - [prefix](#prefix) - _Change the bot prefix for the server._
+- [group](#group) - _Manage score groups._
 
 ### `help`
 
@@ -458,6 +459,39 @@ default role: **ScoreBotAdmin**
 ``` txt
 
 .sb prefix [new_prefix]
+
+```
+
+### `group`
+
+Manage score groups.
+
+default role: **undefined**
+
+``` txt
+
+Create a score group. Score names are comma separated (i.e name1,name2,name3)
+.sb group [group_name] [score_names]
+
+Create a channel score group.
+.sb group -c [group_name] [channel_score_names]
+
+Create a scoreboard score group.
+.sb group -s [group_name] [scoreboard_score_names]
+
+Create a user score group.
+.sb group -u [group_name] [user_scores]
+
+Delete a score group.
+.sb group -rm [name]
+
+Get info on score group.
+.sb group -i [name]
+
+List all current groups
+.sb group -l
+
+All score groups use the same syntax as regular scores to update values but with -g. (i.e .sb [group]+100 -g)
 
 ```
 
