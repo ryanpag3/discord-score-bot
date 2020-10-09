@@ -274,6 +274,7 @@ Set a scoreboard score value.
         command: 'group',
         description: 'Manage score groups.',
         filename: 'group.ts',
+        defaultRole: BotDefaultRoles.USER,
         examples: `
 Create a score group. Score names are comma separated (i.e name1,name2,name3)
 \`.sb group [group_name] [score_names]\`
