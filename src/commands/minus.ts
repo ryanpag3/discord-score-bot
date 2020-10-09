@@ -1,6 +1,6 @@
 import { Message, MessageEmbed } from 'discord.js';
 import logger from '../util/logger';
-import { Score } from '../models';
+import { Score, ScoreGroup } from '../models';
 import { handleCommandError } from '../util/error';
 import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import { User } from '../models';
@@ -21,6 +21,9 @@ const handleMessage = async (user: User, command: string, message: Message) => {
 
     if (args.includes('h'))
         return await handleCommandHelpMessage(command, message);
+
+    if (args.includes('g'))
+        return await decreaseScoreGroup(scoreName, message, amount);
 
     if (args.includes('c'))
         type = ScoreType.CHANNEL;
@@ -62,6 +65,41 @@ const handleMessage = async (user: User, command: string, message: Message) => {
     logger.info(`Score__\n**${scoreName}** was changed from **${previous}** to **${score.value}** by ${message.author.tag}`);
 
     return score;
+}
+
+const decreaseScoreGroup = async (name: string, message: Message, amount: number) => {
+    const group = await ScoreGroup.findOne({
+        where: {
+            serverId: message.guild.id,
+            name
+        }
+    });
+
+    if (!group)
+        throw new Error(`Could not find score group with name **${name}**`);
+    
+    const where = {
+        serverId: message.guild.id,
+        type: group.type
+    };
+
+    if (group.type === ScoreType.CHANNEL)
+        where['channelId'] = message.channel.id;
+
+    const scores = await Score.increment('value',{
+        where,
+        by: amount
+    });
+
+    if (!scores[0][0])
+        throw new Error(`No scores found to update.`);
+
+    const embed = getMessageEmbed(message.author)
+        .setDescription(`
+_Score Group Increased_
+${scores[0][0].map(s => `${s.name} -> ${s.value}`).join('\n')}        
+`);
+    message.channel.send(embed);
 }
 
 export default handleMessage;

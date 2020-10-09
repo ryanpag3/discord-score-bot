@@ -33,11 +33,11 @@ module.exports = {
     //   allowNull: false,
     //   type: Sequelize.ENUM(`SERVER`, `CHANNEL`, 'SCOREBOARD')
     // });
-    return await replaceEnum({
-      queryInterface,
-      tableName: 'Scores',
-      columnName: 'type',
-      newValues: [`SERVER`, `CHANNEL`, 'SCOREBOARD'],
-    });
+    // return await replaceEnum({
+    //   queryInterface,
+    //   tableName: 'Scores',
+    //   columnName: 'type',
+    //   newValues: [`SERVER`, `CHANNEL`, 'SCOREBOARD'],
+    // });
   }
 };
