@@ -466,7 +466,7 @@ default role: **ScoreBotAdmin**
 
 Manage score groups.
 
-default role: **undefined**
+default role: **ScoreBotUser**
 
 ``` txt
 
