@@ -2,7 +2,7 @@ import path from 'path';
 import { GuildMember, Message, MessageAttachment, MessageEmbed } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { Score } from '../models';
-import { getMessageEmbed } from '../util/command';
+import { getMessageEmbed, getScoreType } from '../util/command';
 import logger from '../util/logger';
 import { createCanvas, loadImage } from 'canvas';
 import { User } from '../models';
@@ -20,6 +20,11 @@ const info = async (user: User, command: string, message: Message) => {
         split.splice(2, 1);
     }
 
+    if (split[2] === '-u') {
+        type = ScoreType.USER;
+        split.splice(2, 1);
+    }
+
     const scoreName = split[2];
     if (!scoreName)
         throw new Error(`Score name must be provided.`);
@@ -31,7 +36,7 @@ const info = async (user: User, command: string, message: Message) => {
         type
     }
 
-    if (type === ScoreType.SERVER)
+    if (type !== ScoreType.CHANNEL)
         delete where.channelId;
 
     const score = await Score.findOne({
@@ -45,7 +50,7 @@ const info = async (user: User, command: string, message: Message) => {
     const createdBy = message.guild.member(score.createdBy);
     const embed = getMessageEmbed(message.author)
         .setDescription(`
-            __${type === ScoreType.CHANNEL ? 'Channel' : 'Server'} Score__
+            __${getScoreType(type)} Score__
             name: **${score.name}**
             value: **${score.value}**
             description: **${score.description || `No description.`}**
