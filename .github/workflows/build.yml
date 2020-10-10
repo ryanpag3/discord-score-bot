@@ -36,6 +36,7 @@ jobs:
         continue-on-error: true
         run: |
           yarn generate-readme
+          git pull
           git config --local user.email "action@github.com"
           git config --local user.name "Github Action"
           git commit -m "Generate new README based on commands manifest." README.md
