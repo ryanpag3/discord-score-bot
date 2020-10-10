@@ -49,6 +49,7 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 - [import](#import) - _Import your Score Bot or Tally Bot data file._
 - [permission](#permission) - _Setup and manage permissions._
 - [prefix](#prefix) - _Change the bot prefix for the server._
+- [stats](#stats) - _Display statistics for the server._
 
 ### `help`
 
@@ -439,6 +440,18 @@ default role: **ScoreBotAdmin**
 ``` txt
 
 .sb prefix [new_prefix]
+
+```
+
+### `stats`
+
+Display statistics for the server.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+.sb stats
 
 ```
 
