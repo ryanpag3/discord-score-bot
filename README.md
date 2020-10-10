@@ -3,6 +3,8 @@
 
 ![Build](https://github.com/ryanpag3/discord-score-bot/workflows/Build/badge.svg?branch=master&event=push)
 
+[patch notes](https://github.com/ryanpag3/discord-score-bot/blob/master/PATCHNOTES.md)
+
 Score Bot is exactly what its name describes. Keep scores in your server, channels, etc. It's highly customizable with permissions, custom prefixes, and more. It's also free.
 
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
