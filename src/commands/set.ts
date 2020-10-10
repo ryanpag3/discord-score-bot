@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { User, Score, ScoreGroup } from '../models';
-import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
+import { getMessageEmbed, getScoreType, getScoreTypeLowercase, getUserFromMention, parseArgs } from '../util/command';
 import logger from '../util/logger';
 import { handleCommandHelpMessage } from './help';
 
@@ -29,6 +29,10 @@ const set = async (user: User, command: string, message: Message) => {
     
     if (args.includes('s'))
         type = ScoreType.SCOREBOARD;
+            
+    const mention = getUserFromMention(scoreName);
+    if (mention)
+        type = ScoreType.USER;
 
     const where = {
         serverId: message.guild.id,
