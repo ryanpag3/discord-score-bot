@@ -64,6 +64,9 @@ Get a link to the documentation.
 Get help for a specific command.
 .sb help [command]
 
+Get help for a specific command.
+.sb [command] -h
+
 Get a list of all available commands.
 .sb help commands
 
@@ -88,13 +91,16 @@ default role: **ScoreBotUser**
 ``` txt
 
 Add a server score.
-.sb add [name] [optional_description]
+.sb add [name] "[optional_description]"
 
 Add a channel score.
-.sb add -c [name] [optional_description]
+.sb add -c [name] "[optional_description]"
 
 Add a scoreboard score
-.sb add -s [scoreboard_name] [score_name] [optional_score_description]
+.sb add -s [scoreboard_name] [score_name] "[optional_score_description]"
+
+Add a user score
+.sb add [@mention] "[optional_score_description]"
 
 ```
 
@@ -109,14 +115,17 @@ default role: **ScoreBotAdmin**
 Delete a server score with confirmation.
 .sb rm [score_name]
 
-Delete a server score and skip confirmation.
+Include f in your argument to skip confirming.
 .sb rm -f [score_name]
 
 Delete a channel score.
-.sb rm -c [channel_score_name]
+.sb rm -c [score_name]
 
-Delete a channel score and skip confirmation.
-.sb rm -cf [channel_score_name]
+Delete a scoreboard score.
+.sb rm -s [score_name]
+
+Delete a user score.
+.sb rm [@mention]
 
 ```
 
