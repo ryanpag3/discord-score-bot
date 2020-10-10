@@ -29,7 +29,7 @@ const generate = async () => {
         cmds.push(commands[k]);
     }
 
-    let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n${cmds.map(c => `- [${c.command}](#${c.command}) - _${c.description}_`).join('\n')}\n\n`;
+    let commandsDoc = `${BEGIN_COMMENT}\n\n# Commands\n\n${cmds.map(c => `- [${c.command}](#${c.command}) - _${c.byline}_`).join('\n')}\n\n`;
 
     for (const c of cmds) {
         commandsDoc += `### \`${c.command}\`

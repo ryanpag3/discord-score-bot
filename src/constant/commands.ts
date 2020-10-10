@@ -8,7 +8,8 @@ import BotDefaultRoles from './bot-default-roles';
 export default {
     HELP: {
         command: `help`,
-        description: `Get help using Score Bot.`,
+        byline: `Get help using Score Bot.`,
+        description: `Help can be used to get a link to the documentation or directly for a command.`,
         filename: `help.ts`,
         examples: `
 Get a link to the documentation.
@@ -24,7 +25,18 @@ Get a list of all available commands.
     },
     ADD: {
         command: `add`,
-        description: `Add a new score to the server.`,
+        byline: `Add a new score to the server.`,
+        description: `
+There are 4 different type of scores:
+
+- **Server:** access anywhere in your server
+
+- **Channel:** access only in the channel it was created in
+
+- **Scoreboard:** create a scoreboard and assign a score to it
+
+- **User:** Assign a score to a user. User scores increase when users send a message.        
+`,
         filename: `add.ts`,
         examples: `
 Add a server score.
@@ -40,6 +52,7 @@ Add a scoreboard score
     },
     RM: {
         command: 'rm',
+        byline: `Delete a score.`,
         description: `Delete a score.`,
         filename: 'rm.ts',
         examples: `
@@ -59,7 +72,8 @@ Delete a channel score and skip confirmation.
     },
     PLUS: {
         command: 'plus',
-        description: 'Add to a score.',
+        byline: 'Add to a score.',
+        description: `Add to a score.`,
         filename: 'plus.ts',
         examples: `
 Increase a server score by one.
@@ -79,6 +93,7 @@ You can also increase by an amount
     },
     MINUS: {
         command: 'minus',
+        byline: 'Remove from a score.',
         description: 'Remove from a score.',
         filename: 'minus.ts',
         examples: `
@@ -99,7 +114,12 @@ You can also decrease by an amount
     },
     SET: {
         command: 'set',
-        description: 'Set a score value.',
+        byline: 'Set a score value.',
+        description: `
+Set the value of a score. 
+
+Scores have a range of -2147483648 to +2147483647
+`,
         filename: 'set.ts',
         examples: `
 Set a server score value.
@@ -116,7 +136,12 @@ Set a scoreboard score value.
     },
     GROUP: {
         command: 'group',
-        description: 'Manage score groups.',
+        byline: 'Manage score groups.',
+        description: `
+Score groups allow you to modify multiple scores in one action. 
+
+You can create them for any score type and they work with the existing commands for modifying scores.
+`,
         filename: 'group.ts',
         defaultRole: BotDefaultRoles.USER,
         examples: `
@@ -146,6 +171,7 @@ All score groups use the same syntax as regular scores to update values but with
     },
     SCORES: {
         command: 'scores',
+        byline: 'Show the current score values.',
         description: 'Show the current score values.',
         filename: 'scores.ts',
         examples: `
@@ -165,6 +191,7 @@ Get user scores.
     },
     INFO: {
         command: 'info',
+        byline: `Get info about a score.`,
         description: `Get info about a score.`,
         filename: 'info.ts',
         examples: `
@@ -182,7 +209,12 @@ Get server score info.
 
     SCOREBOARD: {
         command: 'scoreboard',
-        description: 'Manage scoreboard or create a new one.',
+        byline: 'Manage scoreboards',
+        description: `
+Scoreboards are groups of scores that can be tracked over time and compared using the \`.sb scores\` command. 
+
+For example, you could create one to track the 4 Hogwart's houses.
+`,
         filename: 'scoreboard.ts',
         examples: `
 Create a scoreboard.
@@ -201,6 +233,7 @@ Delete a scoreboard
     },
     SCOREBOARDS: {
         command: 'scoreboards',
+        byline: 'List the current scoreboards for a server.',
         description: 'List the current scoreboards for a server.',
         filename: 'scoreboards.ts',
         examples: `
@@ -210,7 +243,10 @@ Delete a scoreboard
     },
     KEYWORD: {
         command: 'keyword',
-        description: `Associate one or more keywords to a score.`,
+        byline: `Setup keywords to trigger score changes.`,
+        description: `
+You can assign keywords to any score. When users type in the chat and include the keyword, it will increase the score by 1.
+`,
         filename: 'keyword.ts',
         examples: `
 Create one or more keywords for a server score.
@@ -235,46 +271,59 @@ Delete a keyword for a scoreboard score.
     },
     BUG: {
         command: 'bug',
-        description: 'Report a bug.',
+        byline: 'Report a bug.',
+        description: `
+Open a bug report in the github repository.
+`,
         filename: 'bug.ts',
         examples: `
-Create a bug report.
 \`.sb bug "This is my bug report that I want to submit."\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
     FEATURE: {
         command: 'feature',
-        description: 'Submit a feature request.',
+        description: `
+Open a bug report in the github repository.
+`,
+        byline: 'Submit a feature request.',
         filename: 'feature.ts',
         examples: `
-Create a feature request.
 \`.sb feature "This is my feature request. I would like to submit this feature!"\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
     EXPORT: {
         command: 'export',
-        description: 'Export your score data.',
+        byline: 'Export your score data.',
+        description: `
+This will generate a file that you can use to backup your Score Bot data.
+
+You can also use it to migrate your data to a new server.
+`,
         filename: 'export.ts',
         examples: `
-Export your server data.
 \`.sb export\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
     IMPORT: {
         command: 'import',
-        description: 'Import your score data.',
+        byline: 'Import your Score Bot or Tally Bot data file.',
+        description: `
+Attach a file to your message to import it.
+
+Works with both Tally Bot and Score Bot data files.
+`,
         filename: 'import.ts',
         examples: `
-Import your server data. This command works with bot score bot data files and tally bot data files.
 \`.sb import\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
     PERMISSION: {
         command: 'permission',
+        byline: 'Setup and manage permissions.',
         description: 'Setup and manage permissions.',
         filename: 'permission.ts',
         examples: `
@@ -294,7 +343,14 @@ Set all commands to require a particular role.
     },
     PREFIX: {
         command: 'prefix',
-        description: 'Change the bot prefix for the server.',
+        byline: 'Change the bot prefix for the server.',
+        description: `
+This will change the _entire_ prefix to be a new keyword.
+
+For example if you've changed your prefix using the following: \`.sb prefix .rp\`
+
+You would then run the following to create a server score: \`.rp add my-score\`
+`,
         filename: 'prefix.ts',
         examples: `
 \`.sb prefix [new_prefix]\`
