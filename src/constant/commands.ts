@@ -261,6 +261,9 @@ You can assign keywords to any score. When users type in the chat and include th
 Create one or more keywords for a server score.
 \`.sb keyword [score_name] [keywords]\`
 
+List keywords.
+\`.sb keyword -l\`
+
 Create one or more keywords for a channel score.
 \`.sb keyword -c [score_name] [keywords]\`
 

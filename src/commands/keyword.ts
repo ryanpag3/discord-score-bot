@@ -1,6 +1,6 @@
 import { User, Score, Keyword } from '../models';
 import { Message } from 'discord.js';
-import { getMessageEmbed, getScoreTypeLowercase, parseArgs } from '../util/command';
+import { getMessageEmbed, getScoreType, getScoreTypeLowercase, parseArgs } from '../util/command';
 import ScoreType from '../constant/score-type';
 import { loadKeywords } from '../util/keyword';
 import logger from '../util/logger';
@@ -16,6 +16,9 @@ const keyword = async (user: User, command: string, message: Message) => {
 
     if (args.includes('h'))
         return handleCommandHelpMessage(command, message);
+
+    if (args.includes('l'))
+        return await listKeywords(user, command, message);
 
     if (args.includes('r') && args.includes('m')) {
         return await deleteKeyword(user, command, message);
@@ -105,13 +108,13 @@ const deleteKeyword = async(user: User, command: string, message: Message) => {
     let type = ScoreType.SERVER;
     if (args.includes('s')) {
         type = ScoreType.SCOREBOARD;
-        split.splice(2, 1);
     }
 
     if (args.includes('c')) {
         type = ScoreType.CHANNEL;
-        split.splice(2, 1);
     }
+
+    split.splice(2, 1);
 
     const scoreName = split[2];
     if (!scoreName)
@@ -141,7 +144,8 @@ const deleteKeyword = async(user: User, command: string, message: Message) => {
     const res = await Keyword.destroy({
         where: {
             ScoreId: score.id,
-            serverId: message.guild.id
+            serverId: message.guild.id,
+            name: keyword
         }
     });
 
@@ -153,6 +157,24 @@ const deleteKeyword = async(user: User, command: string, message: Message) => {
     message.channel.send(embed);
 
     return res;
+}
+
+const listKeywords = async (user: User, command: string, message: Message) => {
+    const keywords = await Keyword.findAll({
+        where: {
+            serverId: message.guild.id
+        }, 
+        include: Score
+    });
+    logger.info(keywords);
+
+    const embed = getMessageEmbed(message.author)
+        .setTitle(`Keywords`)
+        .setDescription(`
+__keyword | score | type__
+${keywords.map(k => `${k.name} - ${k.Score.name} - ${getScoreTypeLowercase(k.Score.type)}`).join('\n')}
+`);
+    message.channel.send(embed);
 }
 
 export default keyword;
