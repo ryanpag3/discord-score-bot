@@ -40,19 +40,19 @@ _**What happens to my Tally Bot data?**_ You will have the opportunity to migrat
 - [group](#group) - _Manage score groups._
 - [scores](#scores) - _Show the current score values._
 - [info](#info) - _Get info about a score._
-- [scoreboard](#scoreboard) - _Manage scoreboard or create a new one._
+- [scoreboard](#scoreboard) - _Manage scoreboards_
 - [scoreboards](#scoreboards) - _List the current scoreboards for a server._
-- [keyword](#keyword) - _Associate one or more keywords to a score._
+- [keyword](#keyword) - _Setup keywords to trigger score changes._
 - [bug](#bug) - _Report a bug._
 - [feature](#feature) - _Submit a feature request._
 - [export](#export) - _Export your score data._
-- [import](#import) - _Import your score data._
+- [import](#import) - _Import your Score Bot or Tally Bot data file._
 - [permission](#permission) - _Setup and manage permissions._
 - [prefix](#prefix) - _Change the bot prefix for the server._
 
 ### `help`
 
-Get help using Score Bot.
+Help can be used to get a link to the documentation or directly for a command.
 
 default role: **ScoreBotUser**
 
@@ -71,7 +71,17 @@ Get a list of all available commands.
 
 ### `add`
 
-Add a new score to the server.
+
+There are 4 different type of scores:
+
+- **Server:** access anywhere in your server
+
+- **Channel:** access only in the channel it was created in
+
+- **Scoreboard:** create a scoreboard and assign a score to it
+
+- **User:** Assign a score to a user. User scores increase when users send a message.        
+
 
 default role: **ScoreBotUser**
 
@@ -156,7 +166,11 @@ You can also decrease by an amount
 
 ### `set`
 
-Set a score value.
+
+Set the value of a score. 
+
+Scores have a range of -2147483648 to +2147483647
+
 
 default role: **ScoreBotUser**
 
@@ -175,7 +189,11 @@ Set a scoreboard score value.
 
 ### `group`
 
-Manage score groups.
+
+Score groups allow you to modify multiple scores in one action. 
+
+You can create them for any score type and they work with the existing commands for modifying scores.
+
 
 default role: **ScoreBotUser**
 
@@ -249,7 +267,11 @@ Get server score info.
 
 ### `scoreboard`
 
-Manage scoreboard or create a new one.
+
+Scoreboards are groups of scores that can be tracked over time and compared using the `.sb scores` command. 
+
+For example, you could create one to track the 4 Hogwart's houses.
+
 
 default role: **ScoreBotUser**
 
@@ -283,7 +305,9 @@ default role: **ScoreBotUser**
 
 ### `keyword`
 
-Associate one or more keywords to a score.
+
+You can assign keywords to any score. When users type in the chat and include the keyword, it will increase the score by 1.
+
 
 default role: **ScoreBotUser**
 
@@ -311,52 +335,60 @@ Delete a keyword for a scoreboard score.
 
 ### `bug`
 
-Report a bug.
+
+Open a bug report in the github repository.
+
 
 default role: **ScoreBotAdmin**
 
 ``` txt
 
-Create a bug report.
 .sb bug "This is my bug report that I want to submit."
 
 ```
 
 ### `feature`
 
-Submit a feature request.
+
+Open a bug report in the github repository.
+
 
 default role: **ScoreBotAdmin**
 
 ``` txt
 
-Create a feature request.
 .sb feature "This is my feature request. I would like to submit this feature!"
 
 ```
 
 ### `export`
 
-Export your score data.
+
+This will generate a file that you can use to backup your Score Bot data.
+
+You can also use it to migrate your data to a new server.
+
 
 default role: **ScoreBotAdmin**
 
 ``` txt
 
-Export your server data.
 .sb export
 
 ```
 
 ### `import`
 
-Import your score data.
+
+Attach a file to your message to import it.
+
+Works with both Tally Bot and Score Bot data files.
+
 
 default role: **ScoreBotAdmin**
 
 ``` txt
 
-Import your server data. This command works with bot score bot data files and tally bot data files.
 .sb import
 
 ```
@@ -385,7 +417,13 @@ Set all commands to require a particular role.
 
 ### `prefix`
 
-Change the bot prefix for the server.
+
+This will change the _entire_ prefix to be a new keyword.
+
+For example if you've changed your prefix using the following: `.sb prefix .rp`
+
+You would then run the following to create a server score: `.rp add my-score`
+
 
 default role: **ScoreBotAdmin**
 
