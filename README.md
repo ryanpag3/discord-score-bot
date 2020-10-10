@@ -133,9 +133,13 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 
 - [help](#help) - _Get help using Score Bot._
 - [add](#add) - _Add a new score to the server._
+- [rm](#rm) - _Delete a score._
+- [plus](#plus) - _Add to a score._
+- [minus](#minus) - _Remove from a score._
+- [set](#set) - _Set a score value._
+- [group](#group) - _Manage score groups._
 - [scores](#scores) - _Show the current score values._
 - [info](#info) - _Get info about a score._
-- [rm](#rm) - _Delete a score._
 - [scoreboard](#scoreboard) - _Manage scoreboard or create a new one._
 - [scoreboards](#scoreboards) - _List the current scoreboards for a server._
 - [keyword](#keyword) - _Associate one or more keywords to a score._
@@ -144,11 +148,7 @@ It's easy to deploy your own instance of Score Bot if you would like to use it o
 - [export](#export) - _Export your score data._
 - [import](#import) - _Import your score data._
 - [permission](#permission) - _Setup and manage permissions._
-- [plus](#plus) - _Add to a score._
-- [minus](#minus) - _Remove from a score._
-- [set](#set) - _Set a score value._
 - [prefix](#prefix) - _Change the bot prefix for the server._
-- [group](#group) - _Manage score groups._
 
 ### `help`
 
@@ -185,6 +185,124 @@ Add a channel score.
 
 Add a scoreboard score
 .sb add -s [scoreboard_name] [score_name] [optional_score_description]
+
+```
+
+### `rm`
+
+Delete a score.
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Delete a server score with confirmation.
+.sb rm [score_name]
+
+Delete a server score and skip confirmation.
+.sb rm -f [score_name]
+
+Delete a channel score.
+.sb rm -c [channel_score_name]
+
+Delete a channel score and skip confirmation.
+.sb rm -cf [channel_score_name]
+
+```
+
+### `plus`
+
+Add to a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Increase a server score by one.
+.sb [name]++
+
+Increase a channel score by one.
+.sb [name]++ -c
+
+Increase a scoreboard score by one.
+.sb [name]++ -s
+
+You can also increase by an amount
+.sb [name]+[amount]
+
+```
+
+### `minus`
+
+Remove from a score.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Decrease a server score by one.
+.sb [name]--
+
+Descrease a channel score by one.
+.sb [name]-- -c
+
+Decrease a scoreboard score by one.
+.sb [name]-- -s
+
+You can also decrease by an amount
+.sb [name]-[amount]
+
+```
+
+### `set`
+
+Set a score value.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Set a server score value.
+.sb [name]=[amount]   
+
+Set a channel score value.
+.sb [name]=[amount] -c
+
+Set a scoreboard score value.
+.sb [name]=[amount] -s 
+
+```
+
+### `group`
+
+Manage score groups.
+
+default role: **ScoreBotUser**
+
+``` txt
+
+Create a score group. Score names are comma separated (i.e name1,name2,name3)
+.sb group [group_name] [score_names]
+
+Create a channel score group.
+.sb group -c [group_name] [channel_score_names]
+
+Create a scoreboard score group.
+.sb group -s [group_name] [scoreboard_score_names]
+
+Create a user score group.
+.sb group -u [group_name] [user_scores]
+
+Delete a score group.
+.sb group -rm [name]
+
+Get info on score group.
+.sb group -i [name]
+
+List all current groups
+.sb group -l
+
+All score groups use the same syntax as regular scores to update values but with -g. (i.e .sb [group]+100 -g)
 
 ```
 
@@ -226,28 +344,6 @@ Get channel score info.
 
 Get server score info.
 .sb info -s [scoreboard_name] [score_name]
-
-```
-
-### `rm`
-
-Delete a score.
-
-default role: **ScoreBotAdmin**
-
-``` txt
-
-Delete a server score with confirmation.
-.sb rm [score_name]
-
-Delete a server score and skip confirmation.
-.sb rm -f [score_name]
-
-Delete a channel score.
-.sb rm -c [channel_score_name]
-
-Delete a channel score and skip confirmation.
-.sb rm -cf [channel_score_name]
 
 ```
 
@@ -387,69 +483,6 @@ Set all commands to require a particular role.
 
 ```
 
-### `plus`
-
-Add to a score.
-
-default role: **ScoreBotUser**
-
-``` txt
-
-Increase a server score by one.
-.sb [name]++
-
-Increase a channel score by one.
-.sb [name]++ -c
-
-Increase a scoreboard score by one.
-.sb [name]++ -s
-
-You can also increase by an amount
-.sb [name]+[amount]
-
-```
-
-### `minus`
-
-Remove from a score.
-
-default role: **ScoreBotUser**
-
-``` txt
-
-Decrease a server score by one.
-.sb [name]--
-
-Descrease a channel score by one.
-.sb [name]-- -c
-
-Decrease a scoreboard score by one.
-.sb [name]-- -s
-
-You can also decrease by an amount
-.sb [name]-[amount]
-
-```
-
-### `set`
-
-Set a score value.
-
-default role: **ScoreBotUser**
-
-``` txt
-
-Set a server score value.
-.sb [name]=[amount]   
-
-Set a channel score value.
-.sb [name]=[amount] -c
-
-Set a scoreboard score value.
-.sb [name]=[amount] -s 
-
-```
-
 ### `prefix`
 
 Change the bot prefix for the server.
@@ -459,39 +492,6 @@ default role: **ScoreBotAdmin**
 ``` txt
 
 .sb prefix [new_prefix]
-
-```
-
-### `group`
-
-Manage score groups.
-
-default role: **ScoreBotUser**
-
-``` txt
-
-Create a score group. Score names are comma separated (i.e name1,name2,name3)
-.sb group [group_name] [score_names]
-
-Create a channel score group.
-.sb group -c [group_name] [channel_score_names]
-
-Create a scoreboard score group.
-.sb group -s [group_name] [scoreboard_score_names]
-
-Create a user score group.
-.sb group -u [group_name] [user_scores]
-
-Delete a score group.
-.sb group -rm [name]
-
-Get info on score group.
-.sb group -i [name]
-
-List all current groups
-.sb group -l
-
-All score groups use the same syntax as regular scores to update values but with -g. (i.e .sb [group]+100 -g)
 
 ```
 
