@@ -38,6 +38,112 @@ Add a scoreboard score
 `,
         defaultRole: BotDefaultRoles.USER
     },
+    RM: {
+        command: 'rm',
+        description: `Delete a score.`,
+        filename: 'rm.ts',
+        examples: `
+Delete a server score with confirmation.
+\`.sb rm [score_name]\`
+
+Delete a server score and skip confirmation.
+\`.sb rm -f [score_name]\`
+
+Delete a channel score.
+\`.sb rm -c [channel_score_name]\`
+
+Delete a channel score and skip confirmation.
+\`.sb rm -cf [channel_score_name]\`
+`,
+        defaultRole: BotDefaultRoles.ADMIN
+    },
+    PLUS: {
+        command: 'plus',
+        description: 'Add to a score.',
+        filename: 'plus.ts',
+        examples: `
+Increase a server score by one.
+\`.sb [name]++\`
+
+Increase a channel score by one.
+\`.sb [name]++ -c\`
+
+Increase a scoreboard score by one.
+\`.sb [name]++ -s\`
+
+You can also increase by an amount
+\`.sb [name]+[amount]\`
+`,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
+    },
+    MINUS: {
+        command: 'minus',
+        description: 'Remove from a score.',
+        filename: 'minus.ts',
+        examples: `
+Decrease a server score by one.
+\`.sb [name]--\`
+
+Descrease a channel score by one.
+\`.sb [name]-- -c\`
+
+Decrease a scoreboard score by one.
+\`.sb [name]-- -s\`
+
+You can also decrease by an amount
+\`.sb [name]-[amount]\`
+`,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
+    },
+    SET: {
+        command: 'set',
+        description: 'Set a score value.',
+        filename: 'set.ts',
+        examples: `
+Set a server score value.
+\`.sb [name]=[amount]\`   
+
+Set a channel score value.
+\`.sb [name]=[amount] -c\`
+
+Set a scoreboard score value.
+\`.sb [name]=[amount] -s\` 
+`,
+        defaultRole: BotDefaultRoles.USER,
+        isShorthand: true
+    },
+    GROUP: {
+        command: 'group',
+        description: 'Manage score groups.',
+        filename: 'group.ts',
+        defaultRole: BotDefaultRoles.USER,
+        examples: `
+Create a score group. Score names are comma separated (i.e name1,name2,name3)
+\`.sb group [group_name] [score_names]\`
+
+Create a channel score group.
+\`.sb group -c [group_name] [channel_score_names]\`
+
+Create a scoreboard score group.
+\`.sb group -s [group_name] [scoreboard_score_names]\`
+
+Create a user score group.
+\`.sb group -u [group_name] [user_scores]\`
+
+Delete a score group.
+\`.sb group -rm [name]\`
+
+Get info on score group.
+\`.sb group -i [name]\`
+
+List all current groups
+\`.sb group -l\`
+
+All score groups use the same syntax as regular scores to update values but with \`-g\`. (i.e \`.sb [group]+100 -g\`)
+`
+    },
     SCORES: {
         command: 'scores',
         description: 'Show the current score values.',
@@ -73,25 +179,7 @@ Get server score info.
 `,
         defaultRole: BotDefaultRoles.USER
     },
-    RM: {
-        command: 'rm',
-        description: `Delete a score.`,
-        filename: 'rm.ts',
-        examples: `
-Delete a server score with confirmation.
-\`.sb rm [score_name]\`
 
-Delete a server score and skip confirmation.
-\`.sb rm -f [score_name]\`
-
-Delete a channel score.
-\`.sb rm -c [channel_score_name]\`
-
-Delete a channel score and skip confirmation.
-\`.sb rm -cf [channel_score_name]\`
-`,
-        defaultRole: BotDefaultRoles.ADMIN
-    },
     SCOREBOARD: {
         command: 'scoreboard',
         description: 'Manage scoreboard or create a new one.',
@@ -204,63 +292,6 @@ Set all commands to require a particular role.
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
-    PLUS: {
-        command: 'plus',
-        description: 'Add to a score.',
-        filename: 'plus.ts',
-        examples: `
-Increase a server score by one.
-\`.sb [name]++\`
-
-Increase a channel score by one.
-\`.sb [name]++ -c\`
-
-Increase a scoreboard score by one.
-\`.sb [name]++ -s\`
-
-You can also increase by an amount
-\`.sb [name]+[amount]\`
-`,
-        defaultRole: BotDefaultRoles.USER,
-        isShorthand: true
-    },
-    MINUS: {
-        command: 'minus',
-        description: 'Remove from a score.',
-        filename: 'minus.ts',
-        examples: `
-Decrease a server score by one.
-\`.sb [name]--\`
-
-Descrease a channel score by one.
-\`.sb [name]-- -c\`
-
-Decrease a scoreboard score by one.
-\`.sb [name]-- -s\`
-
-You can also decrease by an amount
-\`.sb [name]-[amount]\`
-`,
-        defaultRole: BotDefaultRoles.USER,
-        isShorthand: true
-    },
-    SET: {
-        command: 'set',
-        description: 'Set a score value.',
-        filename: 'set.ts',
-        examples: `
-Set a server score value.
-\`.sb [name]=[amount]\`   
-
-Set a channel score value.
-\`.sb [name]=[amount] -c\`
-
-Set a scoreboard score value.
-\`.sb [name]=[amount] -s\` 
-`,
-        defaultRole: BotDefaultRoles.USER,
-        isShorthand: true
-    },
     PREFIX: {
         command: 'prefix',
         description: 'Change the bot prefix for the server.',
@@ -269,35 +300,5 @@ Set a scoreboard score value.
 \`.sb prefix [new_prefix]\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
-    },
-    GROUP: {
-        command: 'group',
-        description: 'Manage score groups.',
-        filename: 'group.ts',
-        defaultRole: BotDefaultRoles.USER,
-        examples: `
-Create a score group. Score names are comma separated (i.e name1,name2,name3)
-\`.sb group [group_name] [score_names]\`
-
-Create a channel score group.
-\`.sb group -c [group_name] [channel_score_names]\`
-
-Create a scoreboard score group.
-\`.sb group -s [group_name] [scoreboard_score_names]\`
-
-Create a user score group.
-\`.sb group -u [group_name] [user_scores]\`
-
-Delete a score group.
-\`.sb group -rm [name]\`
-
-Get info on score group.
-\`.sb group -i [name]\`
-
-List all current groups
-\`.sb group -l\`
-
-All score groups use the same syntax as regular scores to update values but with \`-g\`. (i.e \`.sb [group]+100 -g\`)
-`
     }
 }
