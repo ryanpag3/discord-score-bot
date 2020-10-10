@@ -365,5 +365,15 @@ You would then run the following to create a server score: \`.rp add my-score\`
 \`.sb prefix [new_prefix]\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
+    },
+    STATS: {
+        command: 'stats',
+        byline: 'Display statistics for the server.',
+        description: `Display statistics for the server.`,
+        filename: 'stats.ts',
+        examples: `
+\`.sb stats\`
+`,
+        defaultRole: BotDefaultRoles.ADMIN
     }
 }
