@@ -11,10 +11,13 @@ export default async () => {
         throw new Error(`Keywords must be initialized before bot startup.`);
     
     logger.info(`Score Bot has successfully connected to Discord.`);
-    discordClient.user.setPresence({
-        status: 'online',
-        activity: {
-            name: '.sb help'
-        }
-    });
+    setInterval(() => {
+        // presence times out after 2 hours
+        discordClient.user.setPresence({
+            status: 'online',
+            activity: {
+                name: '.sb help'
+            }
+        });
+    }, 30000);
 }
