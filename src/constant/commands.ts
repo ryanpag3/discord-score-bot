@@ -210,8 +210,8 @@ Get server score info.
 Get channel score info.
 \`.sb info -c [score_name]\`
 
-Get server score info.
-\`.sb info -s [scoreboard_name] [score_name]\`
+Get scoreboard score info.
+\`.sb info -s [score_name]\`
 `,
         defaultRole: BotDefaultRoles.USER
     },

@@ -2,7 +2,7 @@ import path from 'path';
 import { GuildMember, Message, MessageAttachment, MessageEmbed } from 'discord.js';
 import ScoreType from '../constant/score-type';
 import { Score } from '../models';
-import { getMessageEmbed, getScoreType } from '../util/command';
+import { getMessageEmbed, getScoreType, getScoreTypeLowercase } from '../util/command';
 import logger from '../util/logger';
 import { createCanvas, loadImage } from 'canvas';
 import { User } from '../models';
@@ -17,6 +17,11 @@ const info = async (user: User, command: string, message: Message) => {
     let type = ScoreType.SERVER;
     if (split[2] === '-c') {
         type = ScoreType.CHANNEL;
+        split.splice(2, 1);
+    }
+
+    if (split[2] === '-s') {
+        type = ScoreType.SCOREBOARD;
         split.splice(2, 1);
     }
 
@@ -44,7 +49,7 @@ const info = async (user: User, command: string, message: Message) => {
     });
 
     if (!score) {
-        throw new Error(`Could not find ${type === ScoreType.CHANNEL ? 'channel' : 'server'} score with name **${scoreName}**.`);
+        throw new Error(`Could not find ${getScoreTypeLowercase(type)} score with name **${scoreName}**.`);
     }
 
     const createdBy = message.guild.member(score.createdBy);
