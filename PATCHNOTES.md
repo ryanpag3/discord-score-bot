@@ -1,6 +1,10 @@
 
 # Patch Notes
 
+## 10-21-2020
+
+- Fixed bug where channel keywords were triggering on every channel in a server.
+
 ## 10-10-2020
 
 - Added new argument for \`keyword\` to list out all current keywords in a server.
