@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import { Op } from 'sequelize';
+import ScoreType from '../constant/score-type';
 import { Keyword, Score } from '../models';
 import logger from './logger';
 
@@ -49,6 +50,12 @@ export const handleKeywordMessage = async (message: Message) => {
             await k.destroy();
             continue;
         }
+
+        if (score.type === ScoreType.CHANNEL && score.channelId !== message.channel.id) {
+            logger.debug(`Keyword was not sent in channel score's channel. Skipping...`);
+            continue;
+        }
+
         score.value++;
         await score.save();
         logger.debug(`increased count of ${score.name} for keyword ${k.name}`);
