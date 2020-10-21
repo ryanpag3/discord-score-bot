@@ -5,6 +5,8 @@
 
 - Fixed bug where channel keywords were triggering on every channel in a server.
 
+- Generate random colors for scores graph
+
 ## 10-10-2020
 
 - Added new argument for \`keyword\` to list out all current keywords in a server.

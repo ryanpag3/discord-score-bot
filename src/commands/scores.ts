@@ -1,5 +1,4 @@
 import { Message, MessageAttachment } from 'discord.js';
-import Chart from 'chart.js';
 import { Score, Scoreboard } from '../models';
 import logger from '../util/logger';
 import ScoreType from '../constant/score-type';
@@ -89,7 +88,7 @@ const buildChart = (type: ScoreType, scores: Score[]) => {
             datasets: [
                 {
                     data: scores.map(s => s.value),
-                    backgroundColor: "lightgrey"
+                    backgroundColor: scores.map(s => randomColorGenerator())
                 }
             ],
         },
@@ -140,6 +139,10 @@ const buildChart = (type: ScoreType, scores: Score[]) => {
 
     return renderSmallChart(config);
 }
+
+const randomColorGenerator = function () { 
+    return '#' + (Math.random().toString(16) + '0000000').slice(2, 8); 
+};
 
 
 export default scores;
