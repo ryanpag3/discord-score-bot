@@ -49,7 +49,6 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
           docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
           docker build . -t ryanpage/discord-score-bot:${{ github.run_number }} -t ryanpage/discord-score-bot:latest
           docker push ryanpage/discord-score-bot:${{ github.run_number }}
