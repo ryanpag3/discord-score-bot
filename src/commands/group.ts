@@ -45,11 +45,11 @@ const group = async (user: User, command: string, message: Message) => {
     if (!names)
         throw new Error(`You must provide names of scores for a group.`);
     
-        const scores = await Score.findAll({
+    const scores = await Score.findAll({
         where: {
             serverId: message.guild.id,
             name: {
-                [Op.and]: names.split(',')
+                [Op.or]: names.split(',')
             },
             type: scoreType
         }

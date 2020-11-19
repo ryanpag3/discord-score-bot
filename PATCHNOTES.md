@@ -1,6 +1,10 @@
 
 # Patch Notes
 
+## 11-19-2020
+
+- Fixed issue where tally groups couldn't include more than 1 tally.
+
 ## 10-21-2020
 
 - Fixed bug where channel keywords were triggering on every channel in a server.
