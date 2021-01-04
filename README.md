@@ -9,26 +9,6 @@ Score Bot is exactly what its name describes. Keep scores in your server, channe
 
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
-## RIP Tally Bot
-
-Tally Bot has seen considerable growth since I first wrote it over a weekend. I have been supporting it off and on for awhile now and have decided to cut the cord and build something lighter, faster and more focused on what users want.
-
-_**Why not just update Tally Bot?**_ Everything in this bot will be fundamentally different than the previous one. All commands will have different syntax and many of the less-popular features of Tally Bot I plan to gut out. This will be a complete rewrite of the codebase.
-
-_**When is Tally Bot going to die?**_ Jan 1 2021
-
-_**What happens to my Tally Bot data?**_ You will have the opportunity to migrate your Tally Bot data to this new bot. If you do not migrate before Jan 1 2021 that data will not be recoverable.
-
-## Migrating from Tally Bot
-
-1. [Invite Score Bot to your server.](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)
-
-1. Run `!tb data -export` to create a data file containing your Tally Bot data.
-
-1. Run `.sb import` and attach the Tally Bot data file.
-
-[//]: <> (BEGIN_GENERATED_COMMANDS)
-
 # Commands
 
 - [help](#help) - _Get help using Score Bot._
