@@ -3,7 +3,7 @@ import { Score, Scoreboard } from '../models';
 import logger from '../util/logger';
 import ScoreType from '../constant/score-type';
 import { renderSmallChart } from '../util/canvas';
-import { getMessageEmbed, getUserFromMention, parseArgs } from '../util/command';
+import { getMessageEmbed, getScoreType, getUserFromMention, parseArgs } from '../util/command';
 import { User } from '../models';
 import scoreboard from './scoreboard';
 import { handleCommandHelpMessage } from './help';
@@ -41,6 +41,11 @@ const scores = async (user: User, command: string, message: Message) => {
                 throw new Error(`Cannot find scoreboard with name ${scoreboardName} to display scores.`);
         }
 
+        const pagination = split[split.length-1];
+        let [pageNum, limit] = pagination.split(',').map(s => Number.parseInt(s));
+        if (!pageNum) pageNum = 1;
+        if (!limit) limit = 20;
+
         const where = {
             serverId: message.guild.id,
             channelId: message.channel.id,
@@ -57,7 +62,8 @@ const scores = async (user: User, command: string, message: Message) => {
         const scores = await Score.findAll({
             where,
             order: [['value', 'DESC']],
-            limit: 20
+            limit,
+            offset: (pageNum > 0 ? --pageNum : pageNum) * limit
         });
 
         scores.map(s => {
@@ -68,8 +74,12 @@ const scores = async (user: User, command: string, message: Message) => {
         });
 
         const embed = getMessageEmbed(message.author)
-            .setDescription(`You can get more information on a specific score by running:\n\n\`.sb info ${split[2] || ''} [score_name]\`
-        `);
+            .setDescription(`
+__${getScoreType(type)} Scores__
+\`page number: ${pageNum} | amt per page: ${limit}\`
+
+\`.sb help scores\` or \`.sb help info\` for more information.
+`);
         const attachment = new MessageAttachment(buildChart(type, scores));
         embed.attachFiles([attachment]);
         message.channel.send(embed);
