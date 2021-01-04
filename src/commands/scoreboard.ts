@@ -30,6 +30,9 @@ const scoreboard = async (user: User, command: string, message: Message) => {
         const name = split[2];
         const description = getDoubleQuoteText(message);
 
+        if (!name)
+            throw new Error(`Cannot create scoreboard without valid name.`);
+
         const scoreboard = await Scoreboard.create({
             name,
             description,
