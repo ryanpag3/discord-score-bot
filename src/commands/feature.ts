@@ -23,8 +23,8 @@ const feature = async (user: User, command: string, message: Message) => {
     if (!description)
         throw new Error(`Please provide an feature request surrounded by quotes. \`ex. .sb bug "My Feature Request"\``);
 
-    if (description.length < 100)
-        throw new Error(`Minimum feature request length is 100 characters.`);
+    if (description.length < 65)
+        throw new Error(`Minimum feature request length is 65 characters.`);
 
     const response = await axios(`https://api.github.com/repos/${process.env.GITHUB_REPO}/issues`,
     {

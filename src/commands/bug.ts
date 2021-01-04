@@ -23,8 +23,8 @@ const bug = async (user: User, command: string, message: Message) => {
     if (!description)
         throw new Error(`Please provide an bug report surrounded by quotes. \`ex. .sb bug "My Bug Report"\``);
 
-    if (description.length < 100)
-        throw new Error(`Minimum bug report length is 100 characters.`);
+    if (description.length < 65)
+        throw new Error(`Minimum bug report length is 65 characters.`);
 
     const response = await axios(`https://api.github.com/repos/${process.env.GITHUB_REPO}/issues`,
     {
