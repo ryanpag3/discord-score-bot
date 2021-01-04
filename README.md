@@ -254,6 +254,18 @@ Get scoreboard scores.
 Get user scores.
 .sb scores -u
 
+You can also optionally set the page number and amount per page by adding a comma-separated value at the end.
+.sb scores [page_number],[amt_per_page]
+
+To display the second page with the default amount of 20.
+.sb scores 2
+
+To display the second page with a larger amount of 40.
+.sb scores 2,40
+
+Also works with other score types like so.
+.sb scores -c 2,40
+
 ```
 
 ### `info`
