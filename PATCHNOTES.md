@@ -1,6 +1,12 @@
 
 # Patch Notes
 
+## 01-04-2020
+
+- Added pagination to scores command
+
+- Added validation to scoreboard creation
+
 ## 11-19-2020
 
 - Fixed issue where tally groups couldn't include more than 1 tally.
