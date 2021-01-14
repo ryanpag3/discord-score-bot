@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@types/chart.js": "^2.9.24",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.7.2",
     "bufferutil": "^4.0.1",
     "chart.js": "^2.9.3",
