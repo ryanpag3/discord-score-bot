@@ -1,6 +1,12 @@
 
 # Patch Notes
 
+## 02-26-2020
+
+- Fixed issue where `set` could not be used with `0`
+
+- Fixed incorrect documentation for set all permission to role command
+
 ## 01-04-2020
 
 - Added pagination to scores command
