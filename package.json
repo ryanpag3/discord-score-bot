@@ -1,6 +1,6 @@
 {
   "name": "score-bot",
-  "version": "1.0.0a",
+  "version": "1.0.6",
   "description": "A discord bot for scoring things.",
   "main": "src/index.ts",
   "repository": "git@github.com:ryanpag3/score-bot.git",

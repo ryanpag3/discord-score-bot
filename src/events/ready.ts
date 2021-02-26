@@ -2,6 +2,7 @@ import logger from '../util/logger'
 import { keywordsInitialized, loadKeywords } from '../util/keyword';
 import { loadUserScores } from '../util/user-score';
 import discordClient from '../util/discord-client';
+import packageJson from '../../package.json';
 
 export default async () => {
     await loadKeywords();
@@ -16,7 +17,7 @@ export default async () => {
         discordClient.user.setPresence({
             status: 'online',
             activity: {
-                name: '.sb help'
+                name: `.sb help | v${packageJson.version}`
             }
         });
     }, 30000);
