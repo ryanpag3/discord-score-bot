@@ -12,7 +12,7 @@ const set = async (user: User, command: string, message: Message) => {
     const amount = Number.parseInt(split[1]);
     const scoreName = split[0];
 
-    if (!amount)
+    if (!amount && amount !== 0)
         throw new Error(`Amount is required for setting values.`);
 
     if (args.length > 1)
