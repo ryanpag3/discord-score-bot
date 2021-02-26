@@ -355,13 +355,13 @@ Initialize default roles permissions for your server.
 \`.sb permission --init\`
 
 Set a command to require a particular role.
-\`.sb permission [command] "[role]"\`
+\`.sb permission [command] [role]\`
 
 Set a command to be allowed by anyone
 \`.sb permission [command] everyone\`
 
 Set all commands to require a particular role.
-\`.sb permission "[role]"\`
+\`.sb permission -a [role]\`
 `,
         defaultRole: BotDefaultRoles.ADMIN
     },
