@@ -3,7 +3,7 @@
 
 ![Build](https://github.com/ryanpag3/discord-score-bot/workflows/Build/badge.svg?branch=master&event=push)
 
-[commands](#commands) | [patch notes](https://github.com/ryanpag3/discord-score-bot/blob/master/PATCHNOTES.md) | [invite bot](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268577792)
+[commands](#commands) | [patch notes](https://github.com/ryanpag3/discord-score-bot/blob/master/PATCHNOTES.md) | [invite bot](https://discord.com/oauth2/authorize?client_id=762877482314629130&scope=bot&permissions=268594241)
 
 Score Bot is exactly what its name describes. Keep scores in your server, channels, etc. It's highly customizable with permissions, custom prefixes, and more. It's also free.
 
