@@ -143,6 +143,25 @@ Set a scoreboard score value.
         defaultRole: BotDefaultRoles.USER,
         isShorthand: true
     },
+    EMPTY: {
+        command: 'empty',
+        byline: 'Set all scores of a specific type to 0.',
+        description: `
+Set all scores of a specific type to 0.
+        `,
+        filename: `empty.ts`,
+        examples: `
+Set all server scores to 0.
+\`.sb empty\`
+
+Set scores in a specific channel to 0.
+\`.sb empty -c\`
+
+Set the scores in a specific scoreboard to 0.
+\`.sb empty -s [scoreboard_name]\`
+        `,
+        defaultRole: BotDefaultRoles.ADMIN
+    },
     GROUP: {
         command: 'group',
         byline: 'Manage score groups.',

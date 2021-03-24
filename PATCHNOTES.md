@@ -1,6 +1,10 @@
 
 # Patch Notes
 
+## 03-24-2021
+
+- Added `empty` command which allows you to set all scores of a certain type to 0.
+
 ## 03-23-2021
 
 - Fixed issue where server scores may not be properly queried for during `set`
