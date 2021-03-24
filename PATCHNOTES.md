@@ -1,13 +1,17 @@
 
 # Patch Notes
 
-## 02-26-2020
+## 03-23-2021
+
+- Fixed issue where server scores may not be properly queried for during `set`
+
+## 02-26-2021
 
 - Fixed issue where `set` could not be used with `0`
 
 - Fixed incorrect documentation for set all permission to role command
 
-## 01-04-2020
+## 01-04-2021
 
 - Added pagination to scores command
 

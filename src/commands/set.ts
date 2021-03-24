@@ -41,7 +41,7 @@ const set = async (user: User, command: string, message: Message) => {
         name: scoreName
     };
 
-    if (type === ScoreType.CHANNEL)
+    if (type === ScoreType.SERVER)
         delete where.channelId;
     
     const score = await Score.findOne({ where });
