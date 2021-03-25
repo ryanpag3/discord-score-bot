@@ -9,6 +9,8 @@ Score Bot is exactly what its name describes. Keep scores in your server, channe
 
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
+[//]: <> (BEGIN_GENERATED_COMMANDS)
+
 # Commands
 
 - [help](#help) - _Get help using Score Bot._
