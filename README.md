@@ -19,6 +19,7 @@ If you are coming from Tally Bot, thanks for migrating. I plan on supporting onl
 - [plus](#plus) - _Add to a score._
 - [minus](#minus) - _Remove from a score._
 - [set](#set) - _Set a score value._
+- [empty](#empty) - _Set all scores of a specific type to 0._
 - [group](#group) - _Manage score groups._
 - [scores](#scores) - _Show the current score values._
 - [info](#info) - _Get info about a score._
@@ -177,6 +178,27 @@ Set a channel score value.
 Set a scoreboard score value.
 .sb [name]=[amount] -s 
 
+```
+
+### `empty`
+
+
+Set all scores of a specific type to 0.
+        
+
+default role: **ScoreBotAdmin**
+
+``` txt
+
+Set all server scores to 0.
+.sb empty
+
+Set scores in a specific channel to 0.
+.sb empty -c
+
+Set the scores in a specific scoreboard to 0.
+.sb empty -s [scoreboard_name]
+        
 ```
 
 ### `group`
@@ -412,13 +434,13 @@ Initialize default roles permissions for your server.
 .sb permission --init
 
 Set a command to require a particular role.
-.sb permission [command] "[role]"
+.sb permission [command] [role]
 
 Set a command to be allowed by anyone
 .sb permission [command] everyone
 
 Set all commands to require a particular role.
-.sb permission "[role]"
+.sb permission -a [role]
 
 ```
 
