@@ -7,6 +7,8 @@
 
 Score Bot is exactly what its name describes. Keep scores in your server, channels, etc. It's highly customizable with permissions, custom prefixes, and more. It's also free.
 
+Want a feature added immediately? [Open a bounty](https://www.bountysource.com/teams/score-bot)
+
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
 [//]: <> (BEGIN_GENERATED_COMMANDS)
