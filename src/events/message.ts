@@ -18,9 +18,6 @@ const onMessageReceived = async (message: Message) => {
     try {
         const server = await getServer(message.guild.id);
         const prefix = server.prefix || process.env.BOT_PREFIX || `.sb`;
-
-        if (cacheHasUserScore(message.author.id, message.guild.id))
-            increaseUserScore(message.author.id, message.guild.id);
         
         if (message.content.split(' ')[0] !== prefix && !includesKeyword(message)) {
             logger.trace(`message ignored.`);
