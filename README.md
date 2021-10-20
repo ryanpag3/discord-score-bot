@@ -69,8 +69,6 @@ There are 4 different type of scores:
 
 - **Scoreboard:** create a scoreboard and assign a score to it
 
-- **User:** Assign a score to a user. User scores increase when users send a message.        
-
 
 default role: **ScoreBotUser**
 
@@ -84,9 +82,6 @@ Add a channel score.
 
 Add a scoreboard score
 .sb add -s [scoreboard_name] [score_name] "[optional_score_description]"
-
-Add a user score
-.sb add [@mention] "[optional_score_description]"
 
 ```
 
