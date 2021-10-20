@@ -1,6 +1,10 @@
 
 # Patch Notes
 
+## 10-19-2021 **1.0.11**
+
+- Disabled automatic functionality of user scores. This will be brought back in a future release as an opt-in.
+
 ## 03-24-2021
 
 - Added `empty` command which allows you to set all scores of a certain type to 0.
