@@ -11,12 +11,6 @@ Want a feature added immediately? [Open a bounty](https://www.bountysource.com/t
 
 If you are coming from Tally Bot, thanks for migrating. I plan on supporting only this bot longterm.
 
-## Deprecation Warning
-
-This bot will **not** be rewritten to support Discord slash commands and will absolutely become unusable when they inevitably force their usage. _You should come up with a plan for this eventuality._ I have enjoyed supporting this project but do not have the time or resources to do such a refactor based on Discord API changes.
-
-If you have found another bot that provides similar functionality and will support slash commands, please let me know and I will refer users directly to it instead.
-
 [//]: <> (BEGIN_GENERATED_COMMANDS)
 
 # Commands
