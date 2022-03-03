@@ -20,7 +20,8 @@ export const COMMAND_MAP = buildCommandMap();
 export const getMessageEmbed = (author: User) => {
     logger.trace(`get message embed for ${author.tag}`);
     return new MessageEmbed()
-        .setAuthor(author.tag, author.avatarURL());
+        .setAuthor(author.tag, author.avatarURL())
+        .setFooter(`Important announcement: https://gist.github.com/ryanpag3/09f024b521e96ae21e99a276a64f95a1`);
 }
 
 export const getScoreTypeLowercase = (type: ScoreType) => {
