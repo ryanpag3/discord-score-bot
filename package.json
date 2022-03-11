@@ -9,9 +9,11 @@
   "private": true,
   "scripts": {
     "start-prod": "env NODE_ENV=production ts-node -T src/index.ts",
+    "start-api": "env NODE_ENV=production ts-node -T src/api/index.ts",
     "test": "env NODE_ENV=test jest --forceExit --coverage",
     "watch-test": "jest --watch",
     "watch": "tsnd --watch --notify=false src/index.ts",
+    "watch-api": "tsnd src/api/index.ts",
     "watch-prod": "env NODE_ENV=production yarn watch",
     "create-migration": "cd src && npx npx sequelize-cli migration:generate",
     "create-model": "cd src && npx sequelize-cli model:generate",
