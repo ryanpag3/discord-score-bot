@@ -43,7 +43,7 @@ fastify.get('/export', async (request, reply) => {
 
 export const startApi = async () => {
     try {
-        await fastify.listen(process.env.API_PORT || 3000);
+        await fastify.listen(process.env.API_PORT || 3000, '0.0.0.0');
         logger.info('started discord-score-bot api');
     } catch (e) {
         logger.error(e);
