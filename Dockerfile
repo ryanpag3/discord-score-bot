@@ -10,4 +10,4 @@ RUN rm -rf /opt/score-bot/.env && \
     rm -rf /opt/score-bot/node_modules && \
     yarn install
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
