@@ -1,4 +1,6 @@
 
+# This bot will be shutdown on May 1st. Please migrate to https://roscobot.com
+
 # Score Bot
 
 ![Build](https://github.com/ryanpag3/discord-score-bot/workflows/Build/badge.svg?branch=master&event=push)
