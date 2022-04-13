@@ -21,7 +21,7 @@ export const getMessageEmbed = (author: User) => {
     logger.trace(`get message embed for ${author.tag}`);
     return new MessageEmbed()
         .setAuthor(author.tag, author.avatarURL())
-        .setFooter(`Important announcement: https://gist.github.com/ryanpag3/09f024b521e96ae21e99a276a64f95a1`);
+        .setFooter(`Migrate to https://roscobot.com before May 1st. I'm shutting down.`);
 }
 
 export const getScoreTypeLowercase = (type: ScoreType) => {
