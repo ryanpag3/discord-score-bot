@@ -1,6 +1,8 @@
 #!/bin/bash
 
-yarn start-prod &
+if [ -v "${RUN_BOT}" ]; then
+  yarn start-prod &
+fi
 
 yarn start-api &
 
